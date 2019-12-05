@@ -16,8 +16,6 @@ import freemarker.template.SimpleHash;
 public class FreeMarkerViewCustom extends FreeMarkerView
 {
 	private boolean exposeRequestParameters = true;
-	
-	public static String curpath = "~";
 
 	// exposeHelpers 重写这个也可以
 	@Override
