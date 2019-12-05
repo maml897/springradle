@@ -29,7 +29,16 @@ public class HttpSecurityConfigDefault extends WebSecurityConfigurerAdapter
 	@Override
 	public void configure(WebSecurity web) throws Exception
 	{
-		web.ignoring().antMatchers("/**").antMatchers("/");
+		web.ignoring().antMatchers("/")
+		.antMatchers("/images/**")
+		.antMatchers("/css/**")
+		.antMatchers("/js/**")
+		.antMatchers("/pdf/**")
+		.antMatchers("/component/**")
+		.antMatchers("/error/**")
+		.antMatchers("/login/login-fail")
+		.antMatchers("/register")
+		.antMatchers("/register/**");
 	}
 
 	@Override
@@ -37,14 +46,12 @@ public class HttpSecurityConfigDefault extends WebSecurityConfigurerAdapter
 	{
 
 		// http.exceptionHandling().accessDeniedPage("/error/403");
-		// 关闭csrf 防止循环定向
 		http.csrf().disable();
 		http.authorizeRequests().expressionHandler(expressionHandler());
-		// http.cors().disable();
 		http.headers().frameOptions().disable();
 		http.sessionManagement().invalidSessionUrl("/").maximumSessions(10).expiredUrl("/error/sessionexpired");
 
-		// 通过formLogin()定义当需要用户登录时候，转到的登录页面。
+		//登录
 		http.formLogin().loginPage("/").loginProcessingUrl("/SystemLogin").usernameParameter("username").passwordParameter("password").defaultSuccessUrl("/login/login-success", true).failureUrl("/");
 
 		// 注销
@@ -54,14 +61,8 @@ public class HttpSecurityConfigDefault extends WebSecurityConfigurerAdapter
 
 	private void configAuthorizeRequests(HttpSecurity http) throws Exception
 	{
-		// 认证的顺序是从前到后，如果前边的路径匹配了，后边的就不匹配了。
-		// 以下代码指定了/和/index不需要任何认证就可以访问，其他的路径都必须通过身份验证。
 		http.authorizeRequests().antMatchers("/").permitAll(); // , "/index.shtml","/speed-test.shtml"
-
-		// 添加业务需要的验证路径，判断顺序是从上到下，请注意顺序
 		configAuthorizeCommon(http);
-
-		// 默认的全部需要验证，不验证的在前边进行配置
 		http.authorizeRequests().antMatchers("/r/**").access("isAnonymous() or isFullyAuthenticated()");
 		http.authorizeRequests().anyRequest().fullyAuthenticated();
 	}
@@ -74,7 +75,6 @@ public class HttpSecurityConfigDefault extends WebSecurityConfigurerAdapter
 	}
 
 	// -----------Bean--------------------------
-
 	@Bean
 	public SimpleUrlLogoutSuccessHandler logoutSuccessHandler()
 	{
