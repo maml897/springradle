@@ -28,7 +28,7 @@ public class TestService {
 	
 	public int test() {
 		Map<String,Object> map =new HashMap<>();
-		List<Long> ids = namedJdbcTemplate.queryForList("select ID from n_ns",map,Long.class);
+		List<Long> ids = namedJdbcTemplate.queryForList("select ID from m_table",map,Long.class);
 		return ids.size();
 	}
 }

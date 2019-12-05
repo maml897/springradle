@@ -16,7 +16,6 @@ import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceBuilder;
 @Configuration
 public class DataSourceConfigurer {
 	
-	//配置两个数据源
 	@Bean(name = "ds")
     @Primary
     @ConfigurationProperties(prefix = "spring.datasource.druid.qq")
@@ -25,7 +24,7 @@ public class DataSourceConfigurer {
     }
 	
 	@Bean(name = "dsNormal")
-    @ConfigurationProperties(prefix = "spring.datasource.druid.normal")
+    @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource dsNormal() {
         return DruidDataSourceBuilder.create().build();
     }
@@ -41,8 +40,8 @@ public class DataSourceConfigurer {
 		return new NamedParameterJdbcTemplate(jdbcTemplate());
 	}
 
-	@Bean(name = "jdbcTemplateTx")
-	public PlatformTransactionManager jdbcTemplateQqTx() {
+	@Bean(name = "jdbcTemplateTm")
+	public PlatformTransactionManager jdbcTemplateTm() {
 		return new DataSourceTransactionManager(dataSource());
 	}
 	
@@ -57,8 +56,8 @@ public class DataSourceConfigurer {
 		return new NamedParameterJdbcTemplate(jdbcTemplateNormal());
 	}
 
-	@Bean(name = "jdbcTemplateNormalTx")
-	public PlatformTransactionManager jdbcTemplateNaomalTx() {
+	@Bean(name = "jdbcTemplateTmNormal")
+	public PlatformTransactionManager jdbcTemplateTmNormal() {
 		return new DataSourceTransactionManager(dsNormal());
 	}
 }
