@@ -12,16 +12,16 @@ public class Constant
 
 	public static int COLUMN_TYPE_YUNDAN = 1;// 运单号
 	
-	public static int COLUMN_TYPE_YUNDAN_COM = 3;// 运单公司
-
 	public static int COLUMN_TYPE_PHONE = 2;// 手机号
+	
+	public static int COLUMN_TYPE_YUNDAN_COM = 3;// 运单公司
 	
 	public static int COLUMN_TYPE_IMG = 4;// 图片
 
 	//table
 	public static int TABLT_TYPE_SYSTEM = 0;// 系统模板
 
-	public static int TABLT_TYPE_USER = 0;// 用户创建
+	public static int TABLT_TYPE_USER = 1;// 用户创建
 	
 	
 	public static List<String> rowNames = Arrays.asList("A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U");
