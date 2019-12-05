@@ -8,6 +8,8 @@ import org.springframework.security.access.expression.SecurityExpressionHandler;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler;
 
@@ -53,7 +55,7 @@ public class HttpSecurityConfigDefault extends WebSecurityConfigurerAdapter
 		http.sessionManagement().invalidSessionUrl("/").maximumSessions(10).expiredUrl("/error/sessionexpired");
 
 		//登录
-		http.formLogin().loginPage("/").loginProcessingUrl("/SystemLogin").usernameParameter("username").passwordParameter("password").defaultSuccessUrl("/login/login-success", true).failureUrl("/");
+		http.formLogin().loginPage("/").loginProcessingUrl("/SystemLogin").usernameParameter("username").passwordParameter("password").defaultSuccessUrl("/login/login-success", true).failureUrl("/login/login-fail");
 
 		// 注销
 		http.logout().logoutUrl("/SystemLogout").logoutSuccessHandler(logoutSuccessHandler());
@@ -63,16 +65,15 @@ public class HttpSecurityConfigDefault extends WebSecurityConfigurerAdapter
 	private void configAuthorizeRequests(HttpSecurity http) throws Exception
 	{
 		http.authorizeRequests().antMatchers("/").permitAll(); // , "/index.shtml","/speed-test.shtml"
-		configAuthorizeCommon(http);
+		
+		http.authorizeRequests()
+			.antMatchers("/system/**").hasAnyAuthority("ROLE_ADMIN")
+			.antMatchers("/system/**").access("hasAnyAuthority(ADMIN)")
+			.antMatchers("/demo/**").access("isAnonymous() or isFullyAuthenticated()")
+			.antMatchers("/**").access("hasAnyAuthority(USER)");
+		
 		http.authorizeRequests().antMatchers("/r/**").access("isAnonymous() or isFullyAuthenticated()");
 		http.authorizeRequests().anyRequest().fullyAuthenticated();
-	}
-
-	// common
-	private void configAuthorizeCommon(HttpSecurity http) throws Exception
-	{
-		http.authorizeRequests().antMatchers("/system/**").hasAnyAuthority("ROLE_ADMIN").antMatchers("/system/**").access("hasAnyAuthority(ADMIN)").antMatchers("/demo/**")
-				.access("isAnonymous() or isFullyAuthenticated()").antMatchers("/manage/**").access("hasAnyAuthority(ADMIN,MANAGE)").antMatchers("/**").access("hasAnyAuthority(USER)");
 	}
 
 	// -----------Bean--------------------------
@@ -85,4 +86,9 @@ public class HttpSecurityConfigDefault extends WebSecurityConfigurerAdapter
 
 		return logoutSuccessHandler;
 	}
+	
+	@Bean  
+    public static PasswordEncoder passwordEncoder(){  
+        return NoOpPasswordEncoder.getInstance();  
+   }  
 }

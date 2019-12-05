@@ -40,11 +40,11 @@ $(function(){
 		<div class="form-container">
 			<form id="id_form" method="post" action="${base}/SystemLogin">
 				<div class="form-ctrl" target="phone">
-					<input type="text" placeholder="手机号/邮箱" name="j_username" autocomplete="off">
+					<input type="text" placeholder="手机号/邮箱" name="username" autocomplete="off">
 				</div>
 				
 				<div class="form-ctrl" id="pass">
-					<input type="password" placeholder="密码" style="border-bottom: none;" name="j_password">
+					<input type="password" placeholder="密码" style="border-bottom: none;" name="password">
 				</div>
 			</form>
 		</div>

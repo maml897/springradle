@@ -1,8 +1,14 @@
 package com.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.annotation.Resource;
+
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,44 +23,40 @@ import com.view.User;
 @Service
 public class UserService implements UserDetailsService
 {
-
+	@Resource
+	private NamedParameterJdbcTemplate namedJdbcTemplate;
+	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException
 	{
-		User user = new User();
-		if (user.getId() == 0)
-		{
-			throw new UsernameNotFoundException("Username " + username + " not found");
+		Map<String,Object> map =new HashMap<>();
+		map.put("username", username);
+		List<User> users = namedJdbcTemplate.query("select UserName,Password,RealName,ID from t_user where Enabled=true and (UserName=:username or Phone=:username)", map,new BeanPropertyRowMapper<>(User.class));
+		
+		if(users==null ||users.size()==0) {
+			throw new UsernameNotFoundException("User " + username + " has no GrantedAuthority");
 		}
-		if (user.getAuthoritys().size() == 0)
+		
+		User user =users.get(0);
+		
+		map =new HashMap<>();
+		map.put("userID", user.getId());
+		List<Authority> authoritys = namedJdbcTemplate.query("select Authority from t_user_authority where UserID=:userID", map,new BeanPropertyRowMapper<>(Authority.class));;
+		if (authoritys==null || authoritys.size() == 0)
 		{
 			throw new UsernameNotFoundException("User " + username + " has no GrantedAuthority");
 		}
 
-		List<GrantedAuthority> grantedAuthoritys = buildGrantedAuthority(user);
-		List<GrantedAuthority> authorities = new ArrayList<>();
-		grantedAuthoritys.stream().forEach(authority -> {
-			if (!authorities.contains(authority))
-			{
-				authorities.add(authority);
-			}
-		});
+		List<GrantedAuthority> grantedAuthoritys = new ArrayList<>();
+		for (Authority authority : authoritys)
+		{
+			grantedAuthoritys.add(new SimpleGrantedAuthority(authority.getAuthority()));
+		}
 
-		WishUserDetails userDetails = new WishUserDetails(user.getId(), user.getUserName(), user.getPassword(), user.isEnabled(), authorities);
+		WishUserDetails userDetails = new WishUserDetails(user.getId(), user.getUserName(), user.getPassword(), user.isEnabled(), grantedAuthoritys);
 		userDetails.setUserID(user.getId());
 		userDetails.setRealName(user.getRealName());
 		return userDetails;
-	}
-
-	// 构建用户权限
-	private List<GrantedAuthority> buildGrantedAuthority(User user) throws RuntimeException
-	{
-		List<GrantedAuthority> listGrantedAuthorities = new ArrayList<GrantedAuthority>();
-		for (Authority authority : user.getAuthoritys())
-		{
-			listGrantedAuthorities.add(new SimpleGrantedAuthority(authority.getAuthority()));
-		}
-		return listGrantedAuthorities;
 	}
 	
 	@Transactional(readOnly = false)
