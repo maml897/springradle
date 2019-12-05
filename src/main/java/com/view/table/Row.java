@@ -5,9 +5,10 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import com.utils.Constant;
+
 public class Row
 {
-
 	public Map<String, Object> getMap()
 	{
 		Map<String, Object> map = new LinkedHashMap<>();
@@ -22,7 +23,7 @@ public class Row
 
 	private Date date = new Date();
 	
-	private int from=0;//0:excel导入，1：管理员手动录入
+	private int from=Constant.ROW_FROM_EXCEL ;//0:excel导入，1：管理员手动录入
 	
 	private int times=0;//查询次数
 	
