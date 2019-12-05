@@ -13,8 +13,6 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 
 import freemarker.cache.MultiTemplateLoader;
 import freemarker.cache.TemplateLoader;
-import freemarker.ext.beans.BeansWrapper;
-import freemarker.ext.beans.BeansWrapperBuilder;
 import freemarker.template.TemplateHashModel;
 import freemarker.template.TemplateModelException;
 
@@ -26,20 +24,21 @@ public class SpringMvcConfig implements WebMvcConfigurer {
 	{
 		FreeMarkerViewResolver resolver = new FreeMarkerViewResolver();
 		properties.applyToMvcViewResolver(resolver);
+		resolver.setViewClass(FreeMarkerViewCustom.class);
+		
 		Map<String,Object> attributes = new HashMap<>();
-		
-		//加载项目根相对路径
-		attributes.put("base", servletContext.getContextPath());
-		
-		//加载静态方法引用
-		BeansWrapperBuilder swb = new BeansWrapperBuilder(freemarker.template.Configuration.getVersion());
-		swb.setSimpleMapWrapper(true);
-		BeansWrapper wrapper = swb.build();
-		TemplateHashModel staticModels = wrapper.getStaticModels();
-		
+		attributes.put("base", servletContext.getContextPath());//加载项目根相对路径
 		resolver.setAttributesMap(attributes);
+		
+		//设置包装器
+		FreemarkerBeanWraper wrapper=new FreemarkerBeanWraper();
+		wrapper.setSimpleMapWrapper(true);
 		c.setObjectWrapper(wrapper);
 		
+		//加载静态方法引用
+		TemplateHashModel staticModels = wrapper.getStaticModels();
+		
+		//设置加载器
 		MultiTemplateLoader templateLoader1 = (MultiTemplateLoader) c.getTemplateLoader();
 		int size = templateLoader1.getTemplateLoaderCount();
 		
@@ -47,6 +46,9 @@ public class SpringMvcConfig implements WebMvcConfigurer {
 		for(int i=0;i<size;i++) {
 			templateLoaders[i] = templateLoader1.getTemplateLoader(i);
 		}
+		
+		//设置共享变量
+		new SharedVariableSecurity(c);
 		return resolver;
 	}
 }

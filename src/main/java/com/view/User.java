@@ -5,40 +5,39 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-//@Entity
-//@Table(name = "t_user")
 public class User implements Serializable
 {
 
 	private static final long serialVersionUID = 1946565865390558320L;
 
-//	@Id
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)
-//	@Column(name = "ID", nullable = false)
 	private long id = 0;
 
-//	@Column(name = "RealName", length = 40, nullable = false)
 	private String realName = "";
 	
-//	@Column(name = "Phone", length = 20, nullable = false, unique = true)
 	private String phone = "";
 	
-//	@Column(name = "Mail", length = 40, nullable = false, unique = true)
 	private String mail = "";
+	
+	private String userName="";
 
-//	@Column(name = "Password", length = 40, nullable = false)
 	private String password = "";
 
-//	@Column(name = "Enabled", nullable = false, columnDefinition = "bit")
 	private boolean enabled = true;
 
-//	@Column(name = "CreateDate", length = 19, nullable = false)
 	private Date createDate = new Date();
 
-//	@ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
-//	@JoinTable(name = "t_user_authority", joinColumns = { @JoinColumn(name = "UserID", referencedColumnName = "ID") }, inverseJoinColumns = {
-//			@JoinColumn(name = "Authority", referencedColumnName = "Authority") })
 	private List<Authority> authoritys = new ArrayList<Authority>();
+	
+
+	public String getUserName()
+	{
+		return userName;
+	}
+
+	public void setUserName(String userName)
+	{
+		this.userName = userName;
+	}
 
 	public String getPhone()
 	{
