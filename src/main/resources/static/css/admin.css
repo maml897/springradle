@@ -1,0 +1,176 @@
+@CHARSET "UTF-8";
+*{margin: 0;padding: 0;}
+
+body{font-size: 12px;font-family: 微软雅黑;background: rgb(48, 65, 86);color: #4b4b4b;}
+a{color: #ccc;text-decoration: none;}
+
+#id_container{height: 100%;}
+
+/*左侧*/
+#id_left{width: 160px;float: left;color: #fff;height: 100%;}
+#id_left_top{height: 50px;width: 100%;position: relative;}
+.menus{margin-top: 20px;}
+.menu{}
+.menu a.icon1{background-image: url('../svg/icon1.svg')}
+.menu a.icon2{background-image: url('../svg/icon2.svg')}
+.menu a.icon3{background-image: url('../svg/icon3.svg')}
+.menu a.icon4{background-image: url('../svg/icon4.svg')}
+.menu a.icon5{background-image: url('../svg/icon5.svg')}
+.menu a{display: block;height: 48px;line-height: 48px;font-size: 14px;color: rgb(191, 203, 217);font-weight: normal;text-indent: 50px;background-repeat: no-repeat;background-position: 24px 17px;}
+.menu a.curr{background-color: rgb(38,52,69); color: #fff;}
+.items{}
+.items .item{line-height: 36px;color: rgb(191, 203, 217);display: block;text-indent: 50px;}
+.items.curr{background: #001528;}
+
+/*内容*/
+#id_main{margin-left: 160px;background:#f9f9fc;height: 100%;}
+#id_main_top_left{float: left;margin-left: 20px;}
+#id_main_top{width: 100%;height: 50px;line-height: 50px;background: #fff;box-shadow: 0px 0px 40px 0px rgba(82, 63, 105, 0.1);}
+#id_main_top_right{float: right;margin-right: 30px;color: #6c7293;}
+#id_main_{}
+
+
+/*详细内容*/
+.tblist {width:100%;border-collapse: collapse;border: solid #eeecec;border-width: 1px 0 0 1px;text-align: center;color: #4b4b4;}
+.tblist tr{height: 36px;}
+.tblisthover tr:hover{background: #f5f5f5;}
+.tblist tr.title {text-align: center; font-weight:bold;color: #9da1c4;}
+.tblist tr.title:hover {background: #fff;}
+.tblist tr.title td {border-bottom-width:  2px;}
+
+.tblist td {text-align: left;padding: 0 4px 0 10px;border: solid #eeecec;border-width: 0 1px 1px 0;white-space:nowrap;max-width: 100px;text-overflow: ellipsis;overflow: hidden;}
+.tblist th{text-align: right;}
+
+.edit{
+	margin:0 auto;border: 1px solid #eee;width: 700px;padding: 40px;box-shadow: 1px 1px 20px #ccc;border-radius:6px;min-height:80%;margin-top: 20px;position: relative;
+}
+.edit .title{
+	text-align: center;height: 40px;line-height: 40px;font-size: 26px;padding:20px 0 30px 0;font-family: 幼圆;
+}
+.editable {width:100%;border-collapse: collapse;border: dotted #eeecec;border-width: 1px 0 0 1px;}
+.editable tr{height: 40px;}
+.editable th,.editable td{padding: 0 4px 0 4px;border: dotted #eeecec;border-width: 0 1px 1px 0;}
+.editable th{text-align: right;}
+.editable td {text-align:left;}
+
+.abutton{padding: 4px 4px;background: #29e;color: #fff;border-radius:2px;cursor:default;}
+.abutton:hover{background: #0080f6;}
+
+/*分页样式*/
+.page{margin:0 auto;margin:20px 0;text-align: center;text-indent: 0;}
+.page a,.page span{line-height: 16px;height: 16px;padding:2px 6px;display: inline-block;vertical-align: top;}
+.page a,.page span.disabled{border: 1px solid #ccc;text-decoration: none;}
+.page a{color: #000;}
+.page a:HOVER{background: #666;border: 1px solid #666;color: #fff;text-decoration: none;}
+.page span{}
+.page span.disabled{color: #CCC;}
+.page span.this_page{color: #FF9500;font-weight: bold;}
+.page span.text{padding: 4px 6px 0 6px;}
+
+
+
+/*导入excel*/
+.import-excel{width: 900px;margin: 0 auto;margin-top: 10px;}
+.step{position: relative;height: 120px;}
+.step-line{height: 15px;border-bottom: 2px dashed #bbb;position: absolute;top:0px;width: 100%;}
+.step .item{position: absolute;}
+.step .item span{border: 1px solid green;width: 30px;line-height: 30px;text-align: center;line-height: 30px;border-radius:100px;background: #008ed2;color: #fff;position: absolute;}
+.step .item div{position: absolute;bottom:-70px;left:-24px;width: 80px;text-align: center;}
+
+#id_include{}
+.import-content{border: 2px dashed #bbb;height: 120px;background: #fff;}
+.button{
+	background: #008ed2;width: 120px;margin: 0 auto;text-align: center;height: 40px;line-height: 40px;color: #fff;margin-top: 30px;
+	cursor: pointer;
+	border: 1px solid #ddd;
+    border: 1px solid #008ed2;
+    background: #008ed2;
+    color: #fff;
+    border-radius: 3px;
+    cursor: pointer;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+.demo{margin-top: 10px;}
+.demo-img{background: url("../img/excel.png");height: 240px;border: 1px solid #bbb;}
+.scroll{width: 100%;overflow: auto;max-height: 400px;border: 1px solid #d5d5d5;background: #fff;}
+
+
+/*表格拖动*/
+.no-select-text {
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
+.column {
+    background:rgba(157, 161, 196, 0.3);
+    position:absolute;
+    display:none;
+    text-align: center;
+    font-weight: bold;
+   /* line-height: 60px;*/
+}
+
+.sign {
+    display:none;
+    position:absolute;
+    top:0px;
+    width: 2px;
+    background: rgba(157, 161, 196);
+}
+
+/*弹出框*/
+.popover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1060;
+    display: none;
+    min-width: 160px;
+    max-width: 350px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: left;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,.3);
+    white-space: normal;
+}
+.popover-content {
+    background: #fff;
+}
+.popover-content .pop_menu li {
+    overflow: hidden;
+    list-style: none;
+    padding: 0 10px;
+    height: 32px;
+    line-height: 32px;
+    font-size: 12px;
+    position: relative;
+    cursor: pointer;
+}
+.popover-content .pop_menu li:HOVER {
+	background:#f2f6ff;
+   	color: #3b65a7!important;
+}
+
+.popover li a{
+	color: #4b4b4b;
+}
+
+
+.btn {
+    display: inline-block;
+    height: 22px;
+    line-height: 22px;
+    padding: 0 10px;
+    background-color: #4caf50;
+    color: #fff;
+    white-space: nowrap;
+    text-align: center;
+    font-size: 12px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+}

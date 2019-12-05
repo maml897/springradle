@@ -1,0 +1,70 @@
+*{
+overflow: :hidden;
+}
+
+body {
+	background: #f7fafc;
+	overflow: hidden;
+	
+}
+a{
+	color: #000;
+}
+.content{
+	margin: 0 auto;
+	width: 360px;
+	margin-top: 80px;
+}
+.banner{
+	padding: 0 20px 20px 0px;
+	position: relative;
+	height: 40px;
+	background: url('../svg/logo_big.svg') no-repeat 0px 0px;
+}
+.form-container {
+	border: 1px solid #e7ebef;
+	padding: 20px 0px 0px 20px;
+	background: #fff;
+	border-radius:4px;
+}
+
+.form-ctrl{
+	margin-bottom: 10px;
+}
+input{
+	border: none;
+	border-bottom: 1px solid #e7ebef;
+	height: 40px;
+	line-height: 40px;
+	width: 300px;
+	outline: none;
+}
+.reg{
+	height: 36px;line-height: 36px;background: #4caf50;;
+	text-align: center;
+	color: #fff;
+	cursor: pointer;
+	margin-top: 14px;
+}
+#id_tip{
+	margin:0 auto;
+	position:absolute;
+	width:360px;
+	left:50%;
+	top:30px;
+	text-align:center;
+	background:rgba(255,0,0,0.6);
+	opacity:0.8;
+	border-radius:4px;
+	color:#fff;
+	padding:0 20px;
+	padding:10px 20px;
+	line-height:24px;
+	_position:absolute;
+	margin-left: -190px;
+	display: none;
+}
+
+input:-internal-autofill-previewed, input:-internal-autofill-selected, textarea:-internal-autofill-previewed, textarea:-internal-autofill-selected, select:-internal-autofill-previewed, select:-internal-autofill-selected{
+    transition: background-color 50000s ease-in-out 0s;
+}

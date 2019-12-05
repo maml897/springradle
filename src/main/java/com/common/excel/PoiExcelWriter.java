@@ -2,6 +2,7 @@ package com.common.excel;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -165,5 +166,36 @@ public class PoiExcelWriter
 			return false;
 		Pattern pattern = Pattern.compile("^0|[1-9]\\d*(\\.\\d+)?$");
 		return pattern.matcher(str).matches();
+	}
+	
+	/**
+	 * 1、构建Excel 97-2003 工作簿（xls）
+	 * @return
+	 */
+	public static PoiExcelWriter createPoiExcelWriterXLS() {
+		try {
+			return createPoiExcelWriterXLS(null);
+		} catch (FileNotFoundException e) {
+		} catch (IOException e) {
+		}
+		return null;
+	}
+	
+	public static PoiExcelWriter createPoiExcelWriterXLS(String inputFilePath) throws FileNotFoundException, IOException {
+		PoiExcelWriter poiExcelWriter = new PoiExcelWriter();
+		poiExcelWriter.initPoiExcelWriterXLS(inputFilePath);
+		return poiExcelWriter;
+	}
+	
+	private void initPoiExcelWriterXLS(String inputFilePath) throws FileNotFoundException, IOException {
+		if (inputFilePath == null) {
+			workBook = new HSSFWorkbook();
+		} else {
+			try(InputStream is = new FileInputStream(new File(inputFilePath)))
+			{
+				POIFSFileSystem fs = new POIFSFileSystem(is);
+				workBook = new HSSFWorkbook(fs);
+			}
+		}
 	}
 }

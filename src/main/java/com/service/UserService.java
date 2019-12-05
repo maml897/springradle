@@ -8,6 +8,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.config.security.user.WishUserDetails;
 import com.view.Authority;
@@ -53,6 +54,21 @@ public class UserService implements UserDetailsService
 			listGrantedAuthorities.add(new SimpleGrantedAuthority(authority.getAuthority()));
 		}
 		return listGrantedAuthorities;
+	}
+	
+	@Transactional(readOnly = false)
+	public void addUser(User user) throws UsernameNotFoundException
+	{
+	}
+	
+	public User getUser(long id) throws UsernameNotFoundException
+	{
+		return null;
+	}
+	
+	public User getUser(String phoneOrMail) throws UsernameNotFoundException
+	{
+		return null;
 	}
 
 }

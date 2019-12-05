@@ -1,0 +1,132 @@
+*{
+	overflow: :hidden;
+	padding: 0;
+	margin: 0;
+	color: #666;
+}
+body {
+	background: #f7fafc;
+	overflow-x: hidden;
+	display:flex; display: -webkit-flex;min-height:100vh;flex-direction:column;
+}
+a{
+	color: #555;
+}
+.content{
+	margin: 0 auto;
+	width: 92%;
+	margin-top: 10px;
+	flex: 1;
+	margin-bottom: 10px;
+}
+.banner{
+	padding: 0 20px 20px 0px;
+	position: relative;
+	height: 40px;
+	background: url('../svg/logo_big.svg') no-repeat 0px 4px;
+}
+.form-container {
+	border: 1px solid #e7ebef;
+	padding: .3rem 0px .3rem 10px;
+	background: #fff;
+	border-radius:4px;
+	position: relative;
+}
+.form-container a{
+	position: absolute;
+	background: #4caf50;
+	top:-1px;
+	right: -1px;
+	width:5.3rem;
+	line-height:100%;
+	text-align: center;
+	color: #fff;
+	border-radius:0 4px 4px 0;
+	font-size: 1.2rem;
+	padding: 1rem 0;
+	text-decoration: none;
+	border-bottom: .1rem solid #4caf50;
+}
+input{
+	border: none;
+	height: 40px;
+	line-height: 40px;
+	width: 14.6rem;
+	outline: none;
+	font-size: 0.9rem;
+}
+
+#id_infos{
+	font-size: 12px;
+	border-left:1px solid #ddd;
+	background: #fff;
+	margin-top: 10px;
+	border-radius:0 0 20px 0;
+}
+
+.info{
+	border-top: 1px dotted #ddd;
+	padding: 0.5rem 0.5rem 0.5rem 1rem;
+	position: relative;
+	color: #666;
+}
+.info em{
+	position: absolute;
+	width: 8px;
+	height: 8px;
+	background: #fff;
+	top:40%;
+	left:-.4rem;
+	border-radius:100px;
+	border:1px solid #ddd;
+} 
+.info.first{
+	border-top:none;
+}
+.info.first div{
+	color: #4caf50;
+}
+.info.first em{
+	background: #4caf50;
+	border:2px solid #fff;
+	left:-6px;
+}
+
+.historys{font-size: 12px;}
+.historys span{
+	background: #eee;
+	color: #666;
+	border-radius:6px;
+	padding: 1px 4px;margin-right: 4px;margin-bootom: 4px;
+	display:inline-block;word-wrap:break-word;white-space:normal;
+	margin-top: 10px;
+}
+
+.userinfo{
+	background: #fff;
+	padding: 10px;
+	font-size: 12px;
+	line-height: 24px;
+	margin-top: 10px;
+}
+.userinfo span{
+	font-weight: bold;
+}
+
+.com{background: #fff;padding: 10px;font-size: 12px;text-indent: 12px;}
+
+
+.about{
+	text-align: center;
+	width: 96%;
+	padding: 0.6rem 0;
+	margin: 0 auto;
+}
+
+.about span{
+	background: #f7fafc;
+	position: absolute;
+	top:-.7rem;
+	padding: 0 1rem;
+	margin-left: -2.2rem;
+}
