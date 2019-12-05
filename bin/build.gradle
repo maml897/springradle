@@ -1,7 +1,4 @@
 buildscript {
-	ext {
-        springBootVersion = '2.2.1.RELEASE'
-    }
     repositories {
         maven{
              url 'D:/workspace_sts_other/plugin/repo'
@@ -11,63 +8,62 @@ buildscript {
     }
     dependencies {
        classpath "com.demon.plugin:plugin:1.0.0"
-       classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
     }
 }
 
 plugins {
+	id 'org.springframework.boot' version '2.2.1.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.8.RELEASE'
 	id 'java'
 	id "base"
-	id 'eclipse'
 }
-apply plugin: 'org.springframework.boot'
-apply plugin: 'org.gradle.sample.urlverifier'   //这个依赖来自上面的com.demon.plugin:plugin:1.0.0,也可以写在上面的plugins中，就得用id version，然后最上面就不需要依赖了
 
+apply plugin: 'org.gradle.sample.urlverifier'   
 verification {                                  
     url = 'https://www.sbwuff.com/'
 }
-environments {
-    dev {
-        url = 'http://localhost:8080'
-    }
 
-    staging {
-        url = 'http://staging.enterprise.com'
-    }
-
-    production {
-        url = 'http://prod.enterprise.com'
-    }
-}
+group = 'com.flytree'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
 
 repositories {
 	mavenCentral()
 }
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter'
+	//implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-freemarker'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
-	implementation 'org.springframework.boot:spring-boot-starter-tomcat'
-	
 	implementation 'mysql:mysql-connector-java'
+	//implementation 'org.freemarker:freemarker'
+	implementation 'org.springframework.boot:spring-boot-starter-tomcat'
 	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'
 	compile group: 'com.alibaba', name: 'druid-spring-boot-starter', version: '1.1.21'
-	compile group: 'org.apache.poi', name: 'poi', version: '4.0.1'
-	compile group: 'org.apache.poi', name: 'poi-ooxml', version: '4.0.1'
-	
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
 }
 
-import org.apache.tools.ant.filters.ReplaceTokens
-def profileName = project.hasProperty('profile') ? project.getProperty("profile") : "dev" //gradle -Pprofile=prod bootJar
-processResources {
-    with copySpec {
-        from "src/main/resources/"
-        filter(ReplaceTokens, tokens: [profileActive: profileName])
-    }
+test {
+	useJUnitPlatform()
+}
+
+task zip(type: Zip, group: "Archive", description: "Archives sources in a zip file") {
+    from "src"
+    setArchiveName "sbwuff-1.0.zip"
+}
+
+task packageDistribution(type: Zip) {
+    archiveName = "my-distribution.zip"
+    destinationDir = file("${buildDir}/dist")
+    from "${buildDir}/toArchive"
+}
+//解压
+task unpackFiles(type: Copy) {
+    from zipTree("${buildDir}/dist/my-distribution.zip")
+    into "${buildDir}/resources"
 }

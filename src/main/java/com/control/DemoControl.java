@@ -2,6 +2,7 @@ package com.control;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,10 +19,13 @@ public class DemoControl {
 	@Resource
 	private TestService testService;
 	
+	@Value("${spring.a:0}")
+	private String test;
+	
 	@RequestMapping("/test")
 	@ResponseBody
 	public String test() {
-		return "sbwuffrnm";
+		return "sbwuffrnm"+test;
 	}
 
 	@RequestMapping("/ftl")
