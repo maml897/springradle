@@ -33,6 +33,7 @@ public class HttpSecurityConfigDefault extends WebSecurityConfigurerAdapter
 		.antMatchers("/images/**")
 		.antMatchers("/css/**")
 		.antMatchers("/js/**")
+		.antMatchers("/svg/**")
 		.antMatchers("/pdf/**")
 		.antMatchers("/component/**")
 		.antMatchers("/error/**")

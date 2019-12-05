@@ -14,14 +14,6 @@ import com.config.mvc.view.StringView;
 @Controller
 public class LoginControl
 {
-	private String login = "/login";
-
-	@RequestMapping("")
-	public String login(Model model)
-	{
-		return login;
-	}
-
 	@RequestMapping("/login-fail")
 	public View loginfail(@RequestParam(defaultValue = "false") boolean ajax,RedirectAttributes attributes)
 	{
@@ -30,7 +22,7 @@ public class LoginControl
 			return new StringView("fail");
 		}
 		attributes.addFlashAttribute("flag","false");
-		return new RedirectView(login, true);
+		return new RedirectView("/", true);
 	}
 
 	@RequestMapping("/login-success")
