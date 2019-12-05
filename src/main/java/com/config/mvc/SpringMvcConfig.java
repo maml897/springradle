@@ -3,6 +3,7 @@ package com.config.mvc;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.ServletContext;
 
 import org.springframework.boot.autoconfigure.freemarker.FreeMarkerProperties;
@@ -19,6 +20,9 @@ import freemarker.template.TemplateModelException;
 @Configuration
 public class SpringMvcConfig implements WebMvcConfigurer {
 
+	@Resource
+	private FreemarkerStaticAttrProperties freemarkerStaticAttrProperties;
+	
 	@Bean
 	public FreeMarkerViewResolver freeMarkerViewResolver(FreeMarkerProperties properties, ServletContext servletContext, freemarker.template.Configuration c) throws TemplateModelException
 	{
@@ -28,7 +32,9 @@ public class SpringMvcConfig implements WebMvcConfigurer {
 		
 		Map<String,Object> attributes = new HashMap<>();
 		attributes.put("base", servletContext.getContextPath());//加载项目根相对路径
-		resolver.setAttributesMap(attributes);
+		freemarkerStaticAttrProperties.getStr().forEach((key,value) -> {
+			attributes.put(key, value);
+		});
 		
 		//设置包装器
 		FreemarkerBeanWraper wrapper=new FreemarkerBeanWraper();
@@ -37,6 +43,15 @@ public class SpringMvcConfig implements WebMvcConfigurer {
 		
 		//加载静态方法引用
 		TemplateHashModel staticModels = wrapper.getStaticModels();
+		freemarkerStaticAttrProperties.getBean().forEach((key,value) -> {
+			TemplateHashModel fileStatics;
+			try {
+				fileStatics = (TemplateHashModel) staticModels.get(value);
+				attributes.put(key, fileStatics);
+			} catch (Exception e) {
+			}
+		});
+		resolver.setAttributesMap(attributes);
 		
 		//设置加载器
 		MultiTemplateLoader templateLoader1 = (MultiTemplateLoader) c.getTemplateLoader();

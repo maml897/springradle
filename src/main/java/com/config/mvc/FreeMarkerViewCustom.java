@@ -24,7 +24,7 @@ public class FreeMarkerViewCustom extends FreeMarkerView
 		WishUserDetails wishUserDetails = CurrentUser.getUserDetails();
 		if (wishUserDetails != null)
 		{
-			model.put("wishUserDetails", wishUserDetails);
+			model.put("userDetails", wishUserDetails);
 		}
 		model.put("response", response);
 		model.put("request", request);
