@@ -75,8 +75,8 @@ public class RegisterControl
 		user.setAuthoritys(Arrays.asList(new Authority("ROLE_USER")));
 		userService.addUser(user);
 		Map<String, String> map = new HashMap<>();
-		map.put("j_username", user.getPhone());
-		map.put("j_password", user.getPassword());
+		map.put("username", user.getPhone());
+		map.put("password", user.getPassword());
 		return new PostbackView(request.getContextPath() + "/SystemLogin", map);
 	}
 }
