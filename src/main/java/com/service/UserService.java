@@ -70,7 +70,6 @@ public class UserService implements UserDetailsService
 		String sql ="INSERT INTO t_user (CreateDate,Enabled,Password,RealName,Phone,Mail,UserName)VALUES(:createDate,:enabled,:password,:realName,:phone,:mail,:userName)";
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		namedJdbcTemplate.update(sql, new BeanPropertySqlParameterSource(user), keyHolder);
-		System.out.println(keyHolder.getKey());
 		
 		//插入权限
 		sql ="INSERT INTO t_user_authority (UserID,Authority)VALUES("+keyHolder.getKey()+",'ROLE_USER')";
