@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
@@ -35,14 +34,6 @@ public class RegisterControl
 		model.addAttribute("phone", phone);
 		model.addAttribute("mail", mail);
 		return "/register";
-	}
-
-	@ResponseBody
-	@RequestMapping("/check")
-	public String check(Model model, String value)
-	{
-		User user = userService.getUser(value);
-		return (user.getId() == 0) + "";
 	}
 
 	@RequestMapping("/register-process")

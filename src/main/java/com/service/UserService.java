@@ -10,7 +10,6 @@ import javax.annotation.Resource;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.security.core.GrantedAuthority;
@@ -74,11 +73,6 @@ public class UserService implements UserDetailsService
 		//插入权限
 		sql ="INSERT INTO t_user_authority (UserID,Authority)VALUES("+keyHolder.getKey()+",'ROLE_USER')";
 		namedJdbcTemplate.update(sql, new HashMap<>());
-	}
-	
-	public User getUser(String phoneOrMail) throws UsernameNotFoundException
-	{
-		return null;
 	}
 	
 	public boolean checkPhone(String phone) throws UsernameNotFoundException
