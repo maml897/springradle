@@ -101,13 +101,13 @@ $(function(){
 		<div class="form-container">
 			<form id="id_form" method="post" action="${base}/register/register-process">
 				<div class="form-ctrl" target="phone">
-					<input type="text" placeholder="姓名" name="realName" id="id_realName" value="${realName}">
+					<input type="text" placeholder="姓名" name="realName" id="id_realName" value="${realName}" autocomplete="off">
 				</div>
 				<div class="form-ctrl" target="phone">
-					<input type="text" placeholder="手机号，必填，用于登录" name="phone" id="id_phone" value="${phone}">
+					<input type="text" placeholder="手机号，必填，用于登录" name="phone" id="id_phone" value="${phone}" autocomplete="off">
 				</div>
 				<div class="form-ctrl" target="phone">
-					<input type="text" placeholder="邮箱，建议输入，用于找回密码" name="mail" id="id_mail" value="${mail}">
+					<input type="text" placeholder="邮箱，建议输入，用于找回密码" name="mail" id="id_mail" value="${mail}" autocomplete="off">
 				</div>
 				<div class="form-ctrl" id="pass">
 					<input type="password" placeholder="请输入不少于6位密码" name="password" id="id_password" value="${password!}">

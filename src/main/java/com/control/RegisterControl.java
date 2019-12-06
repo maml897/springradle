@@ -48,10 +48,9 @@ public class RegisterControl
 	@RequestMapping("/register-process")
 	public View registerprocess(Model model, RedirectAttributes redirectAttributes, HttpServletRequest request, User user)
 	{
-		User tmpUser = userService.getUser(user.getPhone());
-		if (tmpUser.getId() != 0)
+		boolean phone = userService.checkPhone(user.getPhone());
+		if (phone)
 		{
-
 			redirectAttributes.addAttribute("realName", user.getRealName());
 			redirectAttributes.addAttribute("phone", user.getPhone());
 			redirectAttributes.addAttribute("mail", user.getMail());
@@ -61,8 +60,8 @@ public class RegisterControl
 		}
 		if (!user.getMail().equals(""))
 		{
-			tmpUser = userService.getUser(user.getMail());
-			if (tmpUser.getId() != 0)
+			boolean mail = userService.checkPhone(user.getMail());
+			if (mail)
 			{
 				redirectAttributes.addAttribute("realName", user.getRealName());
 				redirectAttributes.addAttribute("phone", user.getPhone());
