@@ -3,7 +3,6 @@ package com.control.manage;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -26,6 +25,7 @@ import com.service.TableService;
 import com.utils.Constant;
 import com.utils.LambdaUtils;
 import com.view.table.Column;
+import com.view.table.Row;
 import com.view.table.Table;
 
 @RequestMapping("/manage")
@@ -55,8 +55,8 @@ public class ManageControl
 	{
 		if (!file.isEmpty())
 		{
-			//String path = FileUtils.saveFile(file, UUID.randomUUID().toString() + "/" + file.getOriginalFilename());
-			//redirectAttributes.addAttribute("path", path);
+			// String path = FileUtils.saveFile(file, UUID.randomUUID().toString() + "/" + file.getOriginalFilename());
+			// redirectAttributes.addAttribute("path", path);
 			return new RedirectView("excel", true);
 		}
 		return new StringView("1");
@@ -156,21 +156,26 @@ public class ManageControl
 	}
 
 	@RequestMapping(value = { "rows", "rows/{tableID}" })
-	public String rows(Model model, @PathVariable(name = "tableID", required = false) Long tableID, Page<Map<String, Object>> page) throws Exception
+	public String rows(Model model, @PathVariable(name = "tableID", required = false) Long tableID, Page<Row> page) throws Exception
 	{
+		Table table=new Table();
 		if (tableID == null)
 		{
-			tableID = tableService.getFirstTableID(CurrentUser.getUserDetails().getUserID());
+			table = tableService.getFirstTable(CurrentUser.getUserDetails().getUserID());
+			tableID = table.getId();
+			if (tableID == 0)
+			{
+				return "redirect:/";
+			}
 		}
-		if (tableID == 0)
+		else
 		{
-			return "redirect:/";
+			table = tableService.getTable(tableID);
 		}
 
-		Table table = tableService.getTable(tableID);
 		if (table.getUserID() != CurrentUser.getUserDetails().getUserID())
 		{
-			model.addAttribute("", "");
+			return "redirect:/403";
 		}
 
 		model.addAttribute("columns", tableService.getColumns(tableID));
@@ -191,7 +196,7 @@ public class ManageControl
 		model.addAttribute("tableID", tableID);
 		return "/manage/table-set";
 	}
-	
+
 	@RequestMapping(value = { "q-set" })
 	public String qset(Model model, long tableID) throws Exception
 	{
@@ -208,7 +213,7 @@ public class ManageControl
 
 	@ResponseBody
 	@RequestMapping(value = { "ser-column-order" })
-	public String setColumnOrder(Model model, @RequestParam(name="columnID") List<Long> columnID) throws Exception
+	public String setColumnOrder(Model model, @RequestParam(name = "columnID") List<Long> columnID) throws Exception
 	{
 		for (int i = 0; i < columnID.size(); i++)
 		{
@@ -216,70 +221,71 @@ public class ManageControl
 		}
 		return "ok";
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = { "set-column-searchshow" })
-	public String setColumnSearchShow(Model model, @RequestParam(name="columnID") long columnID,boolean show) throws Exception
+	public String setColumnSearchShow(Model model, @RequestParam(name = "columnID") long columnID, boolean show) throws Exception
 	{
 		tableService.setColumnSearchShow(columnID, show);
 		return "ok";
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = { "set-column-type" })
-	public String setColumnSearchShow(Model model, @RequestParam(name="columnID") long columnID,int type) throws Exception
+	public String setColumnSearchShow(Model model, @RequestParam(name = "columnID") long columnID, int type) throws Exception
 	{
 		tableService.setColumnType(columnID, type);
 		return "ok";
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = { "remove-column" })
-	public String removeColumn(Model model, @RequestParam(name="columnID") long columnID) throws Exception
+	public String removeColumn(Model model, @RequestParam(name = "columnID") long columnID) throws Exception
 	{
 		tableService.removeColumn(columnID);
 		return "ok";
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = { "modify-column" })
-	public String modifyColumn(Model model, @RequestParam(name="columnID") long columnID,String name) throws Exception
+	public String modifyColumn(Model model, @RequestParam(name = "columnID") long columnID, String name) throws Exception
 	{
-		tableService.modifyColumn(columnID,name);
+		tableService.modifyColumn(columnID, name);
 		return "ok";
 	}
 
-	
 	@ResponseBody
 	@RequestMapping(value = { "add-column" })
 	public String addColumn(Model model, Column column) throws Exception
 	{
-		String rowName = Constant.rowNames.get(Constant.rowNames.size()-1);
+		String rowName = Constant.rowNames.get(Constant.rowNames.size() - 1);
 		List<Column> columns = tableService.getColumns(column.getTableID());
 		List<String> already = LambdaUtils.list2list(columns, Column::getRowName);
-		for(String name:Constant.rowNames){
-			if(!already.contains(name)){
-				rowName=name;
+		for (String name : Constant.rowNames)
+		{
+			if (!already.contains(name))
+			{
+				rowName = name;
 				break;
 			}
 		}
-		
-		//重新排序
-//		columns.add(column.getOrder(), column);
-//		for (int i = 0; i < columns.size(); i++)
-//		{
-//			tableService.setColumnOrder(columns.get(i).getId(), i);
-//		}
-		
+
+		// 重新排序
+		// columns.add(column.getOrder(), column);
+		// for (int i = 0; i < columns.size(); i++)
+		// {
+		// tableService.setColumnOrder(columns.get(i).getId(), i);
+		// }
+
 		column.setRowName(rowName);
 		tableService.addColumn(column);
-		
-//		JSONObject object= new JSONObject();
-//		object.put("id", column.getId());
-//		object.put("order", column.getOrder());
-//		
-//		return object.toJSONString();
-		
+
+		// JSONObject object= new JSONObject();
+		// object.put("id", column.getId());
+		// object.put("order", column.getOrder());
+		//
+		// return object.toJSONString();
+
 		return null;
 	}
 }

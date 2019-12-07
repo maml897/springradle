@@ -3,15 +3,21 @@ package com.service;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.common.Page;
 import com.utils.LambdaUtils;
 import com.view.table.Column;
+import com.view.table.Row;
 import com.view.table.Table;
 
 @Service
@@ -29,36 +35,44 @@ public class TableService
 //
 //	@Resource
 //	private SearchDao searchDao;
+	
+	@Resource
+	private NamedParameterJdbcTemplate namedJdbcTemplate;
 
 	public Page<Table> getTablePage(Page<Table> page, long userID)
 	{
+		List<Table> list = namedJdbcTemplate.query("select * from m_table where userID="+userID, new HashMap<>(),new BeanPropertyRowMapper<>(Table.class));
 		page.setTotalNumber(0);
-		//page.setList(tableDao.getTables(userID, page.getPageSize(), page.getPageNumber()));
+		page.setList(list);
 		return page;
 	}
 
-	public long getFirstTableID(long userID)
+	public Table getFirstTable(long userID)
 	{
-		//return tableDao.getFirstTableID(userID);
-		return 0;
+		List<Table> list = namedJdbcTemplate.query("select * from m_table where userID="+userID, new HashMap<>(),new BeanPropertyRowMapper<>(Table.class));
+		if(list.isEmpty()) {
+			return new Table();
+		}
+		return list.get(0);
 	}
 
 	public Table getTable(long tableID)
 	{
-		//return tableDao.getTable(tableID);
-		return null;
+		Table obj = namedJdbcTemplate.queryForObject("select * from m_table where id="+tableID, new HashMap<>(),new BeanPropertyRowMapper<>(Table.class));
+		return obj;
 	}
 
 	public List<Column> getColumns(long tableID)
 	{
-		//return columnDao.getColumns(tableID);
-		return null;
+		List<Column> list = namedJdbcTemplate.query("select ID,Title,Search,SearchShow,CShow as 'show' from m_column where tableID="+tableID +" order by COrder", new HashMap<>(),new BeanPropertyRowMapper<>(Column.class));
+		return list;
 	}
 
-	public Page<Map<String, Object>> getRowPage(Page<Map<String, Object>> page, long tableID)
+	public Page<Row> getRowPage(Page<Row> page, long tableID)
 	{
 		page.setTotalNumber(0);
-		//page.setList(rowDao.getRows(tableID));
+		List<Row> list = namedJdbcTemplate.query("select * from m_row where tableID="+tableID, new HashMap<>(),new BeanPropertyRowMapper<>(Row.class));
+		page.setList(list);
 		return page;
 	}
 

@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import com.alibaba.fastjson.JSONObject;
 import com.utils.Constant;
 
 public class Row
@@ -22,11 +23,45 @@ public class Row
 	private long tableID;
 
 	private Date date = new Date();
-	
-	private int from=Constant.ROW_FROM_EXCEL ;//0:excel导入，1：管理员手动录入
-	
-	private int times=0;//查询次数
-	
+
+	private int from = Constant.ROW_FROM_EXCEL;// 0:excel导入，1：管理员手动录入
+
+	private int times = 0;// 查询次数
+
+	private String data = "";
+
+	private JSONObject json = null;
+
+	public String getData()
+	{
+		return data;
+	}
+
+	public void setData(String data)
+	{
+		this.data = data;
+	}
+
+	public JSONObject getJson()
+	{
+		if (json == null)
+		{
+			if(data!=null) {
+				this.json = JSONObject.parseObject(data);
+			}
+			else {
+				this.json =new JSONObject();
+			}
+		}
+
+		return json;
+	}
+
+	public void setJson(JSONObject json)
+	{
+		this.json = json;
+	}
+
 	public int getFrom()
 	{
 		return from;

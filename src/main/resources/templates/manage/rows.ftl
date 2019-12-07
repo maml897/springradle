@@ -41,7 +41,7 @@ $(function(){
 		<tr>
 			<td>${item?counter}<input type="checkbox" style="display: none;"/></td>
 			<#list columns as c>
-			<td>${item(c.rowName)}</td>
+			<td>${item.json(c.id)!}</td>
 			</#list>
 		</tr>
 		</#list>
