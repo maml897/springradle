@@ -4,6 +4,8 @@
 	</div>
 	<div class="scroll">
 		<table style="width: 100%;" class="tblist">
+		
+		<#-- 
 		<tr>
 			<td style="min-width: 100px;"></td>
 			<#list titles as title>
@@ -26,7 +28,7 @@
 			</td>
 			</#list>
 		</tr>
-		
+		 -->
 		<tr style="background: #f5f5f5;">
 			<td>标题行</td>
 			<#list titles as title>

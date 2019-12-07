@@ -21,13 +21,6 @@ $(function(){
 					$("#id_file").val("");
 					return false;
 				}
-				if(data=="2"){
-					alert("导入列数过多，目前最多可以导入${Constant.rowNames?size}列");
-					$(".import-content").find("div").show();
-					$(".import-content").find("p").hide();
-					$("#id_file").val("");
-					return false;
-				}
 				$("#id_include").html(body.find("div.result").html());
 			}).submit();
 			$(".import-content").find("div").hide();

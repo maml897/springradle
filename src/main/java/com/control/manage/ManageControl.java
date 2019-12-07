@@ -3,6 +3,7 @@ package com.control.manage;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 
@@ -23,6 +24,7 @@ import com.config.mvc.view.StringView;
 import com.config.security.user.CurrentUser;
 import com.service.TableService;
 import com.utils.Constant;
+import com.utils.FileUtils;
 import com.utils.LambdaUtils;
 import com.view.table.Column;
 import com.view.table.Row;
@@ -49,37 +51,31 @@ public class ManageControl
 		model.addAttribute("page", page);
 		return "/manage/tables";
 	}
+	
+	@RequestMapping("import-table")
+	public String inporttable()
+	{
+		return "/manage/import-table";
+	}
 
 	@RequestMapping(value = "upload-excel", produces = "text/plain;charset=UTF-8")
 	public View uploadexcel(RedirectAttributes redirectAttributes, @RequestParam("file") MultipartFile file) throws Exception
 	{
 		if (!file.isEmpty())
 		{
-			// String path = FileUtils.saveFile(file, UUID.randomUUID().toString() + "/" + file.getOriginalFilename());
-			// redirectAttributes.addAttribute("path", path);
+			 String path = FileUtils.saveFile(file, UUID.randomUUID().toString() + "/" + file.getOriginalFilename());
+			 redirectAttributes.addAttribute("path", path);
 			return new RedirectView("excel", true);
 		}
 		return new StringView("1");
 	}
 
-	@ResponseBody
-	@RequestMapping(value = "tip", produces = "text/plain;charset=UTF-8")
-	public String tip() throws Exception
-	{
-		return "2";
-	}
 
 	@RequestMapping(value = "excel")
 	public String excel(Model model, String path) throws Exception
 	{
 		PoiExcelReader excelReader = new PoiExcelReader(path);
 		excelReader.selSheet(0);
-
-		if (excelReader.getCurColumns() > Constant.rowNames.size())
-		{
-			return "redirect:tip";
-		}
-
 		List<String> titles = new ArrayList<>();
 		List<List<String>> rows = new ArrayList<>();
 		for (int i = 0; i < excelReader.getCurRows(); i++)
