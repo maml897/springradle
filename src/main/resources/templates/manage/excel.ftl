@@ -14,7 +14,7 @@
 			</td>
 			</#list>
 		</tr>
- 
+  		-->
 		<tr style="background: #eff">
 			<td style="min-width: 100px;">表头属性</td>
 			<#list titles as title>
@@ -28,7 +28,7 @@
 			</td>
 			</#list>
 		</tr>
-		 -->
+		
 		<tr style="background: #f5f5f5;">
 			<td>标题行</td>
 			<#list titles as title>

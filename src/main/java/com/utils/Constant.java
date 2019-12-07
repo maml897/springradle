@@ -28,9 +28,6 @@ public class Constant
 
 	public static int ROW_FROM_ADD = 1;// 用户手动添加的数据
 	
-	
-	public static List<String> rowNames = Arrays.asList("A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U");
-	
 	public static Map<Integer,String> columnType = new LinkedHashMap<>();
 	
 	static {

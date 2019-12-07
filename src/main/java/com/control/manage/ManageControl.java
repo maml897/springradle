@@ -127,7 +127,6 @@ public class ManageControl
 			column.setOrder(i);
 			column.setType(types.get(i));
 			column.setTitle(titles.get(i));
-			column.setRowName(Constant.rowNames.get(i));
 			columns.add(column);
 		}
 
@@ -254,17 +253,9 @@ public class ManageControl
 	@RequestMapping(value = { "add-column" })
 	public String addColumn(Model model, Column column) throws Exception
 	{
-		String rowName = Constant.rowNames.get(Constant.rowNames.size() - 1);
 		List<Column> columns = tableService.getColumns(column.getTableID());
 		List<String> already = LambdaUtils.list2list(columns, Column::getRowName);
-		for (String name : Constant.rowNames)
-		{
-			if (!already.contains(name))
-			{
-				rowName = name;
-				break;
-			}
-		}
+		
 
 		// 重新排序
 		// columns.add(column.getOrder(), column);
@@ -273,7 +264,6 @@ public class ManageControl
 		// tableService.setColumnOrder(columns.get(i).getId(), i);
 		// }
 
-		column.setRowName(rowName);
 		tableService.addColumn(column);
 
 		// JSONObject object= new JSONObject();
