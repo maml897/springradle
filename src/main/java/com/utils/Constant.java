@@ -1,8 +1,6 @@
 package com.utils;
 
-import java.util.Arrays;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Constant
@@ -12,7 +10,7 @@ public class Constant
 
 	public static int COLUMN_TYPE_YUNDAN = 1;// 运单号
 	
-	public static int COLUMN_TYPE_PHONE = 2;// 手机号
+	public static int COLUMN_TYPE_PHONE = 2;// 	手机号
 	
 	public static int COLUMN_TYPE_YUNDAN_COM = 3;// 运单公司
 	

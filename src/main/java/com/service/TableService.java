@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.alibaba.fastjson.JSONObject;
 import com.common.Page;
+import com.utils.Constant;
 import com.view.table.Column;
 import com.view.table.Row;
 import com.view.table.Table;
@@ -138,7 +139,7 @@ public class TableService
 				java.sql.Date sqlDate = new java.sql.Date(table.getCreateDate().getTime());
 				ps.setDate(1, sqlDate);
 				ps.setLong(2, keyHolder.getKey().longValue());
-				ps.setInt(3, 0);
+				ps.setInt(3, Constant.ROW_FROM_EXCEL);
 				ps.setInt(4, 0);
 				List<String> datas = datass.get(i);
 				JSONObject jsonObject =new JSONObject();
