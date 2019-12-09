@@ -158,10 +158,25 @@ public class TableService
 		});
 	}
 
-	@Transactional(readOnly = false)
-	public void setColumnOrder(long columnID, int order)
+	@Transactional(readOnly = false, value = "jdbcTemplateTm")
+	public void setColumnOrder(List<Long> columnIDs)
 	{
-		//columnDao.setColumnOrder(columnID, order);
+		String sql = "update m_column set COrder=? where ID=?";
+		jdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter()
+		{
+			@Override
+			public void setValues(PreparedStatement ps, int i) throws SQLException
+			{
+				ps.setInt(1, i);
+				ps.setLong(2, columnIDs.get(i));
+			}
+
+			@Override
+			public int getBatchSize()
+			{
+				return columnIDs.size();
+			}
+		});
 	}
 
 	@Transactional(readOnly = false)
@@ -218,11 +233,13 @@ public class TableService
 		//columnDao.updateColumn(columnID, name);
 	}
 	
-	@Transactional(readOnly = false)
-	public void addColumn(Column column)
+	@Transactional(readOnly = false, value = "jdbcTemplateTm")
+	public long addColumn(Column column)
 	{
-		//columnDao.addColumn(column);
-		//rowDao.clear(column.getTableID(), column.getRowName());
+		String sql ="INSERT INTO m_column (Title,Search,TableID,CShow,CType,CreateDate,COrder,SearchShow)VALUES(:title,:search,:tableID,:show,:type,:createDate,:order,:searchShow)";
+		KeyHolder keyHolder = new GeneratedKeyHolder();
+		namedJdbcTemplate.update(sql, new BeanPropertySqlParameterSource(column), keyHolder);
+		return keyHolder.getKey().longValue();
 	}
 	
 	@Transactional(readOnly = false)

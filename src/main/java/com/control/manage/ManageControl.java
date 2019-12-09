@@ -18,6 +18,7 @@ import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.alibaba.fastjson.JSONObject;
 import com.common.Page;
 import com.common.excel.PoiExcelReader;
 import com.config.mvc.view.StringView;
@@ -49,7 +50,7 @@ public class ManageControl
 		model.addAttribute("page", page);
 		return "/manage/tables";
 	}
-	
+
 	@RequestMapping("import-table")
 	public String inporttable()
 	{
@@ -61,13 +62,12 @@ public class ManageControl
 	{
 		if (!file.isEmpty())
 		{
-			 String path = FileUtils.saveFile(file, UUID.randomUUID().toString() + "/" + file.getOriginalFilename());
-			 redirectAttributes.addAttribute("path", path);
+			String path = FileUtils.saveFile(file, UUID.randomUUID().toString() + "/" + file.getOriginalFilename());
+			redirectAttributes.addAttribute("path", path);
 			return new RedirectView("excel", true);
 		}
 		return new StringView("1");
 	}
-
 
 	@RequestMapping(value = "excel")
 	public String excel(Model model, String path) throws Exception
@@ -117,7 +117,7 @@ public class ManageControl
 		List<Column> columns = new ArrayList<>();
 		for (int i = 0; i < titles.size(); i++)
 		{
-			if (types.get(i) == -1)//设置不导入的列排除掉
+			if (types.get(i) == -1)// 设置不导入的列排除掉
 			{
 				continue;
 			}
@@ -136,7 +136,7 @@ public class ManageControl
 			List<String> row = rows.get(i);
 			for (int j = 0; j < row.size(); j++)
 			{
-				if (types.get(j) == -1)//设置不导入的列排除掉
+				if (types.get(j) == -1)// 设置不导入的列排除掉
 				{
 					continue;
 				}
@@ -151,7 +151,7 @@ public class ManageControl
 	@RequestMapping(value = { "rows", "rows/{tableID}" })
 	public String rows(Model model, @PathVariable(name = "tableID", required = false) Long tableID, Page<Row> page) throws Exception
 	{
-		Table table=new Table();
+		Table table = new Table();
 		if (tableID == null)
 		{
 			table = tableService.getFirstTable(CurrentUser.getUserDetails().getUserID());
@@ -208,10 +208,7 @@ public class ManageControl
 	@RequestMapping(value = { "ser-column-order" })
 	public String setColumnOrder(Model model, @RequestParam(name = "columnID") List<Long> columnID) throws Exception
 	{
-		for (int i = 0; i < columnID.size(); i++)
-		{
-			tableService.setColumnOrder(columnID.get(i), i);
-		}
+		tableService.setColumnOrder(columnID);
 		return "ok";
 	}
 
@@ -251,24 +248,12 @@ public class ManageControl
 	@RequestMapping(value = { "add-column" })
 	public String addColumn(Model model, Column column) throws Exception
 	{
-		List<Column> columns = tableService.getColumns(column.getTableID());
-		
 
-		// 重新排序
-		// columns.add(column.getOrder(), column);
-		// for (int i = 0; i < columns.size(); i++)
-		// {
-		// tableService.setColumnOrder(columns.get(i).getId(), i);
-		// }
+		long id = tableService.addColumn(column);
+		JSONObject object = new JSONObject();
+		object.put("id", id);
+		object.put("order", column.getOrder());
+		return object.toJSONString();
 
-		tableService.addColumn(column);
-
-		// JSONObject object= new JSONObject();
-		// object.put("id", column.getId());
-		// object.put("order", column.getOrder());
-		//
-		// return object.toJSONString();
-
-		return null;
 	}
 }

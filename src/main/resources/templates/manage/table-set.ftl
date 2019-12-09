@@ -8,10 +8,10 @@
 <script type="text/javascript" src="${base}/js/tableset.js"></script>
 <script type="text/javascript">
 $(function(){
+	//调整顺序
 	$(".tblist").tabledrag({
 		canLast:false,
 		notClass:"nodragg",
-		/*
 		draged:function(table){
 			var tds = table.find("tr").eq(0).find("td.columndata");
 			var param = "columnID=";
@@ -26,12 +26,13 @@ $(function(){
 			});
 			
 			$.ajax({
-				url:"${base}/manage/ser-column-order?"+param,
+				url:"${base}/manage/ser-column-order",
+				data:param,
+				type:"post",
 				success:function(data){
 				}
 			});
 		}
-	*/
 	});
 	
 	var dest=$(".opt_menu").mbox({
@@ -151,12 +152,12 @@ $(function(){
      	}  
 	});  
 	
+	//添加列
 	$(".add_column").click(function(){
 		var index = $(this).index();
 		var trs = $("tr");
 		var name = "第"+(index+1)+"列";
 		
-		return false;
 		//添加数据库
 		//绑定事件
 		$.ajax({
