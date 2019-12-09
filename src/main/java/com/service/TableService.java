@@ -106,7 +106,7 @@ public class TableService
 	}
 
 	@Transactional(readOnly = false, value = "jdbcTemplateTm")
-	public void addTable(long userID, String tableName, List<Column> columns, List<List<String>> datass)
+	public void importTable(long userID, String tableName, List<Column> columns, List<List<String>> datass)
 	{
 		//1.插入table
 		Table table = new Table();

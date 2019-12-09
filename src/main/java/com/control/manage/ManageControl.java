@@ -146,7 +146,7 @@ public class ManageControl
 			}
 			last.add(newRow);
 		}
-		tableService.addTable(CurrentUser.getUserDetails().getUserID(), file.getName(), columns, last);
+		tableService.importTable(CurrentUser.getUserDetails().getUserID(), file.getName(), columns, last);
 		return "ok";
 	}
 
