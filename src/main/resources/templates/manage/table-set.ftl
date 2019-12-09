@@ -137,7 +137,6 @@ $(function(){
 		var $this=$(this);
 		var name=$this.val();
 		var id=$this.attr("alt");
-		return false;
 		$.ajax({
 			url:"modify-column",
 			type:"post",

@@ -227,10 +227,14 @@ public class TableService
 //		columnDao.removeColumn(columnID);
 	}
 	
-	@Transactional(readOnly = false)
+	@Transactional(readOnly = false, value = "jdbcTemplateTm")
 	public void modifyColumn(long columnID,String name)
 	{
-		//columnDao.updateColumn(columnID, name);
+		String sql ="update m_column set Title=:title where ID=:id";
+		Map<String,Object> map =new HashMap<>();
+		map.put("title", name);
+		map.put("id", columnID);
+		namedJdbcTemplate.update(sql, map);
 	}
 	
 	@Transactional(readOnly = false, value = "jdbcTemplateTm")
