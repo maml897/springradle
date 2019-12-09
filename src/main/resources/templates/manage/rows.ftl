@@ -16,6 +16,9 @@ $(function(){
 	  });
 	});
 </script>
+<style type="text/css">
+td{text-indent: 8px;}
+</style>
 </@t_admin.head>
 <@t_admin.body position="首页" menu="icon3">
 <div style="margin: 0 10px;padding: 4px;height: 30px;line-height: 30px;">
