@@ -24,7 +24,6 @@
 			if($this.data("opend")){
 				return false;
 			}
-			
 			if(flag){
 				dest =options.data($this);
 			}
@@ -40,6 +39,7 @@
 			if(options.source){
 				dest.source =options.source($this);//可以自定义source
 			}
+			dest.target=$this;
 			$document.bind("mousedown",{source:$this},bindmousedown);
 		});
 		
@@ -48,13 +48,13 @@
 			var source = event.data.source;
 			if (!target.closest(dest).length && !target.closest(source).length) {
 				close();
-				options.onClose();
-				source.removeData("opend");
 			}
 		}
 		
 		function close(){
+			dest.target.removeData("opend");
 			dest.hide();
+			options.onClose();
 			$document.unbind("mousedown",bindmousedown);
 		}
 		

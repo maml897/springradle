@@ -41,7 +41,7 @@ $(function(){
 			return b.left-10
 		},
 		onClose:function(){
-			$(".opt_menu").hide();
+			//$(".opt_menu").hide();
 		},
 		source:function($this){
 			return $this.parent("td");
