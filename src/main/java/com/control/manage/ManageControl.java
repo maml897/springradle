@@ -254,7 +254,6 @@ public class ManageControl
 	public String addColumn(Model model, Column column) throws Exception
 	{
 		List<Column> columns = tableService.getColumns(column.getTableID());
-		List<String> already = LambdaUtils.list2list(columns, Column::getRowName);
 		
 
 		// 重新排序

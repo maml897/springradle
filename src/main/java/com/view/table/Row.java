@@ -1,23 +1,12 @@
 package com.view.table;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 import com.alibaba.fastjson.JSONObject;
 import com.utils.Constant;
 
 public class Row
 {
-	public Map<String, Object> getMap()
-	{
-		Map<String, Object> map = new LinkedHashMap<>();
-		map.put("CreateDate", new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(date));
-		map.put("TableID", tableID);
-		return map;
-	}
-
 	private long id;
 
 	private long tableID;

@@ -1,29 +1,11 @@
 package com.view.table;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 import com.utils.Constant;
+
 public class Column
 {
-	
-	public Map<String, Object> getMap()
-	{
-		Map<String, Object> map = new LinkedHashMap<>();
-		map.put("Title", title);
-		map.put("Search", search);
-		map.put("TableID", tableID);
-		map.put("CShow", show);
-		map.put("CType", type);
-		map.put("CreateDate", new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(createDate));
-		map.put("COrder", order);
-		map.put("RowName", rowName);
-		map.put("SearchShow", searchShow);
-		return map;
-	}
-	
 	private long id;
 
 	private long tableID;
@@ -33,26 +15,14 @@ public class Column
 	private boolean show = true;
 
 	private int type = Constant.COLUMN_TYPE_TEXT;
-	
-	private Date createDate=new Date();
-	
-	private int order=0;
-	
-	private String title="";
-	
-	private String rowName;
-	
-	private boolean searchShow = true;
-	
-	public String getRowName()
-	{
-		return rowName;
-	}
 
-	public void setRowName(String rowName)
-	{
-		this.rowName = rowName;
-	}
+	private Date createDate = new Date();
+
+	private int order = 0;
+
+	private String title = "";
+
+	private boolean searchShow = true;
 
 	public String getTitle()
 	{
@@ -143,7 +113,5 @@ public class Column
 	{
 		this.searchShow = searchShow;
 	}
-	
-	
 
 }

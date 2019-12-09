@@ -1,24 +1,25 @@
 package com.service;
 
-import java.sql.ResultSet;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.alibaba.fastjson.JSONObject;
 import com.common.Page;
-import com.utils.LambdaUtils;
 import com.view.table.Column;
 import com.view.table.Row;
 import com.view.table.Table;
@@ -41,6 +42,9 @@ public class TableService
 	
 	@Resource
 	private NamedParameterJdbcTemplate namedJdbcTemplate;
+	
+	@Resource
+	private JdbcTemplate jdbcTemplate;
 
 	public Page<Table> getTablePage(Page<Table> page, long userID)
 	{
@@ -82,13 +86,18 @@ public class TableService
 	// 从模板选择创建表格
 	public void copyTable(long userID, String tableName, long tableID)
 	{
+		//1.插入table
 		Table table = new Table();
 		table.setUserID(userID);
 		table.setTitle(tableName);
+		
+		String sql ="INSERT INTO t_table (Title,UserID,CType,CreateDate)VALUES(:tile,:userID,:type,:createDate)";
+		KeyHolder keyHolder = new GeneratedKeyHolder();
+		namedJdbcTemplate.update(sql, new BeanPropertySqlParameterSource(table), keyHolder);
+		
+		//2.插入column
 
-		//tableDao.addTable(table);
-
-		//List<Column> columns = columnDao.getColumns(tableID);
+//		List<Column> columns = columnDao.getColumns(tableID);
 //		for (Column column : columns)
 //		{
 //			column.setTableID(table.getId());
@@ -96,42 +105,56 @@ public class TableService
 //		}
 	}
 
-	// 导入表
-	@Transactional(readOnly = false)
+	@Transactional(readOnly = false, value = "jdbcTemplateTm")
 	public void addTable(long userID, String tableName, List<Column> columns, List<List<String>> datass)
 	{
-		// 插入表
+		//1.插入table
 		Table table = new Table();
 		table.setUserID(userID);
 		table.setTitle(tableName);
-		//tableDao.addTable(table);
+		
+		String sql ="INSERT INTO m_table (Title,UserID,CType,CreateDate)VALUES(:title,:userID,:type,:createDate)";
+		KeyHolder keyHolder = new GeneratedKeyHolder();
+		namedJdbcTemplate.update(sql, new BeanPropertySqlParameterSource(table), keyHolder);
 
 		// 插入列
-		for (Column column : columns)
+		BeanPropertySqlParameterSource[] beanPropertySqlParameterSources = new BeanPropertySqlParameterSource[columns.size()];
+		for (int i = 0; i < columns.size(); i++)
 		{
-			column.setTableID(table.getId());
-			//columnDao.addColumn(column);
+			beanPropertySqlParameterSources[i] = new BeanPropertySqlParameterSource(columns.get(i));
 		}
+	    sql = "insert into m_column(Title,Search,TableID,CShow,CType,CreateDate,COrder,SearchShow) values(:Title,:Search,"+keyHolder.getKey()+",:Show,:Type,:CreateDate,:Order,:SearchShow)";
+	    namedJdbcTemplate.batchUpdate(sql, beanPropertySqlParameterSources);
 
-		List<String> titles = LambdaUtils.list2list(columns, Column::getRowName);
-		addRows(table.getId(), titles, datass);
-	}
-
-	// 追加数据
-	public void addRows(long tableID, List<String> titles, List<List<String>> datass)
-	{
-		titles.add("TableID");
-		titles.add("CreateDate");
-
-		List<List<Object>> lastdatass = new ArrayList<>();
-		for (List<String> datas : datass)
+	    //3.插入数据
+	    List<Long> columnIDs = namedJdbcTemplate.queryForList("select ID from m_column where tableID="+keyHolder.getKey(), new HashMap<>(), Long.class);
+	    
+		String insertSql = "INSERT INTO m_row (CreateDate, TableID,CFrom,Times,data) values (?,?,?,?,?)";
+		jdbcTemplate.batchUpdate(insertSql, new BatchPreparedStatementSetter()
 		{
-			List<Object> objects = new ArrayList<>(datas);
-			objects.add(tableID);
-			objects.add(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()));
-			lastdatass.add(objects);
-		}
-		//rowDao.addRows(titles, lastdatass);
+			@Override
+			public void setValues(PreparedStatement ps, int i) throws SQLException
+			{
+				java.sql.Date sqlDate = new java.sql.Date(table.getCreateDate().getTime());
+				ps.setDate(1, sqlDate);
+				ps.setLong(2, keyHolder.getKey().longValue());
+				ps.setInt(3, 0);
+				ps.setInt(4, 0);
+				List<String> datas = datass.get(i);
+				JSONObject jsonObject =new JSONObject();
+				for(int k=0;k<columnIDs.size();k++)
+				{
+					jsonObject.put(columnIDs.get(k)+"", datas.get(k));
+				}
+				ps.setString(5, jsonObject.toJSONString());
+			}
+
+			@Override
+			public int getBatchSize()
+			{
+				return datass.size();
+			}
+		});
 	}
 
 	@Transactional(readOnly = false)
