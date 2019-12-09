@@ -60,6 +60,7 @@ $(function(){
 	
 	$(".columndata").bind("mouseout",td_mouseout);
 	
+	//删除
 	$(".menu_remove").click(function(){
 		var source = dest.source;
 		var index = source.index();
@@ -76,6 +77,7 @@ $(function(){
 		});
 	});
 	
+	//修改
 	$(".menu_modify").click(function(){
 		var td = dest.source;
 		dest && dest.close();
