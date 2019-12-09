@@ -28,19 +28,6 @@ import com.view.table.Table;
 @Service
 public class TableService
 {
-
-//	@Resource
-//	private TableDao tableDao;
-//
-//	@Resource
-//	private ColumnDao columnDao;
-//
-//	@Resource
-//	private RowDao rowDao;
-//
-//	@Resource
-//	private SearchDao searchDao;
-	
 	@Resource
 	private NamedParameterJdbcTemplate namedJdbcTemplate;
 	
@@ -219,12 +206,13 @@ public class TableService
 		return null;
 	}
 	
-	@Transactional(readOnly = false)
+	@Transactional(readOnly = false, value = "jdbcTemplateTm")
 	public void removeColumn(long columnID)
 	{
-//		Column column = columnDao.getColumn(columnID);
-//		rowDao.clear(column.getTableID(), column.getRowName());
-//		columnDao.removeColumn(columnID);
+		String sql ="delete from m_column where ID=:id";
+		Map<String,Object> map =new HashMap<>();
+		map.put("id", columnID);
+		namedJdbcTemplate.update(sql, map);
 	}
 	
 	@Transactional(readOnly = false, value = "jdbcTemplateTm")
@@ -244,11 +232,5 @@ public class TableService
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		namedJdbcTemplate.update(sql, new BeanPropertySqlParameterSource(column), keyHolder);
 		return keyHolder.getKey().longValue();
-	}
-	
-	@Transactional(readOnly = false)
-	public void clearRow(String rowName,long tableID)
-	{
-		//rowDao.clear(tableID, rowName);
 	}
 }

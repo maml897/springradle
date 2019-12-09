@@ -63,16 +63,14 @@ $(function(){
 	$(".menu_remove").click(function(){
 		var source = dest.source;
 		var index = source.index();
-		dest.close();
-		$("tr").each(function (i) {
-	   		var $tr=$(this);
-	   		$tr.find("td").eq(index).remove();
-        });
-		
-		return false;
 		$.ajax({
 			url:"remove-column?columnID="+source.attr("data-column"),
 			success:function(data){
+				dest.close();
+				$("tr").each(function (i) {
+			   		var $tr=$(this);
+			   		$tr.find("td").eq(index).remove();
+		        });
 				
 			}
 		});
@@ -132,7 +130,7 @@ $(function(){
 		alert("复制");
 	});
 	
-	
+	//保存
 	$(".input_title").blur(function(){
 		var $this=$(this);
 		var name=$this.val();
