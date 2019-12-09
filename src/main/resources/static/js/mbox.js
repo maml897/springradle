@@ -24,17 +24,14 @@
 			if($this.data("opend")){
 				return false;
 			}
+			$this.data("opend",true);
 			if(flag){
 				dest =options.data($this);
 			}
-			
 			var position = $this.offset();
 			var top= options.top($this,position);
 			var left= options.left($this,position);
-			
 			dest.css({top:top,left:left}).show();
-			$this.data("opend",true);
-			
 			dest.source = $this;//当前
 			if(options.source){
 				dest.source =options.source($this);//可以自定义source
@@ -53,9 +50,9 @@
 		
 		function close(){
 			dest.target.removeData("opend");
+			$document.unbind("mousedown",bindmousedown);
 			dest.hide();
 			options.onClose();
-			$document.unbind("mousedown",bindmousedown);
 		}
 		
 		dest.close=close;
