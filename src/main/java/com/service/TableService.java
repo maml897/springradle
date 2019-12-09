@@ -228,7 +228,12 @@ public class TableService
 	@Transactional(readOnly = false, value = "jdbcTemplateTm")
 	public long addColumn(Column column)
 	{
-		String sql ="INSERT INTO m_column (Title,Search,TableID,CShow,CType,CreateDate,COrder,SearchShow)VALUES(:title,:search,:tableID,:show,:type,:createDate,:order,:searchShow)";
+		String sql = "select max(COrder) from m_column where TableID=:tableID";
+		Map<String, Object> params = new HashMap<>();
+		params.put("tableID", column.getTableID());
+		int max = namedJdbcTemplate.queryForObject(sql, params, Integer.class);
+		column.setOrder(max+1);
+		sql ="INSERT INTO m_column (Title,Search,TableID,CShow,CType,CreateDate,COrder,SearchShow)VALUES(:title,:search,:tableID,:show,:type,:createDate,:order,:searchShow)";
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		namedJdbcTemplate.update(sql, new BeanPropertySqlParameterSource(column), keyHolder);
 		return keyHolder.getKey().longValue();

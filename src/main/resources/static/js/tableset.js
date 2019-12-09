@@ -3,6 +3,8 @@ function edititle(td){
 }
 
 function addColumn($trs,index,data,name){
+	console.log(data.id);
+	
 	$trs.each(function (i) {
 		var $tr=$(this);
 		if(i==0){
@@ -11,7 +13,6 @@ function addColumn($trs,index,data,name){
 	   		
 	   		clone.find(".content").html(name);
 	   		clone.find("input").val(name).attr("alt",data.id);
-	   		
 	   		var last_td=clone.insertBefore($tr.find("td:eq(" + (index) + ")"));
 	   		edititle(last_td);
 		}

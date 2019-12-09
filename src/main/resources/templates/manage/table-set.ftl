@@ -156,15 +156,13 @@ $(function(){
 		var index = $(this).index();
 		var trs = $("tr");
 		var name = "第"+(index+1)+"列";
-		
-		//添加数据库
-		//绑定事件
 		$.ajax({
 			url:"add-column",
 			type:"post",
-			data:"tableID=${tableID}&title="+name+"&order="+((index+1)),
+			data:"tableID=${tableID}&title="+encodeURIComponent(name),
+			dataType:"json",
 			success:function(data){
-				addColumn($("tr"),index,data,name);
+				addColumn(trs,index,data,name);
 			}
 		});
 	});
