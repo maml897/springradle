@@ -23,9 +23,7 @@ import com.common.excel.PoiExcelReader;
 import com.config.mvc.view.StringView;
 import com.config.security.user.CurrentUser;
 import com.service.TableService;
-import com.utils.Constant;
 import com.utils.FileUtils;
-import com.utils.LambdaUtils;
 import com.view.table.Column;
 import com.view.table.Row;
 import com.view.table.Table;
@@ -119,7 +117,7 @@ public class ManageControl
 		List<Column> columns = new ArrayList<>();
 		for (int i = 0; i < titles.size(); i++)
 		{
-			if (types.get(i) == -1)
+			if (types.get(i) == -1)//设置不导入的列排除掉
 			{
 				continue;
 			}
@@ -138,7 +136,7 @@ public class ManageControl
 			List<String> row = rows.get(i);
 			for (int j = 0; j < row.size(); j++)
 			{
-				if (types.get(j) == -1)
+				if (types.get(j) == -1)//设置不导入的列排除掉
 				{
 					continue;
 				}
