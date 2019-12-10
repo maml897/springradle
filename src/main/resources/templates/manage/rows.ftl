@@ -21,20 +21,18 @@ td{text-indent: 8px;}
 </style>
 </@t_admin.head>
 <@t_admin.body position="首页" menu="icon3">
-<div style="margin: 0 10px;padding: 4px;height: 30px;line-height: 30px;">
-	<div style="float: left;">共 960 条</div>
-	<div style="float: right;">
-		搜索 | 显示
-	
-		<a class="btn" href="">导入数据</a>
-		<a class="btn" href="">新增数据</a>
-		<a class="btn" href="">导出数据</a>
+<div id="cf">
+	<div style="float: right;margin-right: 10px;">
+		<a href="${base}/manage/import-table" class="btn" >+导入Excel表格</a>
+		<a href="${base}/manage/import-table" class="btn" >+从模板选择表格</a>
+		<a href="${base}/manage/import-table" class="btn" >+手动创建表格</a>
 	</div>
 </div>
+
 <div style="margin: 0 10px;background: #fff;">
 	<table class="tblist tblisthover">
 		<tr class="title">
-			<td style="width: 66px;"><input type="checkbox"></td>
+			<td style="width: 56px;text-align: center;"><input type="checkbox"></td>
 			<#list columns as item>
 			<td>${item.title}</td>
 			</#list>
@@ -42,7 +40,7 @@ td{text-indent: 8px;}
 		
 		<#list page.list as item>
 		<tr>
-			<td>${item?counter}<input type="checkbox" style="display: none;"/></td>
+			<td style="text-align: center;">${item?counter}<input type="checkbox" style="display: none;"/></td>
 			<#list columns as c>
 			<td>${item.json(c.id)!}</td>
 			</#list>

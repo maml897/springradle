@@ -57,13 +57,9 @@
 					</div>
 				</div>
 			</div>
-			
-			
-			
-			
 		</div>
-		<div id="id_main_">
-		<#nested>
+		<div>
+			<#nested>
 		</div>
 	</div>
 </div>

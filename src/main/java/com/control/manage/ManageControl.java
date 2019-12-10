@@ -172,7 +172,7 @@ public class ManageControl
 		}
 
 		model.addAttribute("columns", tableService.getColumns(tableID));
-		model.addAttribute("page", tableService.getRowPage(page.setPageSize(30), tableID));
+		model.addAttribute("page", tableService.getRowPage(page.setPageSize(20), tableID));
 		return "/manage/rows";
 	}
 

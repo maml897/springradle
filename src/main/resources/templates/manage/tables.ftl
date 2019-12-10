@@ -5,16 +5,14 @@ $(function(){
 </script>
 </@t_admin.head>
 <@t_admin.body position="首页" menu="icon4">
-<div id="cf">这里可以方式操作区域+搜索</div>
-<div style="margin: 0 10px;padding: 4px;height: 30px;line-height: 30px;">
-	<div style="float: right;">
-		<a href="${base}/manage/import-table" class="btn" >导入Excel表格</a>
-		<a href="${base}/manage/import-table" class="btn" >从模板选择表格</a>
-		<a href="${base}/manage/import-table" class="btn" >手动创建表格</a>
+<div id="cf">
+	<div style="float: right;margin-right: 10px;">
+		<a href="${base}/manage/import-table" class="btn" >+导入Excel表格</a>
+		<a href="${base}/manage/import-table" class="btn" >+从模板选择表格</a>
+		<a href="${base}/manage/import-table" class="btn" >+手动创建表格</a>
 	</div>
 </div>
-
-<div style="margin: 0 10px;background: #fff;">
+<div style="margin: 0 10px;background: #fff;mar">
 	<table class="tblist">
 		<tr class="title">
 			<td>表名称</td>
@@ -35,5 +33,4 @@ $(function(){
 		</#list>
 	</table>
 </div>
-
 </@t_admin.body>
