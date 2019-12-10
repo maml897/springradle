@@ -5,6 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>${title}</title>
 <link style="text/css" rel="stylesheet" href="${base}/${css_admin}" />
+<link rel="stylesheet" href="${base}/font-awesome-4.7.0/css/font-awesome.min.css">
 <script language="javascript" type="text/javascript" src="${base}/js/jquery-1.8.3.min.js" ></script>
 <script language="javascript" type="text/javascript" src="${base}/js/init.js" ></script>
 <script language="javascript" type="text/javascript" src="${base}/js/tool.js" ></script>
@@ -46,7 +47,7 @@
 			<div id="id_main_top_left">首页  /  我的表格</div>
 			<div id="id_main_top_right">
 				<div style="height: 40px;width: 40px;background: #8BE2E0;color: #fff;border-radius: 100px;line-height: 40px;text-align: center;font-size: 16px;font-weight: bold;margin-top: 4px;">${userDetails.realName[0]}</div>
-				<i class="el-icon-caret-bottom"></i>
+				<i class="fa fa-sort-desc" aria-hidden="true"></i>
 				<div class="useropt popover" style="width: 80px;">
 					<div class="popover-content">
 						<div class="pop_menu">
@@ -67,7 +68,7 @@
 
 <script type="text/javascript">
 <#if menu!="">$(".${menu}").addClass("curr");</#if>
-$(".el-icon-caret-bottom").mbox({
+$(".fa-sort-desc").mbox({
 	data:$(".useropt"),
 	left:function(a,b){
 		return -30

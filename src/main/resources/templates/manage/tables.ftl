@@ -7,58 +7,30 @@ $(function(){
 });
 </script>
 <style type="text/css">
-
 .info{text-align: center;}
 .info .items{display: inline-block;cursor: pointer;border-right: 1px solid #ddd;padding: 0 40px;}
-.info .items span{font-size: 14px;}
-.appcolor{
-	display: block;
-    text-align: center;
-    font-weight: 400!important;
-    text-decoration: none!important;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-text-stroke-width: .22px;
-    position: relative;
-    font-family: hbicon;
-    padding-left: 1px;
-    margin: 0 auto 5px;
-    width: 28px;
-    height: 28px;
-    line-height: 28px;
-    font-size: 28px;
-    color: #66bb6a;
-    border: 1px solid #66bb6a;
-    background-color: #66bb6a;
-    border: none!important;
-    background-color: transparent!important;
-    font-style: normal;
-}
-.xls{
-	background: url("${base}/img/1185986.png") no-repeat;
-	background-size: contain;
-}
+.info .items div{font-size: 14px;margin-top: 8px;}
+.info .items i{font-size: 28px;}
 </style>
 </@t_admin.head>
 <@t_admin.body position="首页" menu="icon4">
 <div id="cf" style="padding: 16px;">
 	<div class="info" style="margin: 0 auto;">
 		<div class="items">
-			<i class="appcolor color_b"></i>
-			<span>导入本地Excel</span>
+			<i class="fa fa-cloud-upload" aria-hidden="true" style="color: #66bb6a;"></i>
+			<div>导入本地Excel</div>
 		</div>
 		<div class="items">
-			<i class="appcolor color_b"></i>
-			<span>选择应用市场模板</span>
+			<i class="fa fa-life-ring" aria-hidden="true" style="color:#ffa726;"></i>
+			<div>选择应用市场模板</div>
 		</div>
 		<div class="items" style="border-right:none;">
-			<i class="appcolor color_b"></i>
-			<span>手动创建表格</span>
+			<i class="fa fa-hand-pointer-o" aria-hidden="true" style="color:#5c6bc0;"></i>
+			<div>手动创建表格</div>
 		</div>
 	</div>
 </div>
 <div style="margin: 0 10px;background: #fff;">
-
 	<#--
 	<#list page.list as item>
 	<div style="width:80px;float: left;margin-right: 16px;text-align: center;" class="table">
