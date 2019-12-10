@@ -23,7 +23,7 @@ a{color: #ccc;text-decoration: none;}
 .items.curr{background: #001528;}
 
 /*内容*/
-#id_main{margin-left: 160px;background:#f9f9fc;height: 100%;}
+#id_main{margin-left: 160px;background:#fff;height: 100%;}
 #id_main_top_left{float: left;margin-left: 20px;}
 #id_main_top{width: 100%;height: 50px;line-height: 50px;background: #fff;box-shadow: 0px 0px 40px 0px rgba(82, 63, 105, 0.1);}
 #id_main_top_right{float: right;margin-right: 30px;color: #6c7293;}

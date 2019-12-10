@@ -40,7 +40,7 @@
 	
 	<div id="id_main">
 		<div id="id_main_top">
-			<div id="id_main_top_left">首页 &#187; 我的表格</div>
+			<div id="id_main_top_left">首页 / 我的表格</div>
 			<div id="id_main_top_right">${userDetails.realName}，欢迎您登录！ <a href="${base}/SystemLogout"><b>退出</b></a></div>
 		</div>
 		<div id="id_main_"><#nested></div>
