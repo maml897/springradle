@@ -34,6 +34,10 @@ $(function(){
     background-color: transparent!important;
     font-style: normal;
 }
+.xls{
+	background: url("${base}/img/1185986.png") no-repeat;
+	background-size: contain;
+}
 </style>
 </@t_admin.head>
 <@t_admin.body position="首页" menu="icon4">
@@ -54,6 +58,13 @@ $(function(){
 	</div>
 </div>
 <div style="margin: 0 10px;background: #fff;">
+	<#list page.list as item>
+	<div style="width:80px;float: left;margin-right: 16px;text-align: center;" class="table">
+		<div style="width: 60px;height: 60px;margin-bottom: 4px;margin-left: 10px;" class="xls"></div>
+		<div>${item.title}</div>
+	</div>
+	</#list>
+	<#--
 	<table class="tblist">
 		<tr class="title">
 			<td>表名称</td>
@@ -71,5 +82,6 @@ $(function(){
 		</tr>
 		</#list>
 	</table>
+	-->
 </div>
 </@t_admin.body>

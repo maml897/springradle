@@ -46,7 +46,7 @@
 			<div id="id_main_top_right">
 				<div style="height: 40px;width: 40px;background: #8BE2E0;color: #fff;border-radius: 100px;line-height: 40px;text-align: center;font-size: 16px;font-weight: bold;margin-top: 4px;">${userDetails.realName[0]}</div>
 				<i class="el-icon-caret-bottom"></i>
-				<div class="useropt popover" style="width: 70px;">
+				<div class="useropt popover" style="width: 80px;">
 					<div class="popover-content">
 						<div class="pop_menu">
 							<ul>
