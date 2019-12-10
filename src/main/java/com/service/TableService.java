@@ -65,9 +65,19 @@ public class TableService
 
 	public Page<Row> getRowPage(Page<Row> page, long tableID)
 	{
-		page.setTotalNumber(0);
-		List<Row> list = namedJdbcTemplate.query("select * from m_row where tableID="+tableID, new HashMap<>(),new BeanPropertyRowMapper<>(Row.class));
+		int pageNumber = page.getPageNumber();
+		int pageSize = page.getPageSize();
+		Map<String, Object> map = new HashMap<>();
+		map.put("begin", (pageNumber - 1) * pageSize);
+		map.put("maxlimit", page.getPageSize());
+		
+		List<Row> list = namedJdbcTemplate.query("select * from m_row where tableID="+tableID +" LIMIT :begin,:maxlimit", map,new BeanPropertyRowMapper<>(Row.class));
 		page.setList(list);
+		
+		int count = namedJdbcTemplate.queryForObject("select count(0) from m_row where tableID="+tableID, new HashMap<>(), Integer.class);
+		page.setTotalNumber(count);
+		
+		page.paging();
 		return page;
 	}
 

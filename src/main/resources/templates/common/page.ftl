@@ -1,4 +1,4 @@
-<#macro paging urlLink="" urlParameter="" number=10 ajax="" page=page prefix="" prev="&laquo;&nbsp;上一页" next="下一页&nbsp;&raquo;">
+<#macro paging urlLink="" urlParameter="" number=10 ajax="" page=page prefix="" prevtext="&laquo;&nbsp;上一页" nextext="下一页&nbsp;&raquo;">
 <#if page.totalPage==0>
 ${page.paging()}
 </#if>
@@ -11,11 +11,11 @@ ${page.paging()}
 <#local urlParameter="">
 </#if>
 
-<div class="${(ajax!='')?string('s_page_ajax','s_page')}">
+<div class="page ${(ajax!='')?string('s_page_ajax','s_page')}">
 <#if (page.pageNumber>1)>
-<a href="${response.encodeURL('${urlLink}?${prefix}totalNumber=${page.totalNumber}&${prefix}pageNumber=${page.preNumber}${urlParameter}')}">&laquo;&nbsp;上一页</a>
+<a href="${response.encodeURL('${urlLink}?${prefix}totalNumber=${page.totalNumber}&${prefix}pageNumber=${page.preNumber}${urlParameter}')}">${prevtext?no_esc}</a>
 <#else>
-<span class="disabled">${prev}</span>
+<span class="disabled">${prevtext?no_esc}</span>
 </#if>
 
 <#if (page.totalPage<=number)>
@@ -55,9 +55,9 @@ ${page.paging()}
 </#if>
 
 <#if (page.pageNumber < page.totalPage)>
-<a href="${response.encodeURL('${urlLink}?${prefix}totalNumber=${page.totalNumber}&${prefix}pageNumber=${page.nextNumber}${urlParameter}')}" class="a_page">下一页&nbsp;&raquo;</a>
+<a href="${response.encodeURL('${urlLink}?${prefix}totalNumber=${page.totalNumber}&${prefix}pageNumber=${page.nextNumber}${urlParameter}')}" class="a_page">${nextext?no_esc}</a>
 <#else>
-<span class="disabled">${next}</span>
+<span class="disabled">${nextext?no_esc}</span>
 </#if>
 </div>
 

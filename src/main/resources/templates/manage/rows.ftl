@@ -49,5 +49,9 @@ td{text-indent: 8px;}
 		</tr>
 		</#list>
 	</table>
+	
+	<@t_page.paging/>
+	
+	<br/>
 </div>
 </@t_admin.body>
