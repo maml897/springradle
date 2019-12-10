@@ -82,11 +82,11 @@ $(function(){
 			<i class="fa fa-cloud-upload" aria-hidden="true" style="color: #66bb6a;"></i>
 			<div>导入本地Excel</div>
 		</div>
-		<div class="items" style="border-right:none;">
+		<div class="items">
 			<i class="fa fa-hand-pointer-o" aria-hidden="true" style="color:#5c6bc0;"></i>
 			<div>手动创建表格</div>
 		</div>
-		<div class="items">
+		<div class="items" style="border-right:none;">
 			<i class="fa fa-life-ring" aria-hidden="true" style="color:#ffa726;"></i>
 			<div>选择应用市场模板</div>
 		</div>
@@ -96,7 +96,7 @@ $(function(){
 	<div style="border-left: 1px solid #eeecec;float: left;">
 		<#list page.list as item>
 		<div class="table" rel="${item.id}">
-			<div class="icon" style="border-color: #42a5f5;"><i class="fa fa-file-excel-o" aria-hidden="true" style="color: #42a5f5;"></i></div>
+			<div class="icon" style="border-color: ${item.color};"><i class="fa ${item.icon}" aria-hidden="true" style="color: ${item.color};"></i></div>
 			<i class="fa fa-angle-down optable" aria-hidden="true" style="font-size: 12px;"></i>
 			<div>${item.title}</div>
 		</div>

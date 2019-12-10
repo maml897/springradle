@@ -28,7 +28,7 @@ td{text-indent: 8px;}
 		<span style="color: #ddd">|</span>&nbsp;&nbsp;
 		<a href="" style="color: #9da1c4"><i class="fa fa-cloud-upload" aria-hidden="true"></i> 导入</a>&nbsp;&nbsp;
 		<a href="" style="color: #9da1c4"><i class="fa fa-cloud-download" aria-hidden="true"></i> 导出</a>&nbsp;&nbsp;
-		<a href="" style="color: #9da1c4"><i class="fa fa-plus-square" aria-hidden="true"></i> 增加记录</a>&nbsp;&nbsp;
+		<a href="" style="color: #008ed2"><i class="fa fa-plus-square" aria-hidden="true"></i> 增加记录</a>&nbsp;&nbsp;
 		<span style="color: #ddd">|</span>&nbsp;&nbsp;
 		<a href="${base}/manage/tables" style="color: #9da1c4"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i> 返回</a>&nbsp;&nbsp;
 	</div>

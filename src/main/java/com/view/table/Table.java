@@ -1,33 +1,43 @@
 package com.view.table;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 import com.utils.Constant;
 
 public class Table
 {
-	public Map<String, Object> getMap()
-	{
-		Map<String, Object> map = new LinkedHashMap<>();
-		map.put("Title", title);
-		map.put("UserID", userID);
-		map.put("CType", type);
-		map.put("CreateDate", new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(createDate));
-		return map;
-	}
-
 	private long id;
 
 	private String title;
+	
+	private String icon;
+	private String color;
 
 	private long userID;
 
 	private int type = Constant.TABLT_TYPE_USER;// 0:系统模板，1.用户
 
 	private Date createDate = new Date();
+
+	public String getIcon()
+	{
+		return icon;
+	}
+
+	public void setIcon(String icon)
+	{
+		this.icon = icon;
+	}
+
+	public String getColor()
+	{
+		return color;
+	}
+
+	public void setColor(String color)
+	{
+		this.color = color;
+	}
 
 	public Date getCreateDate()
 	{
