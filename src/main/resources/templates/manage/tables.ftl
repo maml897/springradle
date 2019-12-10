@@ -25,10 +25,16 @@ $(function(){
 			//$(".opt_menu").hide();
 		},
 		source:function($this){
-			return $this.parent("td");
+			return $this.parent("div");
 		}
 	});
 	
+	$(".to-edit").click(function(){
+		window.location.href="${base}/manage/table-set?tableID="+dest.source.attr("rel");
+	});
+	$(".to-queryset").click(function(){
+		window.location.href="${base}/manage/q-set?tableID="+dest.source.attr("rel");
+	});
 });
 </script>
 <style type="text/css">
@@ -61,16 +67,14 @@ $(function(){
 		<div class="pop_menu">
 			<ul>
 				<li class=""><a href="javascript:void(0);"><span><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 表格名称和图标</span></a></li>
-				<li class=""><a href="${base}/SystemLogout"><span><i class="fa fa-table" aria-hidden="true"></i> 编辑表格</span></a></li>
-				<li class=""><a href="${base}/SystemLogout"><span><i class="fa fa-dot-circle-o" aria-hidden="true"></i> 查询设置</span></a></li>
-				<li class=""><a href="${base}/SystemLogout"><span><i class="fa fa-cloud-download" aria-hidden="true"></i> 导出Excel</span></a></li>
-				<li class=""><a href="${base}/SystemLogout"><span><i class="fa fa-cloud-upload" aria-hidden="true"></i> 导入Excel</span></a></li>
+				<li class="to-edit"><a href="javascript:void(0);"><span><i class="fa fa-table" aria-hidden="true"></i> 编辑表格</span></a></li>
+				<li class="to-queryset"><a href="javascript:void(0);"><span><i class="fa fa-dot-circle-o" aria-hidden="true"></i> 查询设置</span></a></li>
+				<li class=""><a href="javascript:void(0);"><span><i class="fa fa-cloud-download" aria-hidden="true"></i> 导出Excel</span></a></li>
+				<li class=""><a href="javascript:void(0);"><span><i class="fa fa-cloud-upload" aria-hidden="true"></i> 导入Excel</span></a></li>
 			</ul>
 		</div>
 	</div>
 </div>
-
-
 
 <div id="cf" style="padding: 16px;">
 	<div class="info" style="margin: 0 auto;">
@@ -99,25 +103,5 @@ $(function(){
 		</#list>
 		<div style="clear: both;"></div>
 	</div>
-	
-	<#--
-	<table class="tblist">
-		<tr class="title">
-			<td>表名称</td>
-			<td>创建时间</td>
-			<td>设置</td>
-		</tr>
-		<#list page.list as item>
-		<tr>
-			<td style="text-align: left;"><i class="fa fa-table" aria-hidden="true"></i> <a href="${base}/manage/rows/${item.id}">${item.title}</a></td>
-			<td><i class="fa fa-calendar-check-o" aria-hidden="true"></i> ${item.createDate}</td>
-			<td>
-				<a class="btn" href="${base}/manage/table-set?tableID=${item.id}">表格设置</a>
-				<a class="btn" href="${base}/manage/q-set?tableID=${item.id}">查询设置</a>
-			</td>
-		</tr>
-		</#list>
-	</table>
-	-->
 </div>
 </@t_admin.body>
