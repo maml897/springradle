@@ -12,14 +12,13 @@ $(function(){
 		<a href="${base}/manage/import-table" class="btn" >+手动创建表格</a>
 	</div>
 </div>
-<div style="margin: 0 10px;background: #fff;mar">
+<div style="margin: 0 10px;background: #fff;">
 	<table class="tblist">
 		<tr class="title">
 			<td>表名称</td>
 			<td>创建时间</td>
 			<td>设置</td>
 		</tr>
-		
 		<#list page.list as item>
 		<tr>
 			<td style="text-align: left;"><a href="${base}/manage/rows/${item.id}">${item.title}</a></td>
@@ -28,7 +27,6 @@ $(function(){
 				<a class="btn" href="${base}/manage/table-set?tableID=${item.id}">表格设置</a>
 				<a class="btn" href="${base}/manage/q-set?tableID=${item.id}">查询设置</a>
 			</td>
-				
 		</tr>
 		</#list>
 	</table>
