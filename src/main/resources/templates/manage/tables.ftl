@@ -64,6 +64,7 @@ $(function(){
 				<li class=""><a href="${base}/SystemLogout"><span><i class="fa fa-table" aria-hidden="true"></i> 编辑表格</span></a></li>
 				<li class=""><a href="${base}/SystemLogout"><span><i class="fa fa-dot-circle-o" aria-hidden="true"></i> 查询设置</span></a></li>
 				<li class=""><a href="${base}/SystemLogout"><span><i class="fa fa-cloud-download" aria-hidden="true"></i> 导出Excel</span></a></li>
+				<li class=""><a href="${base}/SystemLogout"><span><i class="fa fa-cloud-upload" aria-hidden="true"></i> 导入Excel</span></a></li>
 			</ul>
 		</div>
 	</div>
@@ -77,13 +78,13 @@ $(function(){
 			<i class="fa fa-cloud-upload" aria-hidden="true" style="color: #66bb6a;"></i>
 			<div>导入本地Excel</div>
 		</div>
-		<div class="items">
-			<i class="fa fa-life-ring" aria-hidden="true" style="color:#ffa726;"></i>
-			<div>选择应用市场模板</div>
-		</div>
 		<div class="items" style="border-right:none;">
 			<i class="fa fa-hand-pointer-o" aria-hidden="true" style="color:#5c6bc0;"></i>
 			<div>手动创建表格</div>
+		</div>
+		<div class="items">
+			<i class="fa fa-life-ring" aria-hidden="true" style="color:#ffa726;"></i>
+			<div>选择应用市场模板</div>
 		</div>
 	</div>
 </div>
