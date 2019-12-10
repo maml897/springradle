@@ -10,6 +10,14 @@
   font-style: normal
 }
 
+
+@font-face {
+  font-family: 'hbicon';
+  src: url('hbicon.6efb83b3.woff') format('woff'); /* chrome, firefox */
+  font-weight: normal;
+  font-style: normal
+}
+
 body{font-size: 12px;font-family: weiruanyahei;background: rgb(48, 65, 86);color: #4b4b4b;}
 a{color: #ccc;text-decoration: none;}
 
@@ -54,7 +62,7 @@ a{color: #ccc;text-decoration: none;}
     content: "\E60B";
 }
 
-#cf{background-color: #f8f8f8;height: 52px;line-height: 50px;margin-bottom: 18px;}
+#cf{background-color: #f8f8f8;height: 52px;margin-bottom: 18px;}
 #id_main_{}
 
 /*详细内容*/
