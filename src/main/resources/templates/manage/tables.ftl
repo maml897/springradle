@@ -4,6 +4,10 @@ $(function(){
 	$(".items").click(function(){
 		window.location.href="${base}/manage/import-table";
 	});
+	
+	$(".table").click(function(){
+		window.location.href="${base}/manage/rows/"+$(this).attr("rel");
+	});
 });
 </script>
 <style type="text/css">
@@ -11,6 +15,10 @@ $(function(){
 .info .items{display: inline-block;cursor: pointer;border-right: 1px solid #ddd;padding: 0 40px;}
 .info .items div{font-size: 14px;margin-top: 8px;}
 .info .items i{font-size: 28px;}
+
+.table{width:80px;float: left;margin-right: 10px;text-align: center;cursor: pointer;}
+.table .icon{width:40px;height: 40px;border: 1px solid #eee;border-radius: 100px;line-height: 40px;margin-left: 20px;margin-bottom: 7px;}
+.table i{font-size: 24px;margin-top: 8px;}
 </style>
 </@t_admin.head>
 <@t_admin.body position="首页" menu="icon4">
@@ -31,14 +39,13 @@ $(function(){
 	</div>
 </div>
 <div style="margin: 0 10px;background: #fff;">
-	<#--
 	<#list page.list as item>
-	<div style="width:80px;float: left;margin-right: 16px;text-align: center;" class="table">
-		<div style="width: 60px;height: 60px;margin-bottom: 4px;margin-left: 10px;" class="xls"></div>
+	<div class="table" rel="${item.id}">
+		<div class="icon" style="border-color: #42a5f5;"><i class="fa fa-file-excel-o" aria-hidden="true" style="color: #42a5f5;"></i></div>
 		<div>${item.title}</div>
 	</div>
 	</#list>
-	-->
+	<#--
 	<table class="tblist">
 		<tr class="title">
 			<td>表名称</td>
@@ -56,6 +63,6 @@ $(function(){
 		</tr>
 		</#list>
 	</table>
-	
+	-->
 </div>
 </@t_admin.body>
