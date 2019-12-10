@@ -23,19 +23,19 @@
 		</div>
 		<div class="menus">
 			<div class="menu">
-				<a class="icon3" href="${base}/manage/rows">数据信息</a>
+				<a href="${base}/manage/rows"><i class="fa fa-database" aria-hidden="true"></i> 数据信息</a>
 			</div>
 			<div class="menu">
-				<a class="icon4" href="${base}/manage/tables">我的表格</a>
+				<a href="${base}/manage/tables" class="curr"><i class="fa fa-bars" aria-hidden="true"></i> 我的表格</a>
 			</div>
 			<div class="menu">
-				<a class="icon2" href="">报名信息 </a>
+				<a href=""><i class="fa fa-paper-plane" aria-hidden="true"></i> 报名信息 </a>
 			</div>
 			<div class="menu">
-				<a class="icon1" href="">预约信息</a>
+				<a href=""><i class="fa fa-hourglass-end" aria-hidden="true"></i> 预约信息</a>
 			</div>
 			<div class="menu">
-				<a class="icon5" href="">系统设置</a>
+				<a href=""><i class="fa fa-cog" aria-hidden="true"></i> 系统设置</a>
 			</div>
 		</div>
 	</div>

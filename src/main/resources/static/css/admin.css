@@ -28,12 +28,8 @@ a{color: #ccc;text-decoration: none;}
 #id_left_top{height: 50px;width: 100%;position: relative;}
 .menus{margin-top: 20px;}
 .menu{}
-.menu a.icon1{background-image: url('../svg/icon1.svg')}
-.menu a.icon2{background-image: url('../svg/icon2.svg')}
-.menu a.icon3{background-image: url('../svg/icon3.svg')}
-.menu a.icon4{background-image: url('../svg/icon4.svg')}
-.menu a.icon5{background-image: url('../svg/icon5.svg')}
-.menu a{display: block;height: 48px;line-height: 48px;font-size: 14px;color: rgb(191, 203, 217);font-weight: normal;text-indent: 50px;background-repeat: no-repeat;background-position: 24px 17px;}
+.menu a{display: block;height: 48px;line-height: 48px;font-size: 14px;color: rgb(191, 203, 217);font-weight: normal;text-indent: 16px;background-repeat: no-repeat;background-position: 24px 17px;}
+.menu i{margin-right: 10px;}
 .menu a.curr{background-color: rgb(38,52,69); color: #fff;}
 .items{}
 .items .item{line-height: 36px;color: rgb(191, 203, 217);display: block;text-indent: 50px;}
