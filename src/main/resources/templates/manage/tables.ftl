@@ -23,7 +23,7 @@ $(function(){
 		
 		<#list page.list as item>
 		<tr>
-			<td style="text-align: left;text-indent: 12px;"><a href="${base}/manage/rows/${item.id}" style="color: #000;">${item.title}</a></td>
+			<td style="text-align: left;text-indent: 12px;"><a href="${base}/manage/rows/${item.id}">${item.title}</a></td>
 			<td>${item.createDate}</td>
 			<td>
 				<a class="btn" href="${base}/manage/table-set?tableID=${item.id}">表格设置</a>
