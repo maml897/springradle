@@ -5,7 +5,7 @@ $(function(){
 </script>
 </@t_admin.head>
 <@t_admin.body position="首页" menu="icon4">
-<div id="cf">这里是内容区域</div>
+<div id="cf">这里可以方式操作区域+搜索</div>
 <div style="margin: 0 10px;padding: 4px;height: 30px;line-height: 30px;">
 	<div style="float: right;">
 		<a href="${base}/manage/import-table" class="btn" >导入Excel表格</a>
