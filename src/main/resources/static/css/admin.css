@@ -35,7 +35,7 @@ a{color: #ccc;text-decoration: none;}
 #id_main{margin-left: 160px;background:#fff;height: 100%;}
 #id_main_top_left{float: left;margin-left: 10px;font-size: 14px;}
 #id_main_top{width: 100%;height: 50px;line-height: 50px;background: #fff;box-shadow: 0 1px 4px rgba(0,21,41,.08);z-index: 99999;position: relative;}
-#id_main_top_right{float: right;margin-right: 30px;color: #6c7293;}
+#id_main_top_right{float: right;margin-right: 30px;color: #6c7293;position: relative;}
 #id_main_top_right i{
 	font-family: element-icons!important;
     speak: none;
@@ -48,11 +48,13 @@ a{color: #ccc;text-decoration: none;}
     font-size: 12px;
     position: absolute;
     top:30px;
-    right: 14px;
+    right: -20px;
 }
 .el-icon-caret-bottom:before {
     content: "\E60B";
 }
+
+
 #cf{background-color: #f8f8f8;box-sizing: border-box;height: 42px;line-height: 42px;border-bottom: 1px solid #ddd;}
 #id_main_{}
 
@@ -154,7 +156,6 @@ a{color: #ccc;text-decoration: none;}
     left: 0;
     z-index: 1060;
     display: none;
-    min-width: 160px;
     max-width: 350px;
     font-size: 14px;
     font-weight: 400;
@@ -164,9 +165,7 @@ a{color: #ccc;text-decoration: none;}
     box-shadow: 0 1px 3px rgba(0,0,0,.3);
     white-space: normal;
 }
-.popover-content {
-    background: #fff;
-}
+.popover-content {background: #fff;}
 .popover-content .pop_menu li {
     overflow: hidden;
     list-style: none;
@@ -181,7 +180,6 @@ a{color: #ccc;text-decoration: none;}
 	background:#f2f6ff;
    	color: #3b65a7!important;
 }
-
 .popover li a{
 	color: #4b4b4b;
 }
@@ -219,4 +217,3 @@ a.btn {
     height: 20px;
     line-height: 46px;
 }
-    

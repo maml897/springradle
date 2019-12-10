@@ -8,6 +8,7 @@
 <script language="javascript" type="text/javascript" src="${base}/js/jquery-1.8.3.min.js" ></script>
 <script language="javascript" type="text/javascript" src="${base}/js/init.js" ></script>
 <script language="javascript" type="text/javascript" src="${base}/js/tool.js" ></script>
+<script type="text/javascript" src="${base}/js/mbox.js"></script>
 <#nested>
 </head>
 </#macro>
@@ -45,7 +46,21 @@
 			<div id="id_main_top_right">
 				<div style="height: 40px;width: 40px;background: #8BE2E0;color: #fff;border-radius: 100px;line-height: 40px;text-align: center;font-size: 16px;font-weight: bold;margin-top: 4px;">${userDetails.realName[0]}</div>
 				<i class="el-icon-caret-bottom"></i>
+				<div class="useropt popover" style="width: 70px;">
+					<div class="popover-content">
+						<div class="pop_menu">
+							<ul>
+								<li class=""><a href="javascript:void(0);"><span>修改密码</span></a></li>
+								<li class=""><a href="${base}/SystemLogout"><span>退出登录</span></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
 			</div>
+			
+			
+			
+			
 		</div>
 		<div id="id_main_">
 		<#nested>
@@ -53,24 +68,18 @@
 	</div>
 </div>
 
-
-<div class="popover bottom-left in" style="display: block; height: auto; width: 148px; max-width: 148px; display: none;">
-	<div class="popover-content ">
-		<div class="pop_menu cl">
-			<ul class="cl">
-				<li class="menu_modify"><a href="javascript:void(0);"><span>修改密码</span></a></li>
-				<li class="menu_insertbefore"><a href="javascript:void(0);"><span>退出登录</span></a></li>
-			</ul>
-		</div>
-	</div>
-</div>
-
-
-<#if menu!="">
 <script type="text/javascript">
-$(".${menu}").addClass("curr");
+<#if menu!="">$(".${menu}").addClass("curr");</#if>
+$(".el-icon-caret-bottom").mbox({
+	data:$(".useropt"),
+	left:function(a,b){
+		return -30
+	},
+	top:function(a,b){
+		return 56
+	}
+});
 </script>
-</#if>
 </body>
 </html>
 </#macro>

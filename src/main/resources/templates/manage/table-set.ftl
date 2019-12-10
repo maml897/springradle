@@ -1,7 +1,6 @@
 <@t_admin.head>
 <link style="text/css" rel="stylesheet" href="${base}/js/jbox/css/box.css" />
 <script type="text/javascript" src="${base}/js/tabledrag.js"></script>
-<script type="text/javascript" src="${base}/js/mbox.js"></script>
 <script type="text/javascript" src="${base}/js/jbox/browserQs.js"></script>
 <script type="text/javascript" src="${base}/js/jbox/jquery-overlayQS.js"></script>
 <script type="text/javascript" src="${base}/js/jbox/jquery-boxQS.js"></script>
@@ -232,7 +231,7 @@ $(function(){
 	</table>
 </div>
 
-<div class="popover bottom-left in" style="display: block; height: auto; width: 148px; max-width: 148px; display: none;">
+<div class="popover bottom-left in" style="display: block; height: auto; max-width: 148px; display: none;">
 	<div class="popover-content ">
 		<div class="pop_menu cl">
 			<ul class="cl">
