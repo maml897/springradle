@@ -63,6 +63,7 @@ a{color: #ccc;text-decoration: none;}
 .tblist td {text-align: left;padding: 0 4px 0 10px;border: solid #eeecec;border-width: 0 1px 1px 0;white-space:nowrap;max-width: 100px;text-overflow: ellipsis;overflow: hidden;}
 .tblist th{text-align: right;}
 
+
 .edit{
 	margin:0 auto;border: 1px solid #eee;width: 700px;padding: 40px;box-shadow: 1px 1px 20px #ccc;border-radius:6px;min-height:80%;margin-top: 20px;position: relative;
 }

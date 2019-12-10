@@ -16,9 +16,10 @@ $(function(){
 .info .items div{font-size: 14px;margin-top: 8px;}
 .info .items i{font-size: 28px;}
 
-.table{width:80px;float: left;margin-right: 10px;text-align: center;cursor: pointer;}
+.table{width:80px;padding: 10px;height:100px;text-align: center;cursor: pointer;float: left;border: solid #eeecec;border-width: 1px 1px 1px 0;}
 .table .icon{width:40px;height: 40px;border: 1px solid #eee;border-radius: 100px;line-height: 40px;margin-left: 20px;margin-bottom: 7px;}
 .table i{font-size: 24px;margin-top: 8px;}
+
 </style>
 </@t_admin.head>
 <@t_admin.body position="首页" menu="icon4">
@@ -39,12 +40,16 @@ $(function(){
 	</div>
 </div>
 <div style="margin: 0 10px;background: #fff;">
-	<#list page.list as item>
-	<div class="table" rel="${item.id}">
-		<div class="icon" style="border-color: #42a5f5;"><i class="fa fa-file-excel-o" aria-hidden="true" style="color: #42a5f5;"></i></div>
-		<div>${item.title}</div>
+	<div style="border-left: 1px solid #eeecec;float: left;">
+		<#list page.list as item>
+		<div class="table" rel="${item.id}">
+			<div class="icon" style="border-color: #42a5f5;"><i class="fa fa-file-excel-o" aria-hidden="true" style="color: #42a5f5;"></i></div>
+			<div>${item.title}</div>
+		</div>
+		</#list>
+		<div style="clear: both;"></div>
 	</div>
-	</#list>
+	
 	<#--
 	<table class="tblist">
 		<tr class="title">
