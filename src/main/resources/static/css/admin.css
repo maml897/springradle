@@ -211,12 +211,6 @@ a.btn:hover{
     -webkit-transition: background .3s;
     transition: background .3s;
     -webkit-tap-highlight-color: transparent;
-    padding: 15px 0px 0px 10px;
-}
-.navbar .hamburger{
-	display: inline-block;
-    vertical-align: middle;
-    width: 20px;
-    height: 20px;
-    line-height: 46px;
+    padding: 35px 0px 0px 10px;
+    background: red;
 }

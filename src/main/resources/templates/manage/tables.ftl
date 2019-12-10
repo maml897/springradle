@@ -47,8 +47,8 @@ $(function(){
 		</tr>
 		<#list page.list as item>
 		<tr>
-			<td style="text-align: left;"><a href="${base}/manage/rows/${item.id}">${item.title}</a></td>
-			<td>${item.createDate}</td>
+			<td style="text-align: left;"><i class="fa fa-table" aria-hidden="true"></i> <a href="${base}/manage/rows/${item.id}">${item.title}</a></td>
+			<td><i class="fa fa-calendar-check-o" aria-hidden="true"></i> ${item.createDate}</td>
 			<td>
 				<a class="btn" href="${base}/manage/table-set?tableID=${item.id}">表格设置</a>
 				<a class="btn" href="${base}/manage/q-set?tableID=${item.id}">查询设置</a>
