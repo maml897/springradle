@@ -96,7 +96,7 @@ $(function(){
 	<div style="border-left: 1px solid #eeecec;float: left;">
 		<#list page.list as item>
 		<div class="table" rel="${item.id}">
-			<div class="icon" style="border-color: ${item.color};"><i class="fa ${item.icon}" aria-hidden="true" style="color: ${item.color};"></i></div>
+			<div class="icon" style="border-color: ${item.color!'#42a5f5'};"><i class="fa ${item.icon!'fa-file-excel-o'}" aria-hidden="true" style="color: ${item.color!'#42a5f5'};"></i></div>
 			<i class="fa fa-angle-down optable" aria-hidden="true" style="font-size: 12px;"></i>
 			<div>${item.title}</div>
 		</div>
