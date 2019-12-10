@@ -208,7 +208,14 @@ $(function(){
 </style>
 </@t_admin.head>
 <@t_admin.body position="首页" menu="icon3">
-<div style="margin: 20px;background: #fff;">
+<div id="cf" style="height: 48px;line-height:48px;margin-bottom: 0px;background: #fff;">
+	<div style="float: right;margin-right: 20px;">
+		<a href="${base}/manage/tables" style="color: red"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i> 返回</a>&nbsp;&nbsp;
+	</div>
+</div>
+
+
+<div style="margin: 0 20px 20px 20px;background: #fff;">
 	<table class="tblist">
 		<tr class="title">
 			<#list columns as item>

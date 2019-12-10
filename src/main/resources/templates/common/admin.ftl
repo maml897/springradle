@@ -23,10 +23,10 @@
 		</div>
 		<div class="menus">
 			<div class="menu">
-				<a href="${base}/manage/rows"><i class="fa fa-database" aria-hidden="true"></i> 数据信息</a>
+				<a href="${base}/manage/tables" class="curr"><i class="fa fa-database" aria-hidden="true"></i> 我的表格</a>
 			</div>
 			<div class="menu">
-				<a href="${base}/manage/tables" class="curr"><i class="fa fa-bars" aria-hidden="true"></i> 我的表格</a>
+				<a href="${base}/manage/rows"><i class="fa fa-bars" aria-hidden="true"></i> 数据信息</a>
 			</div>
 			<div class="menu">
 				<a href=""><i class="fa fa-paper-plane" aria-hidden="true"></i> 报名信息 </a>

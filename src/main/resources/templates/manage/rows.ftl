@@ -21,7 +21,7 @@ td{text-indent: 8px;}
 </style>
 </@t_admin.head>
 <@t_admin.body position="首页" menu="icon3">
-<div id="cf" style="height: 48px;line-height: 48px;margin-bottom: 0px;">
+<div id="cf" style="height: 48px;line-height: 48px;margin-bottom: 0px;background: #fff;">
 	<div style="float: right;margin-right: 10px;">
 		<a href="" style="color: #9da1c4"><i class="fa fa-search" aria-hidden="true"></i></a>&nbsp;&nbsp;
 		<a href="" style="color: #9da1c4"><i class="fa fa-list-ul" aria-hidden="true"></i></a>&nbsp;&nbsp;
@@ -30,7 +30,7 @@ td{text-indent: 8px;}
 		<a href="" style="color: #9da1c4"><i class="fa fa-cloud-download" aria-hidden="true"></i> 导出</a>&nbsp;&nbsp;
 		<a href="" style="color: #008ed2"><i class="fa fa-plus-square" aria-hidden="true"></i> 增加记录</a>&nbsp;&nbsp;
 		<span style="color: #ddd">|</span>&nbsp;&nbsp;
-		<a href="${base}/manage/tables" style="color: #9da1c4"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i> 返回</a>&nbsp;&nbsp;
+		<a href="${base}/manage/tables" style="color: red"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i> 返回</a>&nbsp;&nbsp;
 	</div>
 </div>
 
