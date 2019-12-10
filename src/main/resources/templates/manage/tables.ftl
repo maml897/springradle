@@ -1,6 +1,9 @@
 <@t_admin.head>
 <script type="text/javascript">
 $(function(){
+	$(".items").click(function(){
+		window.location.href="${base}/manage/import-table";
+	});
 });
 </script>
 <style type="text/css">
