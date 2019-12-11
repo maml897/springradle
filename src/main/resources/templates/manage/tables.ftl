@@ -83,7 +83,7 @@ $(function(){
 			<div>导入本地Excel</div>
 		</div>
 		<div class="items">
-			<i class="fa fa-hand-pointer-o" aria-hidden="true" style="color:#5c6bc0;"></i>
+			<i class="fa fa-gavel" aria-hidden="true" style="color:#5c6bc0;"></i>
 			<div>手动创建表格</div>
 		</div>
 		<div class="items" style="border-right:none;">
