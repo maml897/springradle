@@ -25,12 +25,12 @@ public class DemoControl {
 	@RequestMapping("/test")
 	@ResponseBody
 	public String test() {
-		return "sbwuffrnm"+test;
+		return "sbwuffrnm无"+test;
 	}
 
 	@RequestMapping("/ftl")
 	public String ftl(Model model) {
-		model.addAttribute("sb", "wugou");
+		model.addAttribute("sb", "wugou无");
 		return "/test";
 	}
 	

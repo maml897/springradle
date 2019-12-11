@@ -67,7 +67,13 @@ import org.apache.tools.ant.filters.ReplaceTokens
 def profileName = project.hasProperty('profile') ? project.getProperty("profile") : "dev" //gradle -Pprofile=prod bootJar
 processResources {
     with copySpec {
-        from "src/main/resources/"
+    	filteringCharset = 'UTF-8'
+        from "src/main/resources/application.properties"
         filter(ReplaceTokens, tokens: [profileActive: profileName])
     }
+}
+
+compileJava.options.encoding = 'UTF-8'
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
 }
