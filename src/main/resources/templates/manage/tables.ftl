@@ -66,7 +66,7 @@ $(function(){
 	<div class="popover-content">
 		<div class="pop_menu">
 			<ul>
-				<li class=""><a href="javascript:void(0);"><span><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 表格名称和图标</span></a></li>
+				<li class=""><a href="javascript:void(0);"><span><i class="fa fa-picture-o" aria-hidden="true"></i> 表格名称和图标</span></a></li>
 				<li class="to-edit"><a href="javascript:void(0);"><span><i class="fa fa-table" aria-hidden="true"></i> 编辑表格</span></a></li>
 				<li class="to-queryset"><a href="javascript:void(0);"><span><i class="fa fa-dot-circle-o" aria-hidden="true"></i> 查询设置</span></a></li>
 				<li class=""><a href="javascript:void(0);"><span><i class="fa fa-cloud-download" aria-hidden="true"></i> 导出Excel</span></a></li>

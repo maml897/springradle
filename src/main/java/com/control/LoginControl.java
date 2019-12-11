@@ -28,6 +28,6 @@ public class LoginControl
 	public String loginsuccess()
 	{
 		// 根据权限判断去处
-		return "redirect:/manage";
+		return "redirect:/manage/tables";
 	}
 }
