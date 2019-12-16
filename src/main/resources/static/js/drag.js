@@ -10,6 +10,12 @@
 			var position = target.offset();
 			var relaX = ev.clientX - position.left;
 	        var relaY = ev.clientY - position.top;
+	        
+	        var el = $this.get(0);
+	        if(el.setCapture){
+	        	el.setCapture();
+	        }
+	        
 	        $document.bind("mousemove",{relaX:relaX,relaY:relaY,position:position},documentmousemove);
 	        $document.bind("mouseup",{relaX:relaX,relaY:relaY,position:position},documentmouseup);
 	        
@@ -24,7 +30,6 @@
 				left:left,
 				top:top
 			});
-			
 			
 			var flag=false;
 			$this.each(function(){
@@ -47,6 +52,12 @@
 				left:"",
 				top:""
 			});
+			
+			var el = $this.get(0);
+			if(el.releaseCapture)
+			{
+				el.releaseCapture()
+			}
 		}
 		
 		function change(){
