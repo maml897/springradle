@@ -1,6 +1,9 @@
 <@t_admin.head>
+<script src="${base}/js/drag.js"></script>
 <script type="text/javascript">
 $(function(){
+	$(".tablecontent").mdrag();
+	
 	$(".items").click(function(){
 		window.location.href="${base}/manage/import-table";
 	});
@@ -10,7 +13,7 @@ $(function(){
 		if(target.hasClass("optable")){
 			return false;
 		}
-		window.location.href="${base}/manage/rows/"+$(this).attr("rel");
+		//window.location.href="${base}/manage/rows/"+$(this).attr("rel");
 	});
 	
 	var dest=$(".optable").mbox({
@@ -49,7 +52,7 @@ $(function(){
 .fa-angle-down{
 	position: absolute;
 	right:12px;
-	top:30px;
+	top:20px;
 	height:12px;
 	width:12px;
 	border-radius: 20px;
@@ -66,11 +69,15 @@ $(function(){
 	<div class="popover-content">
 		<div class="pop_menu">
 			<ul>
-				<li class=""><a href="javascript:void(0);"><span><i class="fa fa-picture-o" aria-hidden="true"></i> 表格名称和图标</span></a></li>
-				<li class="to-edit"><a href="javascript:void(0);"><span><i class="fa fa-table" aria-hidden="true"></i> 编辑表格</span></a></li>
-				<li class="to-queryset"><a href="javascript:void(0);"><span><i class="fa fa-dot-circle-o" aria-hidden="true"></i> 查询设置</span></a></li>
-				<li class=""><a href="javascript:void(0);"><span><i class="fa fa-cloud-download" aria-hidden="true"></i> 导出Excel</span></a></li>
-				<li class=""><a href="javascript:void(0);"><span><i class="fa fa-cloud-upload" aria-hidden="true"></i> 导入Excel</span></a></li>
+				<li class=""><a href="javascript:void(0);"><span><i class="fa fa-picture-o" aria-hidden="true"></i>&nbsp;&nbsp;表格名称和图标</span></a></li>
+				<li class="to-edit"><a href="javascript:void(0);"><span><i class="fa fa-table" aria-hidden="true"></i>&nbsp;&nbsp;编辑表格</span></a></li>
+				<li class="to-queryset"><a href="javascript:void(0);"><span><i class="fa fa-dot-circle-o" aria-hidden="true"></i>&nbsp;&nbsp;查询设置</span></a></li>
+				<li style="height: 2px;border-bottom: 1px solid #eeecec"></li>
+				<li class=""><a href="javascript:void(0);"><span><i class="fa fa-cloud-download" aria-hidden="true"></i>&nbsp;&nbsp;导出Excel</span></a></li>
+				<li class=""><a href="javascript:void(0);"><span><i class="fa fa-cloud-upload" aria-hidden="true"></i>&nbsp;&nbsp;导入Excel</span></a></li>
+				<li style="height: 2px;border-bottom: 1px solid #eeecec"></li>
+				<li class=""><a href="javascript:void(0);"><span><i class="fa fa-trash" aria-hidden="true"></i>&nbsp;&nbsp;删除表格</span></a></li>
+				<li class=""><a href="javascript:void(0);"><span><i class="fa fa-files-o" aria-hidden="true"></i>&nbsp;&nbsp;复制表格</span></a></li>
 			</ul>
 		</div>
 	</div>
@@ -93,15 +100,17 @@ $(function(){
 	</div>
 </div>
 <div style="margin: 0 10px;background: #fff;">
-	<div style="border-left: 1px solid #eeecec;float: left;">
+	<div style="border-left: 1px solid #eeecec;float: left;" class="table_container">
 		<#list page.list as item>
 		<div class="table" rel="${item.id}">
-			<div class="icon" style="border-color: ${item.color!'#42a5f5'};"><i class="fa ${item.icon!'fa-file-excel-o'}" aria-hidden="true" style="color: ${item.color!'#42a5f5'};"></i></div>
-			<i class="fa fa-angle-down optable" aria-hidden="true" style="font-size: 12px;"></i>
-			<div>${item.title}</div>
+			<div class="tablecontent" style="position: relative;">
+				<div class="icon" style="border-color: ${item.color!'#42a5f5'};"><i class="fa ${item.icon!'fa-file-excel-o'}" aria-hidden="true" style="color: ${item.color!'#42a5f5'};"></i></div>
+				<i class="fa fa-angle-down optable" aria-hidden="true" style="font-size: 12px;"></i>
+				<div>${item.title}</div>
+			</div>
 		</div>
 		</#list>
-		<div style="clear: both;"></div>
 	</div>
+	<div style="clear: both;"></div>
 </div>
 </@t_admin.body>
