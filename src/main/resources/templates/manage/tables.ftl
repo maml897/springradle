@@ -13,7 +13,7 @@ $(function(){
 		if(target.hasClass("optable")){
 			return false;
 		}
-		//window.location.href="${base}/manage/rows/"+$(this).attr("rel");
+		window.location.href="${base}/manage/rows/"+$(this).attr("rel");
 	});
 	
 	var dest=$(".optable").mbox({
@@ -28,7 +28,7 @@ $(function(){
 			//$(".opt_menu").hide();
 		},
 		source:function($this){
-			return $this.parent("div");
+			return $this.parent("div").parent("div");
 		}
 	});
 	
@@ -105,7 +105,7 @@ $(function(){
 		<div class="table" rel="${item.id}">
 			<div class="tablecontent" style="position: relative;">
 				<div class="icon" style="border-color: ${item.color!'#42a5f5'};"><i class="fa ${item.icon!'fa-file-excel-o'}" aria-hidden="true" style="color: ${item.color!'#42a5f5'};"></i></div>
-				<i class="fa fa-angle-down optable" aria-hidden="true" style="font-size: 12px;"></i>
+				<i class="fa fa-angle-down optable" aria-hidden="true" style="font-size: 12px;" rel="${item.id}"></i>
 				<div>${item.title}</div>
 			</div>
 		</div>
