@@ -26,12 +26,17 @@
 			});
 			
 			
+			var flag=false;
 			$this.each(function(){
 				if($(this).offset().left<left && $(this).offset().top<top)
 				{
+					flag=true;
 					target.parent().insertAfter($(this).parent());
 				}
 			})
+			if(!flag){
+				target.parent().insertBefore($this.eq(0).parent());
+			}
 			
 			return false;
 		}
