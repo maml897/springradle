@@ -32,6 +32,8 @@
 					target.parent().insertAfter($(this).parent());
 				}
 			})
+			
+			return false;
 		}
 		function documentmouseup(){
 			$document.unbind("mousemove",documentmousemove);
