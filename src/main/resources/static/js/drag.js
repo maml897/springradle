@@ -16,11 +16,15 @@
 	        	el.setCapture();
 	        }
 	        
+	        var parent=target.parent();
+	        
+	        target =parent.clone().css("border","none").css("opacity","0.7").appendTo("body");
+	        
+	        parent.css("opacity","0.7");
+	        
 	        $document.bind("mousemove",{relaX:relaX,relaY:relaY,position:position},documentmousemove);
 	        $document.bind("mouseup",{relaX:relaX,relaY:relaY,position:position},documentmouseup);
 		});
-		
-		
 		
 		function documentmousemove(ev){
 			ev = ev || window.event;
@@ -28,7 +32,7 @@
 			var left = ev.clientX - data.relaX
 			var top = ev.clientY - data.relaY
 			
-			compare(left,top,$this);
+			//compare(left,top,$this);
 			target.offset({
 				left:left,
 				top:top

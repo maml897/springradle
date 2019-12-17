@@ -13,7 +13,7 @@ $(function(){
 		if(target.hasClass("optable")){
 			return false;
 		}
-		window.location.href="${base}/manage/rows/"+$(this).attr("rel");
+		//window.location.href="${base}/manage/rows/"+$(this).attr("rel");
 	});
 	
 	var dest=$(".optable").mbox({
@@ -46,7 +46,7 @@ $(function(){
 .info .items div{font-size: 14px;margin-top: 8px;}
 .info .items i{font-size: 28px;}
 
-.table{width:90px;padding: 10px;height:100px;text-align: center;cursor: pointer;float: left;border: solid #eeecec;border-width: 1px 1px 1px 0;position: relative;}
+.table{width:90px;padding: 10px;height:100px;text-align: center;cursor: pointer;float: left;border: solid #eeecec;border-width: 1px 1px 1px 0;position: relative;cursor: }
 .table .icon{width:40px;height: 40px;border: 1px solid #eee;border-radius: 100px;line-height: 40px;margin-left: 22px;margin-bottom: 7px;}
 .table i{font-size: 24px;margin-top: 8px;}
 .fa-angle-down{
