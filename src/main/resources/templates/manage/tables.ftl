@@ -103,11 +103,14 @@ $(function(){
 	<div style="border-left: 1px solid #eeecec;float: left;" class="table_container">
 		<#list page.list as item>
 		<div class="table" rel="${item.id}">
-			<div class="tablecontent" style="position: relative;">
+		
+			<div class="tablecontent" style="position: relative;" data="${item?counter}">
 				<div class="icon" style="border-color: ${item.color!'#42a5f5'};"><i class="fa ${item.icon!'fa-file-excel-o'}" aria-hidden="true" style="color: ${item.color!'#42a5f5'};"></i></div>
 				<i class="fa fa-angle-down optable" aria-hidden="true" style="font-size: 12px;" rel="${item.id}"></i>
-				<div>${item.title}</div>
+				<div class="t">${item.title}  ===${item?counter}</div>
+				<div class="log"></div>
 			</div>
+			
 		</div>
 		</#list>
 	</div>
