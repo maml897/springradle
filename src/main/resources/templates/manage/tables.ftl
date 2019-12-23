@@ -118,7 +118,7 @@ $(function(){
 	<div style="clear: both;"></div>
 </div>
 
-<div style="background: red;width: 5px;height: 40px;position: absolute;" id="ban" ondragenter="ondragoverfun();"></div>
+<div style="background: #aaa;width: 5px;height: 120px;position: absolute;display: none;" id="ban" ondragenter="ondragoverfun();" ondragover="ondragoverfun();"></div>
 
 <script type="text/javascript">
 var d = document.querySelector("#ban");
@@ -143,6 +143,7 @@ function ondragoverfun(ev){
 			div.style.transform="scale(1)";
 		});
 		tablecontent.style.transform="scale(1.2)";
+		d.style.display="none";
 	}
 	else{
 	}
@@ -154,12 +155,11 @@ function ondragoverfun(ev){
 		console.log("展示");
 		
 		[].forEach.call(ds, function(div) {
-			if(ev.pageX>div.getBoundingClientRect().left){
+			if(ev.pageX>div.getBoundingClientRect().left+div.offsetWidth/2 && ev.pageY>div.getBoundingClientRect().top){
 				d.style.display="block";
-				d.style.left=div.getBoundingClientRect().left+"px";
-				d.style.top=div.getBoundingClientRect().top+"px";
+				d.style.left=(div.getBoundingClientRect().left+div.offsetWidth-8)+"px";
+				d.style.top=(div.getBoundingClientRect().top+10)+"px";
 			}
-			//console.log(div.getBoundingClientRect().left);
 		});
 		
 	}
