@@ -118,7 +118,8 @@ $(function(){
 	<div style="clear: both;"></div>
 </div>
 
-<div style="background: #aaa;width: 5px;height: 120px;position: absolute;display: none;" id="ban" ondragenter="ondragoverfun();" ondragover="ondragoverfun();"></div>
+<div style="background: #aaa;width: 4px;border-top:2px solid #aaa;border-bottom:2px solid #aaa;border-right:2px solid #fff;border-left:2px solid #fff; 
+height: 120px;position: absolute;display: none;" id="ban" ondragenter="ondragoverfun();" ondragover="ondragoverfun();"></div>
 
 <script type="text/javascript">
 var d = document.querySelector("#ban");
