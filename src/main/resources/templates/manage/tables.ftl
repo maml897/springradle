@@ -1,5 +1,6 @@
 <@t_admin.head>
-<script src="${base}/js/drag.js"></script>
+<script src="${base}/js/drag.js"></script> 
+<script src="${base}/js/tool.js"></script> 
 <script type="text/javascript">
 $(function(){
 	//$(".tablecontent").mdrag();
@@ -104,7 +105,7 @@ $(function(){
 		<#list page.list as item>
 		<div class="table" rel="${item.id}">
 		
-			<div class="tablecontent" style="position: relative;transition:0.2s ease all" data="${item?counter}" draggable="true" ondragover="over1(this);" ondragleave="leave(this)">
+			<div class="tablecontent" style="position: relative;transition:0.2s ease all" data="${item?counter}" draggable="true">
 				<div class="icon" style="border-color: ${item.color!'#42a5f5'};"><i class="fa ${item.icon!'fa-file-excel-o'}" aria-hidden="true" style="color: ${item.color!'#42a5f5'};"></i></div>
 				<i class="fa fa-angle-down optable" aria-hidden="true" style="font-size: 12px;" rel="${item.id}"></i>
 				<div class="t">${item.title}  ===${item?counter}</div>
@@ -117,21 +118,52 @@ $(function(){
 	<div style="clear: both;"></div>
 </div>
 
+<div style="background: red;width: 5px;height: 40px;position: absolute;" id="ban" ondragenter="ondragoverfun();"></div>
+
 <script type="text/javascript">
+var d = document.querySelector("#ban");
+var ds = document.querySelectorAll(".table");
+var dss = document.querySelectorAll(".tablecontent");
+
+[].forEach.call(ds, function(div) {
+	console.log(div.getBoundingClientRect().left);
+});
+
 function ondragoverfun(ev){
 	console.log("----------");
-	
 	ev=ev||window.event;
 	ev.preventDefault();
+	console.log(ev.pageX);
+	console.log(ev.pageY);
+	var target = ev.target;
+	var tablecontent= closest(target,".tablecontent");
+	if(tablecontent){
+		console.log("合并");
+		[].forEach.call(dss, function(div) {
+			div.style.transform="scale(1)";
+		});
+		tablecontent.style.transform="scale(1.2)";
+	}
+	else{
+	}
+	
+	if(is(target,".table")){
+		[].forEach.call(dss, function(div) {
+			div.style.transform="scale(1)";
+		});
+		console.log("展示");
+		
+		[].forEach.call(ds, function(div) {
+			if(ev.pageX>div.getBoundingClientRect().left){
+				d.style.display="block";
+				d.style.left=div.getBoundingClientRect().left+"px";
+				d.style.top=div.getBoundingClientRect().top+"px";
+			}
+			//console.log(div.getBoundingClientRect().left);
+		});
+		
+	}
 	return false;
-}
-
-function over1(t,ev){
-	console.log("==============");
-	t.style.transform="scale(1.1)";
-}
-function leave(t,ev){
-	t.style.transform="scale(1)";
 }
 </script>
 
