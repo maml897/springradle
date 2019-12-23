@@ -17,11 +17,7 @@
 	        }
 	        
 	        var parent=target.parent();
-	        
 	        target =parent.clone().css("border","none").css("opacity","0.7").appendTo("body");
-	        
-	        parent.css("opacity","0.7");
-	        
 	        $document.bind("mousemove",{relaX:relaX,relaY:relaY,position:position},documentmousemove);
 	        $document.bind("mouseup",{relaX:relaX,relaY:relaY,position:position},documentmouseup);
 		});
@@ -38,7 +34,7 @@
 				top:top
 			});
 			
-			target.find(".log").html(left+","+top);
+			//target.find(".log").html(left+","+top);
 			return false;
 		}
 		
@@ -47,14 +43,14 @@
 			$(".tablecontent").each(function(){
 				
 				if($(this).attr("data")==target.attr("data")){
-					console.log(left+","+top+"--"+$(this).find(".t").html(),$(this).offset().top,$(this).offset().left);
+					//console.log(left+","+top+"--"+$(this).find(".t").html(),$(this).offset().top,$(this).offset().left);
 					return true;
 				}
 				
 				var tt = $(this);
 				if(tt.offset().left<left && tt.offset().top<top)
 				{
-					console.log("满足啊",tt.attr("data")+"之后插入",tt.offset().left,tt.offset().top,left,top);
+					//console.log("满足啊",tt.attr("data")+"之后插入",tt.offset().left,tt.offset().top,left,top);
 					flag=true;
 					target.parent().insertAfter(tt.parent());
 				}

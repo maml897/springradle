@@ -2,7 +2,7 @@
 <script src="${base}/js/drag.js"></script>
 <script type="text/javascript">
 $(function(){
-	$(".tablecontent").mdrag();
+	//$(".tablecontent").mdrag();
 	
 	$(".items").click(function(){
 		window.location.href="${base}/manage/import-table";
@@ -46,7 +46,7 @@ $(function(){
 .info .items div{font-size: 14px;margin-top: 8px;}
 .info .items i{font-size: 28px;}
 
-.table{width:90px;padding: 10px;height:100px;text-align: center;cursor: pointer;float: left;border: solid #eeecec;border-width: 1px 1px 1px 0;position: relative;cursor: }
+.table{width:90px;padding: 10px;height:100px;text-align: center;cursor: pointer;float: left;border: solid #eeecec;border-width: 10px 10px 10px 0;position: relative;}
 .table .icon{width:40px;height: 40px;border: 1px solid #eee;border-radius: 100px;line-height: 40px;margin-left: 22px;margin-bottom: 7px;}
 .table i{font-size: 24px;margin-top: 8px;}
 .fa-angle-down{
@@ -99,12 +99,12 @@ $(function(){
 		</div>
 	</div>
 </div>
-<div style="margin: 0 10px;background: #fff;">
-	<div style="border-left: 1px solid #eeecec;float: left;" class="table_container">
+<div style="margin: 0 10px;background: #fff;" ondragover="over();" ondragenter="over();">
+	<div style="border-left: 10px solid #eeecec;float: left;" class="table_container">
 		<#list page.list as item>
 		<div class="table" rel="${item.id}">
 		
-			<div class="tablecontent" style="position: relative;" data="${item?counter}">
+			<div class="tablecontent" style="position: relative;transition:0.2s ease all" data="${item?counter}" draggable="true" ondragover="over1(this);" ondragleave="leave(this)">
 				<div class="icon" style="border-color: ${item.color!'#42a5f5'};"><i class="fa ${item.icon!'fa-file-excel-o'}" aria-hidden="true" style="color: ${item.color!'#42a5f5'};"></i></div>
 				<i class="fa fa-angle-down optable" aria-hidden="true" style="font-size: 12px;" rel="${item.id}"></i>
 				<div class="t">${item.title}  ===${item?counter}</div>
@@ -116,4 +116,20 @@ $(function(){
 	</div>
 	<div style="clear: both;"></div>
 </div>
+
+<script type="text/javascript">
+function over(ev){
+	ev=ev||window.event;
+	ev.preventDefault();
+	return false;
+}
+
+function over1(t,ev){
+	t.style.transform="scale(1.1)";
+}
+function leave(t,ev){
+	t.style.transform="scale(1)";
+}
+</script>
+
 </@t_admin.body>
