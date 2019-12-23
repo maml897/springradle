@@ -13,7 +13,7 @@ $(function(){
 		if(target.hasClass("optable")){
 			return false;
 		}
-		//window.location.href="${base}/manage/rows/"+$(this).attr("rel");
+		window.location.href="${base}/manage/rows/"+$(this).attr("rel");
 	});
 	
 	var dest=$(".optable").mbox({
@@ -99,7 +99,7 @@ $(function(){
 		</div>
 	</div>
 </div>
-<div style="margin: 0 10px;background: #fff;" ondragover="over();" ondragenter="over();">
+<div style="margin: 0 10px;background: #fff;" ondragover="ondragoverfun();" ondragenter="ondragoverfun();">
 	<div style="border-left: 10px solid #eeecec;float: left;" class="table_container">
 		<#list page.list as item>
 		<div class="table" rel="${item.id}">
@@ -118,13 +118,16 @@ $(function(){
 </div>
 
 <script type="text/javascript">
-function over(ev){
+function ondragoverfun(ev){
+	console.log("----------");
+	
 	ev=ev||window.event;
 	ev.preventDefault();
 	return false;
 }
 
 function over1(t,ev){
+	console.log("==============");
 	t.style.transform="scale(1.1)";
 }
 function leave(t,ev){
