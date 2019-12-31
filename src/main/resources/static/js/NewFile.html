@@ -3,23 +3,36 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+.aa{color: red;}
+</style>
 </head>
 <body>
 
 	<div class="b">
-		<a href="" class="a">test1</a> <a href="">test2</a> <a href="">test3</a>
+		<a href="" class="a">test1</a> <a href="">test2</a> <a href="" id="ban">test3</a>
 	</div>
 
 
 
 
 	<script type="text/javascript">
-		var a = document.querySelector(".a");
-		var b = document.querySelector(".b");
-
-		console.log(closest(a, ".b"));
-
-		
+	var R_SPACE = /\s+/g;
+	function toggleClass(el, name, state) {
+		if (el && name) {
+			if (el.classList) {
+				el.classList[state ? 'add' : 'remove'](name);
+			} 
+			else 
+			{
+				var className = (' ' + el.className + ' ').replace(R_SPACE, ' ').replace(' ' + name + ' ', ' ');
+				el.className = (className + (state ? ' ' + name : '')).replace(R_SPACE, ' ');
+			}
+		}
+	}
+	var d = document.querySelector("#ban");
+	toggleClass(d,"aa",true)
+	toggleClass(d,"aa",false)
 	</script>
 </body>
 </html>

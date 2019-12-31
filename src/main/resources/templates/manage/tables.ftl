@@ -1,6 +1,6 @@
 <@t_admin.head>
 <script src="${base}/js/drag.js"></script> 
-<script src="${base}/js/tool.js"></script> 
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script type="text/javascript">
 $(function(){
 	//$(".tablecontent").mdrag();
@@ -100,7 +100,7 @@ $(function(){
 		</div>
 	</div>
 </div>
-<div style="margin: 0 10px;background: #fff;" ondragover="ondragoverfun();" ondragenter="ondragoverfun();">
+<div style="margin: 0 10px;background: #fff;" ondragover="ondragoverfun();" ondragenter="ondragoverfun();" ondrop="drop()">
 	<div style="border-left: 10px solid #eeecec;float: left;" class="table_container">
 		<#list page.list as item>
 		<div class="table" rel="${item.id}">
@@ -108,8 +108,7 @@ $(function(){
 			<div class="tablecontent" style="position: relative;transition:0.2s ease all" data="${item?counter}" draggable="true">
 				<div class="icon" style="border-color: ${item.color!'#42a5f5'};"><i class="fa ${item.icon!'fa-file-excel-o'}" aria-hidden="true" style="color: ${item.color!'#42a5f5'};"></i></div>
 				<i class="fa fa-angle-down optable" aria-hidden="true" style="font-size: 12px;" rel="${item.id}"></i>
-				<div class="t">${item.title}  ===${item?counter}</div>
-				<div class="log"></div>
+				<div class="t">${item.title}</div>
 			</div>
 			
 		</div>
@@ -125,19 +124,15 @@ height: 120px;position: absolute;display: none;" id="ban" ondragenter="ondragove
 var d = document.querySelector("#ban");
 var ds = document.querySelectorAll(".table");
 var dss = document.querySelectorAll(".tablecontent");
-
 [].forEach.call(ds, function(div) {
 	console.log(div.getBoundingClientRect().left);
 });
 
 function ondragoverfun(ev){
-	console.log("----------");
 	ev=ev||window.event;
 	ev.preventDefault();
-	console.log(ev.pageX);
-	console.log(ev.pageY);
 	var target = ev.target;
-	var tablecontent= closest(target,".tablecontent");
+	var tablecontent= flytree.closest(target,".tablecontent");
 	if(tablecontent){
 		console.log("合并");
 		[].forEach.call(dss, function(div) {
@@ -149,7 +144,7 @@ function ondragoverfun(ev){
 	else{
 	}
 	
-	if(is(target,".table")){
+	if(flytree.is(target,".table")){
 		[].forEach.call(dss, function(div) {
 			div.style.transform="scale(1)";
 		});
@@ -166,6 +161,33 @@ function ondragoverfun(ev){
 	}
 	return false;
 }
+
+
+
+
+function drop(ev){
+	ev=ev||window.event;
+	ev.preventDefault();
+	ev.stopPropagation();
+	var fileList = ev.dataTransfer.files; //获取文件对象
+	if(fileList.length){
+		
+		
+		const param = new FormData();
+		  param.append("file", fileList[0]);
+
+		  const config = {
+		    headers: { "Content-Type": "multipart/form-data" }
+		  };
+		  axios.post("/postest", param, config).then(res => {
+		    console.log(res);
+		  });
+		
+		
+	}
+}
+
+
 </script>
 
 </@t_admin.body>
