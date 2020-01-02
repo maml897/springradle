@@ -47,7 +47,7 @@ $(function(){
 .info .items div{font-size: 14px;margin-top: 8px;}
 .info .items i{font-size: 28px;}
 
-.table{width:90px;padding: 10px;height:100px;text-align: center;cursor: pointer;float: left;border: solid #eeecec;border-width: 10px 10px 10px 0;position: relative;}
+.table{width:90px;padding: 8px;height:100px;text-align: center;cursor: pointer;float: left;border: solid #eeecec;border-width: 1px 1px 1px 0;position: relative;}
 .table .icon{width:40px;height: 40px;border: 1px solid #eee;border-radius: 100px;line-height: 40px;margin-left: 22px;margin-bottom: 7px;}
 .table i{font-size: 24px;margin-top: 8px;}
 .fa-angle-down{
@@ -73,6 +73,7 @@ $(function(){
 				<li class=""><a href="javascript:void(0);"><span><i class="fa fa-picture-o" aria-hidden="true"></i>&nbsp;&nbsp;表格名称和图标</span></a></li>
 				<li class="to-edit"><a href="javascript:void(0);"><span><i class="fa fa-table" aria-hidden="true"></i>&nbsp;&nbsp;编辑表格</span></a></li>
 				<li class="to-queryset"><a href="javascript:void(0);"><span><i class="fa fa-dot-circle-o" aria-hidden="true"></i>&nbsp;&nbsp;查询设置</span></a></li>
+				<li class="to-queryset"><a href="javascript:void(0);"><span><i class="fa fa-font" aria-hidden="true"></i>&nbsp;&nbsp;信息收集</span>  <span style="color: blue;">√</span></a></li>
 				<li style="height: 2px;border-bottom: 1px solid #eeecec"></li>
 				<li class=""><a href="javascript:void(0);"><span><i class="fa fa-cloud-download" aria-hidden="true"></i>&nbsp;&nbsp;导出Excel</span></a></li>
 				<li class=""><a href="javascript:void(0);"><span><i class="fa fa-cloud-upload" aria-hidden="true"></i>&nbsp;&nbsp;导入Excel</span></a></li>
@@ -100,8 +101,8 @@ $(function(){
 		</div>
 	</div>
 </div>
-<div style="margin: 0 10px;background: #fff;" ondragover="ondragoverfun();" ondragenter="ondragoverfun();" ondrop="drop()">
-	<div style="border-left: 10px solid #eeecec;float: left;" class="table_container">
+<div style="margin: 0 10px;background: #fff;" ondragover="ondragoverfun();" ondragenter="ondragoverfun();" ondrop="drop()" onmousedown="mousedown()">
+	<div style="border-left: 1px solid #eeecec;float: left;" class="table_container">
 		<#list page.list as item>
 		<div class="table" rel="${item.id}">
 		
@@ -117,8 +118,8 @@ $(function(){
 	<div style="clear: both;"></div>
 </div>
 
-<div style="background: #aaa;width: 4px;border-top:2px solid #aaa;border-bottom:2px solid #aaa;border-right:2px solid #fff;border-left:2px solid #fff; 
-height: 120px;position: absolute;display: none;" id="ban" ondragenter="ondragoverfun();" ondragover="ondragoverfun();"></div>
+<div style="background: #aaa;width: 2px;border-top:2px solid #aaa;border-bottom:2px solid #aaa;border-right:2px solid #fff;border-left:2px solid #fff; 
+height: 114px;position: absolute;display: none;" id="ban" ondragenter="ondragoverfun();" ondragover="ondragoverfun();"></div>
 
 <script type="text/javascript">
 var d = document.querySelector("#ban");
@@ -127,6 +128,11 @@ var dss = document.querySelectorAll(".tablecontent");
 [].forEach.call(ds, function(div) {
 	console.log(div.getBoundingClientRect().left);
 });
+
+function mousedown(e){
+	
+}
+
 
 function ondragoverfun(ev){
 	ev=ev||window.event;
@@ -138,7 +144,7 @@ function ondragoverfun(ev){
 		[].forEach.call(dss, function(div) {
 			div.style.transform="scale(1)";
 		});
-		tablecontent.style.transform="scale(1.2)";
+		tablecontent.style.transform="scale(1.1)";
 		d.style.display="none";
 	}
 	else{
@@ -153,8 +159,8 @@ function ondragoverfun(ev){
 		[].forEach.call(ds, function(div) {
 			if(ev.pageX>div.getBoundingClientRect().left+div.offsetWidth/2 && ev.pageY>div.getBoundingClientRect().top){
 				d.style.display="block";
-				d.style.left=(div.getBoundingClientRect().left+div.offsetWidth-8)+"px";
-				d.style.top=(div.getBoundingClientRect().top+10)+"px";
+				d.style.left=(div.getBoundingClientRect().left+div.offsetWidth-4)+"px";
+				d.style.top=(div.getBoundingClientRect().top)+"px";
 			}
 		});
 		
@@ -170,9 +176,10 @@ function drop(ev){
 	ev.preventDefault();
 	ev.stopPropagation();
 	var fileList = ev.dataTransfer.files; //获取文件对象
-	if(fileList.length){
-		
-		
+	
+	console.log(fileList);
+	
+	if(fileList.length){//上传
 		const param = new FormData();
 		  param.append("file", fileList[0]);
 
@@ -182,7 +189,8 @@ function drop(ev){
 		  axios.post("/postest", param, config).then(res => {
 		    console.log(res);
 		  });
-		
+	}
+	else{//排序合并
 		
 	}
 }

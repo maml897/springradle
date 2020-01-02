@@ -4,10 +4,29 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-window.
 </script>
 </head>
 <body>
+<div contenteditable="true" style="width: 100px;height: 100px;background: #ccc;" onpaste="paste()"></div>
 
+<script type="text/javascript">
+function paste(e) {
+	e=e||window.event
+	
+	var obj = e.clipboardData;
+	var item = obj.items[0];
+	
+	console.log(item);
+	 if (item.kind === "string") {
+         item.getAsString(function (str) {
+             console.log(str);
+         })
+     } else if (item.kind === "file") {
+         var pasteFile = item.getAsFile();
+         console.log(pasteFile);
+     }
+	
+}
+</script>
 </body>
 </html>
