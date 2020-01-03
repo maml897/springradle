@@ -64,7 +64,7 @@ $(function(){
 }
 .table:hover .fa-angle-down{display: block;}
 
-.tablecontent{height: 90%;}
+.tablecontent{height: 100%;}
 
 #ondragoverfun .icon{
 	transition:0.2s ease all;
@@ -154,9 +154,7 @@ function ondragoverfun(ev){
 	
 	if(flytree.is(target,".table")){
 		var cur=document.querySelector("#ondragoverfun");
-		if(cur){
-			cur.removeAttribute("id");
-		}
+		cur&& cur.removeAttribute("id");
 		
 		console.log("展示");
 		[].forEach.call(tables, function(div) {
