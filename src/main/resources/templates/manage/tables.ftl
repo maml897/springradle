@@ -67,7 +67,8 @@ $(function(){
 .tablecontent{height: 90%;}
 
 #ondragoverfun .icon{
-	transform:scale(1.1);
+	transition:0.2s ease all;
+	transform:scale(1.2);
 }
 </style>
 </@t_admin.head>
@@ -111,7 +112,7 @@ $(function(){
 	<div style="border-left: 1px solid #eeecec;float: left;" class="table_container">
 		<#list page.list as item>
 		<div class="table" rel="${item.id}">
-			<div class="tablecontent" style="position: relative;transition:0.2s ease all;background: #aaa;" data="${item?counter}" draggable="true">
+			<div class="tablecontent" style="position: relative;background: #aaa;" data="${item?counter}" draggable="true">
 				<div class="icon" style="border-color: ${item.color!'#42a5f5'};"><i class="fa ${item.icon!'fa-file-excel-o'}" aria-hidden="true" style="color: ${item.color!'#42a5f5'};"></i></div>
 				<i class="fa fa-angle-down optable" aria-hidden="true" style="font-size: 12px;" rel="${item.id}"></i>
 				<div class="t">${item.title}</div>
@@ -141,9 +142,7 @@ function ondragoverfun(ev){
 	if(tablecontent){
 		console.log("合并");
 		var cur=document.querySelector("#ondragoverfun");
-		if(cur){
-			cur.removeAttribute("id");
-		}
+			cur && cur.removeAttribute("id");
 		tablecontent.setAttribute("id","ondragoverfun");
 		d.style.display="none";
 	}
