@@ -134,28 +134,27 @@ var dss = document.querySelectorAll(".tablecontent");
 	console.log(div.getBoundingClientRect().left);
 });
 
+var haveOver=false;
 function ondragoverfun(ev){
 	ev=ev||window.event;
 	ev.preventDefault();
 	var target = ev.target;
 	var tablecontent= flytree.closest(target,".tablecontent");
+	
+	if(haveOver){
+		var cur=document.querySelector("#ondragoverfun");
+		cur && cur.removeAttribute("id");
+		haveOver=false;
+	}
+	
 	if(tablecontent){
 		console.log("合并");
-		var cur=document.querySelector("#ondragoverfun");
-			cur && cur.removeAttribute("id");
 		tablecontent.setAttribute("id","ondragoverfun");
+		haveOver=true;
 		d.style.display="none";
 	}
 	else
 	{
-		
-		
-	}
-	
-	if(flytree.is(target,".table")){
-		var cur=document.querySelector("#ondragoverfun");
-		cur&& cur.removeAttribute("id");
-		
 		console.log("展示");
 		[].forEach.call(tables, function(div) {
 			if((ev.pageX)>div.getBoundingClientRect().left+div.offsetWidth/2 && ev.pageY>div.getBoundingClientRect().top){
@@ -166,6 +165,7 @@ function ondragoverfun(ev){
 		});
 		
 	}
+	
 	return false;
 }
 
