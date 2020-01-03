@@ -63,6 +63,12 @@ $(function(){
 	display: none;
 }
 .table:hover .fa-angle-down{display: block;}
+
+.tablecontent{height: 90%;}
+
+#ondragoverfun .icon{
+	transform:scale(1.1);
+}
 </style>
 </@t_admin.head>
 <@t_admin.body position="首页" menu="icon4">
@@ -101,38 +107,31 @@ $(function(){
 		</div>
 	</div>
 </div>
-<div style="margin: 0 10px;background: #fff;" ondragover="ondragoverfun();" ondragenter="ondragoverfun();" ondrop="drop()" onmousedown="mousedown()">
+<div style="margin: 0 10px;background: #fff;" ondragover="ondragoverfun();" ondragenter="ondragoverfun();" ondrop="drop()">
 	<div style="border-left: 1px solid #eeecec;float: left;" class="table_container">
 		<#list page.list as item>
 		<div class="table" rel="${item.id}">
-		
-			<div class="tablecontent" style="position: relative;transition:0.2s ease all" data="${item?counter}" draggable="true">
+			<div class="tablecontent" style="position: relative;transition:0.2s ease all;background: #aaa;" data="${item?counter}" draggable="true">
 				<div class="icon" style="border-color: ${item.color!'#42a5f5'};"><i class="fa ${item.icon!'fa-file-excel-o'}" aria-hidden="true" style="color: ${item.color!'#42a5f5'};"></i></div>
 				<i class="fa fa-angle-down optable" aria-hidden="true" style="font-size: 12px;" rel="${item.id}"></i>
 				<div class="t">${item.title}</div>
 			</div>
-			
 		</div>
 		</#list>
 	</div>
 	<div style="clear: both;"></div>
+	<div style="background: #aaa;width: 2px;border-top:2px solid #aaa;border-bottom:2px solid #aaa;border-right:2px solid #fff;border-left:2px solid #fff;height: 114px;position: absolute;display: none;" id="ban"></div>
 </div>
 
-<div style="background: #aaa;width: 2px;border-top:2px solid #aaa;border-bottom:2px solid #aaa;border-right:2px solid #fff;border-left:2px solid #fff; 
-height: 114px;position: absolute;display: none;" id="ban" ondragenter="ondragoverfun();" ondragover="ondragoverfun();"></div>
 
 <script type="text/javascript">
 var d = document.querySelector("#ban");
-var ds = document.querySelectorAll(".table");
+var tables = document.querySelectorAll(".table");
+
 var dss = document.querySelectorAll(".tablecontent");
-[].forEach.call(ds, function(div) {
+[].forEach.call(tables, function(div) {
 	console.log(div.getBoundingClientRect().left);
 });
-
-function mousedown(e){
-	
-}
-
 
 function ondragoverfun(ev){
 	ev=ev||window.event;
@@ -141,23 +140,28 @@ function ondragoverfun(ev){
 	var tablecontent= flytree.closest(target,".tablecontent");
 	if(tablecontent){
 		console.log("合并");
-		[].forEach.call(dss, function(div) {
-			div.style.transform="scale(1)";
-		});
-		tablecontent.style.transform="scale(1.1)";
+		var cur=document.querySelector("#ondragoverfun");
+		if(cur){
+			cur.removeAttribute("id");
+		}
+		tablecontent.setAttribute("id","ondragoverfun");
 		d.style.display="none";
 	}
-	else{
+	else
+	{
+		
+		
 	}
 	
 	if(flytree.is(target,".table")){
-		[].forEach.call(dss, function(div) {
-			div.style.transform="scale(1)";
-		});
-		console.log("展示");
+		var cur=document.querySelector("#ondragoverfun");
+		if(cur){
+			cur.removeAttribute("id");
+		}
 		
-		[].forEach.call(ds, function(div) {
-			if(ev.pageX>div.getBoundingClientRect().left+div.offsetWidth/2 && ev.pageY>div.getBoundingClientRect().top){
+		console.log("展示");
+		[].forEach.call(tables, function(div) {
+			if((ev.pageX)>div.getBoundingClientRect().left+div.offsetWidth/2 && ev.pageY>div.getBoundingClientRect().top){
 				d.style.display="block";
 				d.style.left=(div.getBoundingClientRect().left+div.offsetWidth-4)+"px";
 				d.style.top=(div.getBoundingClientRect().top)+"px";
@@ -167,8 +171,6 @@ function ondragoverfun(ev){
 	}
 	return false;
 }
-
-
 
 
 function drop(ev){
