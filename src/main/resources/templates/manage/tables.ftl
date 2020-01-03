@@ -112,7 +112,7 @@ $(function(){
 	<div style="border-left: 1px solid #eeecec;float: left;" class="table_container">
 		<#list page.list as item>
 		<div class="table" rel="${item.id}">
-			<div class="tablecontent" style="position: relative;background: #aaa;" data="${item?counter}" draggable="true">
+			<div class="tablecontent" style="position: relative;background: #eee;" data="${item?counter}" draggable="true">
 				<div class="icon" style="border-color: ${item.color!'#42a5f5'};"><i class="fa ${item.icon!'fa-file-excel-o'}" aria-hidden="true" style="color: ${item.color!'#42a5f5'};"></i></div>
 				<i class="fa fa-angle-down optable" aria-hidden="true" style="font-size: 12px;" rel="${item.id}"></i>
 				<div class="t">${item.title}</div>
@@ -133,6 +133,7 @@ var dss = document.querySelectorAll(".tablecontent");
 [].forEach.call(tables, function(div) {
 	console.log(div.getBoundingClientRect().left);
 });
+
 
 var haveOver=false;
 function ondragoverfun(ev){
@@ -163,9 +164,7 @@ function ondragoverfun(ev){
 				d.style.top=(div.getBoundingClientRect().top)+"px";
 			}
 		});
-		
 	}
-	
 	return false;
 }
 
@@ -174,14 +173,16 @@ function drop(ev){
 	ev=ev||window.event;
 	ev.preventDefault();
 	ev.stopPropagation();
+	
+	var cur=document.querySelector("#ondragoverfun");
+	cur && cur.removeAttribute("id");
+	d.style.display="none";
+	
 	var fileList = ev.dataTransfer.files; //获取文件对象
-	
 	console.log(fileList);
-	
 	if(fileList.length){//上传
 		const param = new FormData();
 		  param.append("file", fileList[0]);
-
 		  const config = {
 		    headers: { "Content-Type": "multipart/form-data" }
 		  };
@@ -193,8 +194,5 @@ function drop(ev){
 		
 	}
 }
-
-
 </script>
-
 </@t_admin.body>
