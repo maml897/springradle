@@ -235,14 +235,25 @@ function drop(ev){
 		else
 		{
 			console.log("合并文件夹");
-			var folder=$(tablecontent.parentNode).clone(true).insertAfter($(tablecontent.parentNode)).attr("rel","-100")
-			folder.find(".t").html("未命名分组");
-			folder.find(".icon .fa").attr("class","fa fa-folder");
-			folder.find(".tablecontent").attr("data-childs","2");
+			var id=tablecontent.parentNode.getAttribute("rel")
+			$.ajax({
+				url:"${base}/manage/set-table-table",
+				data:"tableID="+$(source).attr("rel")+"&tableID2="+id,
+				success:function(data){
+					
+					var folder=$(tablecontent.parentNode).clone(true).insertAfter($(tablecontent.parentNode)).attr("rel","-100")
+					folder.find(".t").html("未命名分组");
+					folder.find(".icon .fa").attr("class","fa fa-folder");
+					folder.find(".tablecontent").attr("data-childs","2");
+					
+					var newContainer=$("<div style=\"border-left: 1px solid #eeecec;float: left;display: none;\" class=\"table_container\" id=\"id_folder_-100\"></div>").appendTo("#cont")
+					newContainer.append($(tablecontent.parentNode));
+					newContainer.append($(source));
+					
+				}
+			});
 			
-			var newContainer=$("<div style=\"border-left: 1px solid #eeecec;float: left;display: none;\" class=\"table_container\" id=\"id_folder_-100\"></div>").appendTo("#cont")
-			newContainer.append($(tablecontent.parentNode));
-			newContainer.append($(source));
+			
 		}
 	}
 	else{

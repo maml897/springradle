@@ -202,7 +202,7 @@ public class TableService
 		table.setIcon("fa-folder");
 		table.setChilds(2);
 		
-		String sql ="INSERT INTO m_table (Title,UserID,CType,CreateDate,childs)VALUES(:title,:userID,:type,:createDate,:childs)";
+		String sql ="INSERT INTO m_table (Title,UserID,CType,CreateDate,childs,color,icon)VALUES(:title,:userID,:type,:createDate,:childs,:color,:icon)";
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		namedJdbcTemplate.update(sql, new BeanPropertySqlParameterSource(table), keyHolder);
 		
