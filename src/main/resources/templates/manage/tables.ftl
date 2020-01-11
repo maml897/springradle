@@ -108,7 +108,7 @@ $(function(){
 </div>
 
 <div class="folder_opt" style="cursor: pointer;display: none;padding: 10px 0;text-align: center;color: #666;font-size: 14px;">返回</div>
-<div style="margin: 0 10px;background: #fff;" ondragover="ondragoverfun();" ondragenter="ondragoverfun();" ondrop="drop()">
+<div style="margin: 0 10px;background: #fff;" ondragover="ondragoverfun();" ondragenter="ondragoverfun();" ondrop="drop()" id="cont">
 	
 	<div style="border-left: 1px solid #eeecec;float: left;" class="table_container root">
 		<#list roots as item>
@@ -139,10 +139,10 @@ $(function(){
 	</#if>
 	</#list>
 	
-	<div style="clear: both;"></div>
-	<div style="background: #aaa;width: 2px;border-top:2px solid #aaa;border-bottom:2px solid #aaa;border-right:2px solid #fff;border-left:2px solid #fff;height: 114px;position: absolute;display: none;" id="ban"></div>
+	
 </div>
-
+<div style="clear: both;"></div>
+	<div style="background: #aaa;width: 2px;border-top:2px solid #aaa;border-bottom:2px solid #aaa;border-right:2px solid #fff;border-left:2px solid #fff;height: 114px;position: absolute;display: none;" id="ban"></div>
 
 <script type="text/javascript">
 var d = document.querySelector("#ban");
@@ -215,7 +215,7 @@ function drop(ev){
 		    headers: { "Content-Type": "multipart/form-data" }
 		  };
 		  axios.post("/postest", param, config).then(res => {
-		    console.log(res);
+		    	console.log(res);
 		  });
 	}
 	
@@ -235,6 +235,14 @@ function drop(ev){
 		else
 		{
 			console.log("合并文件夹");
+			var folder=$(tablecontent.parentNode).clone(true).insertAfter($(tablecontent.parentNode)).attr("rel","-100")
+			folder.find(".t").html("未命名分组");
+			folder.find(".icon .fa").attr("class","fa fa-folder");
+			folder.find(".tablecontent").attr("data-childs","2");
+			
+			var newContainer=$("<div style=\"border-left: 1px solid #eeecec;float: left;display: none;\" class=\"table_container\" id=\"id_folder_-100\"></div>").appendTo("#cont")
+			newContainer.append($(tablecontent.parentNode));
+			newContainer.append($(source));
 		}
 	}
 	else{
