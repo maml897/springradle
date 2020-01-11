@@ -174,12 +174,11 @@ $(function(){
 <@t_admin.body position="首页" menu="icon3">
 <div style="margin: 20px;background: #fff;padding: 20px;">
 	<div style="float: left;width: 46%;">
+		<#---
 		<div class="block" style="min-height:100px;">
 			<p>1.查询条件设置</p>
-			
 			<div>+增加一组查询条件</div>
 			
-			<#---
 			<div class="search_column on">
 				<div class="number quan">1</div>
 				<div class="delete quan">X</div>
@@ -196,22 +195,29 @@ $(function(){
 				</#list>
 			</div>
 			<div style="text-decoration: underline;"><a href="" style="color: #333;">+增加一组查询条件</a></div>
-			-->
 		</div>
+		-->
 		<div class="block">
-			<p>2.结果显示设置</p>
+			<p>1.结果显示设置</p>
 			<table class="tblist">
+				<tr>
+					<td style="text-align: left;padding-left: 12px;width: 100px;">名称</td>
+					<td style="width: 80px;">属性</td>
+					<td style="width: 120px;">查询条件设置</td>
+					<td style="width: 120px;">查询结果是否显示</td>
+				</tr>
 				<#list columns as item>
 				<tr>
 					<td style="text-align: left;padding-left: 12px;width: 100px;"><b>${item.title}</b></td>
+					<td style="width: 80px;"><a class="columndata" rel="${item.id}">${Constant.columnType(item.type)}</a></td>
+					<td style="width: 120px;"></td>
 					<td style="width: 120px;"><div class="layui-form-checkbox<#if item.searchShow> selected</#if>" data-id="${item.id}"><span>显示</span><i></i></div></td>
-					<td style="width: 120px;"><a class="columndata" rel="${item.id}">${Constant.columnType(item.type)}</a></td>
 				</tr>
 				</#list>
 			</table>
 		</div>
 		<div class="block">
-			<p>3.开启查询</p>
+			<p>2.开启查询</p>
 			<div style="text-align: center;">扫描下方二维码或者复制链接分享到朋友圈</div>
 			<div style="text-align: center;">
 				<div class="qr"> </div>
