@@ -197,7 +197,6 @@ function drop(ev){
 		if(source && dragtarget){
 			flytree.insertAfter(source,dragtarget);
 			tables = document.querySelectorAll(".table");
-			
 			var param="";
 			[].forEach.call(tables, function(div) {
 				div.left=div.getBoundingClientRect().left;
@@ -205,9 +204,6 @@ function drop(ev){
 				console.log(div);
 				param=param+"tableIDs="+div.getAttribute("rel")+"&"
 			});
-			
-			
-			console.log(param);
 			$.ajax({
 				url:"${base}/manage/set-table-order",
 				data:param

@@ -16,6 +16,10 @@ public class Table
 	private long userID;
 
 	private int type = Constant.TABLT_TYPE_USER;// 0:系统模板，1.用户
+	
+	private int childs=0;//0是文件，大于0是文件夹，表示子文件的数量
+	
+	private long fatherID=0;//0是没有在文件夹中，其余的是属于某个文件夹
 
 	private Date createDate = new Date();
 
@@ -88,4 +92,25 @@ public class Table
 	{
 		this.type = type;
 	}
+
+	public int getChilds()
+	{
+		return childs;
+	}
+
+	public void setChilds(int childs)
+	{
+		this.childs = childs;
+	}
+
+	public long getFatherID()
+	{
+		return fatherID;
+	}
+
+	public void setFatherID(long fatherID)
+	{
+		this.fatherID = fatherID;
+	}
+	
 }
