@@ -231,8 +231,6 @@ function drop(ev){
 			});
 			console.log("进入文件夹",id,tablecontent.parentNode);
 			$(source).appendTo($("#id_folder_"+id));
-			
-			
 		}
 		else{
 			console.log("合并文件夹");
