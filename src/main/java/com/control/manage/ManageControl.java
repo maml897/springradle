@@ -232,6 +232,14 @@ public class ManageControl
 	}
 	
 	@ResponseBody
+	@RequestMapping(value = { "set-table-table" })
+	public String setTable2Table(Model model, long tableID,long tableID2) throws Exception
+	{
+		tableService.setTable2Table(tableID, tableID2);
+		return "ok";
+	}
+	
+	@ResponseBody
 	@RequestMapping(value = { "ser-column-order" })
 	public String setColumnOrder(Model model, @RequestParam(name = "columnID") List<Long> columnID) throws Exception
 	{

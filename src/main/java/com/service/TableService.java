@@ -21,6 +21,7 @@ import org.springframework.ui.Model;
 
 import com.alibaba.fastjson.JSONObject;
 import com.common.Page;
+import com.config.security.user.CurrentUser;
 import com.utils.Constant;
 import com.view.table.Column;
 import com.view.table.Row;
@@ -188,6 +189,29 @@ public class TableService
 		sql ="update m_table set childs=childs+1 where ID=:id";
 		map =new HashMap<>();
 		map.put("id", folderID);
+		namedJdbcTemplate.update(sql, map);
+	}
+	
+	@Transactional(readOnly = false, value = "jdbcTemplateTm")
+	public void setTable2Table(long tableID,long tableID2) throws Exception{
+		
+		Table table = new Table();
+		table.setUserID(CurrentUser.getUserDetails().getUserID());
+		table.setTitle("未命名分组");
+		table.setColor("#42a5f5");
+		table.setIcon("fa-folder");
+		table.setChilds(2);
+		
+		String sql ="INSERT INTO m_table (Title,UserID,CType,CreateDate,childs)VALUES(:title,:userID,:type,:createDate,:childs)";
+		KeyHolder keyHolder = new GeneratedKeyHolder();
+		namedJdbcTemplate.update(sql, new BeanPropertySqlParameterSource(table), keyHolder);
+		
+		
+		sql ="update m_table set fatherID=:fatherID where (ID=:id1 or ID=:id2)";
+		Map<String,Object> map =new HashMap<>();
+		map.put("fatherID", keyHolder.getKey().longValue());
+		map.put("id1", tableID);
+		map.put("id2", tableID2);
 		namedJdbcTemplate.update(sql, map);
 	}
 	
