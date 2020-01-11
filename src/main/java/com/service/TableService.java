@@ -198,7 +198,7 @@ public class TableService
 		Table table = new Table();
 		table.setUserID(CurrentUser.getUserDetails().getUserID());
 		table.setTitle("未命名分组");
-		table.setColor("#42a5f5");
+		table.setColor("#F8DD88");
 		table.setIcon("fa-folder");
 		table.setChilds(2);
 		
