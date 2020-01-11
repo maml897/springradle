@@ -129,6 +129,9 @@ var flytree = function() {
 			{
 				parent.insertBefore(newElement, targetElement.nextSibling);
 			}
+		},
+		isHidden:function(element) {
+		    return (element.offsetParent === null);
 		}
 	}
 }();

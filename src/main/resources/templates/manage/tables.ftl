@@ -14,8 +14,24 @@ $(function(){
 		if(target.hasClass("optable")){
 			return false;
 		}
-		window.location.href="${base}/manage/rows/"+$(this).attr("rel");
+		
+		var childs = $(this).find(".tablecontent").attr("data-childs");
+		if(!childs || childs=="0"){
+			window.location.href="${base}/manage/rows/"+$(this).attr("rel");
+		}
+		else{
+			$(".root").hide();
+			$("#id_folder_"+$(this).attr("rel")).show();
+			$(".folder_opt").show();
+		}
 	});
+	
+	$(".folder_opt").click(function(){
+		$(".table_container").hide();
+		$(".root").show();
+		$(this).hide();
+	});
+	
 	
 	var dest=$(".optable").mbox({
 		data:$(".tableopt"),
@@ -90,29 +106,26 @@ $(function(){
 		</div>
 	</div>
 </div>
+
+<div class="folder_opt" style="cursor: pointer;display: none;padding: 10px 0;text-align: center;color: #666;font-size: 14px;">返回</div>
 <div style="margin: 0 10px;background: #fff;" ondragover="ondragoverfun();" ondragenter="ondragoverfun();" ondrop="drop()">
 	
-	
-	<div style="border-left: 1px solid #eeecec;float: left;" class="table_container">
-		
-		<#list page.list as item>
-		<#if item.fatherID==0>
+	<div style="border-left: 1px solid #eeecec;float: left;" class="table_container root">
+		<#list roots as item>
 		<div class="table" rel="${item.id}">
-			<div class="tablecontent" style="position: relative;" data="${item?counter}" draggable="true" ondragstart="dragstartfun(this)">
+			<div class="tablecontent" style="position: relative;" data="${item?counter}" data-childs="${item.childs}" draggable="true" ondragstart="dragstartfun(this)">
 				<div class="icon" style="border-color: ${item.color!'#42a5f5'};"><i class="fa ${item.icon!'fa-file-excel-o'}" aria-hidden="true" style="color: ${item.color!'#42a5f5'};"></i></div>
 				<i class="fa fa-angle-down optable" aria-hidden="true" style="font-size: 12px;" rel="${item.id}"></i>
 				<div class="t">${item.title}</div>
 			</div>
 		</div>
-		</#if>
 		</#list>
 	</div>
 	
 	
-	<#--
 	<#list map as k,v>
 	<#if k!=0>
-	<div style="border-left: 1px solid #eeecec;float: left;display: none;" class="table_container">
+	<div style="border-left: 1px solid #eeecec;float: left;display: none;" class="table_container" id="id_folder_${k}">
 		<#list v as item>
 		<div class="table" rel="${item.id}">
 			<div class="tablecontent" style="position: relative;" data="${item?counter}" draggable="true" ondragstart="dragstartfun(this)">
@@ -125,7 +138,6 @@ $(function(){
 	</div>
 	</#if>
 	</#list>
-	-->
 	
 	<div style="clear: both;"></div>
 	<div style="background: #aaa;width: 2px;border-top:2px solid #aaa;border-bottom:2px solid #aaa;border-right:2px solid #fff;border-left:2px solid #fff;height: 114px;position: absolute;display: none;" id="ban"></div>
@@ -135,12 +147,13 @@ $(function(){
 <script type="text/javascript">
 var d = document.querySelector("#ban");
 var tables = document.querySelectorAll(".table");
-
-var dss = document.querySelectorAll(".tablecontent");
 [].forEach.call(tables, function(div) {
 	div.left=div.getBoundingClientRect().left;
 	div.top=div.getBoundingClientRect().top;
 });
+
+var dss = document.querySelectorAll(".tablecontent");
+
 
 var source=null;
 var dragtarget=null;
@@ -171,7 +184,7 @@ function ondragoverfun(ev){
 	{
 		console.log("排序");
 		[].forEach.call(tables, function(div) {
-			if((ev.pageX)>div.left+div.offsetWidth/2 && ev.pageY>div.top){
+			if((ev.pageX)>div.left+div.offsetWidth/2 && ev.pageY>div.top && !flytree.isHidden(div)){
 				d.style.display="block";
 				d.style.left=(div.left+div.offsetWidth-4)+"px";
 				d.style.top=(div.top)+"px";
@@ -209,6 +222,21 @@ function drop(ev){
 	var tablecontent= flytree.closest(target,".tablecontent");
 	if(tablecontent){
 		console.log("合并。。");
+		var childs = tablecontent.getAttribute("data-childs")
+		if(childs && childs>0){
+			var id=tablecontent.parentNode.getAttribute("rel")
+			$.ajax({
+				url:"${base}/manage/set-table-folder",
+				data:"tableID="+$(source).attr("rel")+"&folderID="+id
+			});
+			console.log("进入文件夹",id,tablecontent.parentNode);
+			$(source).appendTo($("#id_folder_"+id));
+			
+			
+		}
+		else{
+			console.log("合并文件夹");
+		}
 	}
 	else{
 		console.log("排序。。");

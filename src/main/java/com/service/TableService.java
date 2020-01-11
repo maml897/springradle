@@ -17,6 +17,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 
 import com.alibaba.fastjson.JSONObject;
 import com.common.Page;
@@ -174,6 +175,20 @@ public class TableService
 				return ids.size();
 			}
 		});
+	}
+	
+	@Transactional(readOnly = false, value = "jdbcTemplateTm")
+	public void setTable2Folder(long tableID,long folderID) throws Exception{
+		String sql ="update m_table set fatherID=:folderID where ID=:id";
+		Map<String,Object> map =new HashMap<>();
+		map.put("folderID", folderID);
+		map.put("id", tableID);
+		namedJdbcTemplate.update(sql, map);
+		
+		sql ="update m_table set childs=childs+1 where ID=:id";
+		map =new HashMap<>();
+		map.put("id", folderID);
+		namedJdbcTemplate.update(sql, map);
 	}
 	
 	

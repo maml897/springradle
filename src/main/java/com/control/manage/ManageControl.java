@@ -224,6 +224,14 @@ public class ManageControl
 	}
 	
 	@ResponseBody
+	@RequestMapping(value = { "set-table-folder" })
+	public String setTable2Folder(Model model, long tableID,long folderID) throws Exception
+	{
+		tableService.setTable2Folder(tableID, folderID);
+		return "ok";
+	}
+	
+	@ResponseBody
 	@RequestMapping(value = { "ser-column-order" })
 	public String setColumnOrder(Model model, @RequestParam(name = "columnID") List<Long> columnID) throws Exception
 	{
