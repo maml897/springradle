@@ -17,7 +17,6 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
 
 import com.alibaba.fastjson.JSONObject;
 import com.common.Page;
@@ -193,7 +192,12 @@ public class TableService
 	}
 	
 	@Transactional(readOnly = false, value = "jdbcTemplateTm")
-	public void setTable2Table(long tableID,long tableID2) throws Exception{
+	public long setTable2Table(long tableID,long tableID2) throws Exception{
+		
+		String sql = "select corder from m_table where id=:tableID";
+		Map<String, Object> params = new HashMap<>();
+		params.put("tableID", tableID2);
+		int order = namedJdbcTemplate.queryForObject(sql, params, Integer.class);
 		
 		Table table = new Table();
 		table.setUserID(CurrentUser.getUserDetails().getUserID());
@@ -201,8 +205,9 @@ public class TableService
 		table.setColor("#F8DD88");
 		table.setIcon("fa-folder");
 		table.setChilds(2);
+		table.setOrder(order);
 		
-		String sql ="INSERT INTO m_table (Title,UserID,CType,CreateDate,childs,color,icon)VALUES(:title,:userID,:type,:createDate,:childs,:color,:icon)";
+		sql ="INSERT INTO m_table (Title,UserID,CType,CreateDate,childs,color,icon,corder)VALUES(:title,:userID,:type,:createDate,:childs,:color,:icon,:order)";
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		namedJdbcTemplate.update(sql, new BeanPropertySqlParameterSource(table), keyHolder);
 		
@@ -213,6 +218,7 @@ public class TableService
 		map.put("id1", tableID);
 		map.put("id2", tableID2);
 		namedJdbcTemplate.update(sql, map);
+		return keyHolder.getKey().longValue();
 	}
 	
 	

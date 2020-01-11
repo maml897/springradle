@@ -22,6 +22,18 @@ public class Table
 	private long fatherID=0;//0是没有在文件夹中，其余的是属于某个文件夹
 
 	private Date createDate = new Date();
+	
+	private int order =0;
+
+	public int getOrder()
+	{
+		return order;
+	}
+
+	public void setOrder(int order)
+	{
+		this.order = order;
+	}
 
 	public String getIcon()
 	{
