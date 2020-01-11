@@ -3,6 +3,7 @@ package com.control.manage;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -25,6 +26,7 @@ import com.config.mvc.view.StringView;
 import com.config.security.user.CurrentUser;
 import com.service.TableService;
 import com.utils.FileUtils;
+import com.utils.LambdaUtils;
 import com.view.table.Column;
 import com.view.table.Row;
 import com.view.table.Table;
@@ -46,8 +48,17 @@ public class ManageControl
 	@RequestMapping("tables")
 	public String tables(Model model, Page<Table> page)
 	{
-		page = tableService.getTablePage(page.setPageSize(50), CurrentUser.getUserDetails().getUserID());
+		page = tableService.getTablePage(page.setPageSize(5000), CurrentUser.getUserDetails().getUserID());
+		List<Table> tables =page.getList();
+		
+		List<Table> roots=LambdaUtils.filter(tables, x->x.getFatherID()==0);
+		
+		
+		Map<Long, List<Table>> map=LambdaUtils.groupby(tables, Table::getFatherID);
+		
 		model.addAttribute("page", page);
+		model.addAttribute("roots", roots);
+		model.addAttribute("map", map);
 		return "/manage/tables";
 	}
 

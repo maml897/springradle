@@ -86,7 +86,7 @@ $(function(){
 		</div>
 		<div class="items" style="border-right:none;">
 			<i class="fa fa-life-ring" aria-hidden="true" style="color:#ffa726;"></i>
-			<div>选择应用市场模板</div>
+			<div>选择应用市场模板${map?size}</div>
 		</div>
 	</div>
 </div>
@@ -96,6 +96,24 @@ $(function(){
 	<div style="border-left: 1px solid #eeecec;float: left;" class="table_container">
 		
 		<#list page.list as item>
+		<#if item.fatherID==0>
+		<div class="table" rel="${item.id}">
+			<div class="tablecontent" style="position: relative;" data="${item?counter}" draggable="true" ondragstart="dragstartfun(this)">
+				<div class="icon" style="border-color: ${item.color!'#42a5f5'};"><i class="fa ${item.icon!'fa-file-excel-o'}" aria-hidden="true" style="color: ${item.color!'#42a5f5'};"></i></div>
+				<i class="fa fa-angle-down optable" aria-hidden="true" style="font-size: 12px;" rel="${item.id}"></i>
+				<div class="t">${item.title}</div>
+			</div>
+		</div>
+		</#if>
+		</#list>
+	</div>
+	
+	
+	<#--
+	<#list map as k,v>
+	<#if k!=0>
+	<div style="border-left: 1px solid #eeecec;float: left;display: none;" class="table_container">
+		<#list v as item>
 		<div class="table" rel="${item.id}">
 			<div class="tablecontent" style="position: relative;" data="${item?counter}" draggable="true" ondragstart="dragstartfun(this)">
 				<div class="icon" style="border-color: ${item.color!'#42a5f5'};"><i class="fa ${item.icon!'fa-file-excel-o'}" aria-hidden="true" style="color: ${item.color!'#42a5f5'};"></i></div>
@@ -104,10 +122,10 @@ $(function(){
 			</div>
 		</div>
 		</#list>
-		
 	</div>
-	
-	
+	</#if>
+	</#list>
+	-->
 	
 	<div style="clear: both;"></div>
 	<div style="background: #aaa;width: 2px;border-top:2px solid #aaa;border-bottom:2px solid #aaa;border-right:2px solid #fff;border-left:2px solid #fff;height: 114px;position: absolute;display: none;" id="ban"></div>
