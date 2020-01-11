@@ -73,25 +73,7 @@ $(function(){
 </style>
 </@t_admin.head>
 <@t_admin.body position="首页" menu="icon4">
-<div class="tableopt popover" style="width: 130px;">
-	<div class="popover-content">
-		<div class="pop_menu">
-			<ul>
-				<li class=""><a href="javascript:void(0);"><span><i class="fa fa-picture-o" aria-hidden="true"></i>&nbsp;&nbsp;表格名称和图标</span></a></li>
-				<li class="to-edit"><a href="javascript:void(0);"><span><i class="fa fa-table" aria-hidden="true"></i>&nbsp;&nbsp;编辑表格</span></a></li>
-				<li class="to-queryset"><a href="javascript:void(0);"><span><i class="fa fa-dot-circle-o" aria-hidden="true"></i>&nbsp;&nbsp;查询设置</span></a></li>
-				<li class="to-queryset"><a href="javascript:void(0);"><span><i class="fa fa-font" aria-hidden="true"></i>&nbsp;&nbsp;信息收集</span>  <span style="color: blue;">√</span></a></li>
-				<li style="height: 2px;border-bottom: 1px solid #eeecec"></li>
-				<li class=""><a href="javascript:void(0);"><span><i class="fa fa-cloud-download" aria-hidden="true"></i>&nbsp;&nbsp;导出Excel</span></a></li>
-				<li class=""><a href="javascript:void(0);"><span><i class="fa fa-cloud-upload" aria-hidden="true"></i>&nbsp;&nbsp;导入Excel</span></a></li>
-				<li style="height: 2px;border-bottom: 1px solid #eeecec"></li>
-				<li class=""><a href="javascript:void(0);"><span><i class="fa fa-trash" aria-hidden="true"></i>&nbsp;&nbsp;删除表格</span></a></li>
-				<li class=""><a href="javascript:void(0);"><span><i class="fa fa-files-o" aria-hidden="true"></i>&nbsp;&nbsp;复制表格</span></a></li>
-			</ul>
-		</div>
-	</div>
-</div>
-
+<#include "inc/menu.ftl">
 <div id="cf" style="padding: 16px;">
 	<div class="info" style="margin: 0 auto;">
 		<div class="items">
@@ -109,17 +91,24 @@ $(function(){
 	</div>
 </div>
 <div style="margin: 0 10px;background: #fff;" ondragover="ondragoverfun();" ondragenter="ondragoverfun();" ondrop="drop()">
+	
+	
 	<div style="border-left: 1px solid #eeecec;float: left;" class="table_container">
+		
 		<#list page.list as item>
 		<div class="table" rel="${item.id}">
-			<div class="tablecontent" style="position: relative;background: #eee;" data="${item?counter}" draggable="true">
+			<div class="tablecontent" style="position: relative;" data="${item?counter}" draggable="true" ondragstart="dragstartfun(this)">
 				<div class="icon" style="border-color: ${item.color!'#42a5f5'};"><i class="fa ${item.icon!'fa-file-excel-o'}" aria-hidden="true" style="color: ${item.color!'#42a5f5'};"></i></div>
 				<i class="fa fa-angle-down optable" aria-hidden="true" style="font-size: 12px;" rel="${item.id}"></i>
 				<div class="t">${item.title}</div>
 			</div>
 		</div>
 		</#list>
+		
 	</div>
+	
+	
+	
 	<div style="clear: both;"></div>
 	<div style="background: #aaa;width: 2px;border-top:2px solid #aaa;border-bottom:2px solid #aaa;border-right:2px solid #fff;border-left:2px solid #fff;height: 114px;position: absolute;display: none;" id="ban"></div>
 </div>
@@ -133,6 +122,12 @@ var dss = document.querySelectorAll(".tablecontent");
 [].forEach.call(tables, function(div) {
 	console.log(div.getBoundingClientRect().left);
 });
+
+var source=null;
+var dragtarget=null;
+function dragstartfun($this){
+	source=$this.parentNode;
+}
 
 
 var haveOver=false;
@@ -156,12 +151,13 @@ function ondragoverfun(ev){
 	}
 	else
 	{
-		console.log("展示");
+		console.log("排序");
 		[].forEach.call(tables, function(div) {
 			if((ev.pageX)>div.getBoundingClientRect().left+div.offsetWidth/2 && ev.pageY>div.getBoundingClientRect().top){
 				d.style.display="block";
 				d.style.left=(div.getBoundingClientRect().left+div.offsetWidth-4)+"px";
 				d.style.top=(div.getBoundingClientRect().top)+"px";
+				dragtarget=div;
 			}
 		});
 	}
@@ -173,6 +169,7 @@ function drop(ev){
 	ev=ev||window.event;
 	ev.preventDefault();
 	ev.stopPropagation();
+	var target = ev.target;
 	
 	var cur=document.querySelector("#ondragoverfun");
 	cur && cur.removeAttribute("id");
@@ -190,9 +187,24 @@ function drop(ev){
 		    console.log(res);
 		  });
 	}
-	else{//排序合并
-		
+	
+	var tablecontent= flytree.closest(target,".tablecontent");
+	if(tablecontent){
+		console.log("合并。。");
+	}
+	else{
+		console.log("排序。。");
+		if(source && dragtarget){
+			flytree.insertAfter(source,dragtarget);
+		}
 	}
 }
+
+function setTableOrder(ids){
+	$.ajax({
+		
+	});
+}
+
 </script>
 </@t_admin.body>

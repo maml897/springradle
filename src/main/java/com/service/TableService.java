@@ -156,6 +156,28 @@ public class TableService
 	}
 
 	@Transactional(readOnly = false, value = "jdbcTemplateTm")
+	public void setTableOrder(List<Long> ids)
+	{
+		String sql = "update m_table set corder=? where ID=?";
+		jdbcTemplate.batchUpdate(sql, new BatchPreparedStatementSetter()
+		{
+			@Override
+			public void setValues(PreparedStatement ps, int i) throws SQLException
+			{
+				ps.setInt(1, i);
+				ps.setLong(2, ids.get(i));
+			}
+
+			@Override
+			public int getBatchSize()
+			{
+				return ids.size();
+			}
+		});
+	}
+	
+	
+	@Transactional(readOnly = false, value = "jdbcTemplateTm")
 	public void setColumnOrder(List<Long> columnIDs)
 	{
 		String sql = "update m_column set COrder=? where ID=?";

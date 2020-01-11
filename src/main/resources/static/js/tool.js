@@ -118,6 +118,17 @@ var flytree = function() {
 		addClass:addClass,
 		removeClass:removeClass,
 		on:on,
-		off:off
+		off:off,
+		insertAfter:function(newElement, targetElement){
+			var parent = targetElement.parentNode;
+			if (parent.lastChild == targetElement) 
+			{
+				parent.appendChild(newElement);
+			}
+			else 
+			{
+				parent.insertBefore(newElement, targetElement.nextSibling);
+			}
+		}
 	}
 }();
