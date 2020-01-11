@@ -120,7 +120,8 @@ var tables = document.querySelectorAll(".table");
 
 var dss = document.querySelectorAll(".tablecontent");
 [].forEach.call(tables, function(div) {
-	console.log(div.getBoundingClientRect().left);
+	div.left=div.getBoundingClientRect().left;
+	div.top=div.getBoundingClientRect().top;
 });
 
 var source=null;
@@ -128,7 +129,6 @@ var dragtarget=null;
 function dragstartfun($this){
 	source=$this.parentNode;
 }
-
 
 var haveOver=false;
 function ondragoverfun(ev){
@@ -153,10 +153,10 @@ function ondragoverfun(ev){
 	{
 		console.log("排序");
 		[].forEach.call(tables, function(div) {
-			if((ev.pageX)>div.getBoundingClientRect().left+div.offsetWidth/2 && ev.pageY>div.getBoundingClientRect().top){
+			if((ev.pageX)>div.left+div.offsetWidth/2 && ev.pageY>div.top){
 				d.style.display="block";
-				d.style.left=(div.getBoundingClientRect().left+div.offsetWidth-4)+"px";
-				d.style.top=(div.getBoundingClientRect().top)+"px";
+				d.style.left=(div.left+div.offsetWidth-4)+"px";
+				d.style.top=(div.top)+"px";
 				dragtarget=div;
 			}
 		});
@@ -196,6 +196,11 @@ function drop(ev){
 		console.log("排序。。");
 		if(source && dragtarget){
 			flytree.insertAfter(source,dragtarget);
+			tables = document.querySelectorAll(".table");
+			[].forEach.call(tables, function(div) {
+				div.left=div.getBoundingClientRect().left;
+				div.top=div.getBoundingClientRect().top;
+			});
 		}
 	}
 }
