@@ -205,7 +205,7 @@ public class ManageControl
 	}
 
 	@ResponseBody
-	@RequestMapping(value = { "ser-table-order" })
+	@RequestMapping(value = { "set-table-order" })
 	public String setTableOrder(Model model, @RequestParam(name = "tableIDs") List<Long> tableIDs) throws Exception
 	{
 		tableService.setTableOrder(tableIDs);

@@ -36,7 +36,7 @@ public class TableService
 
 	public Page<Table> getTablePage(Page<Table> page, long userID)
 	{
-		List<Table> list = namedJdbcTemplate.query("select * from m_table where userID="+userID, new HashMap<>(),new BeanPropertyRowMapper<>(Table.class));
+		List<Table> list = namedJdbcTemplate.query("select * from m_table where userID="+userID +" order by corder", new HashMap<>(),new BeanPropertyRowMapper<>(Table.class));
 		page.setTotalNumber(0);
 		page.setList(list);
 		return page;
