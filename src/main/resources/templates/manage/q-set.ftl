@@ -198,7 +198,7 @@ $(function(){
 		</div>
 		-->
 		<div class="block">
-			<p>1.结果显示设置</p>
+			<p>1.查询设置</p>
 			<table class="tblist">
 				<tr>
 					<td style="text-align: left;padding-left: 12px;width: 100px;">名称</td>
