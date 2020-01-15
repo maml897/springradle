@@ -29,6 +29,7 @@ public class Constant
 	public static int ROW_FROM_ADD = 1;// 用户手动添加的数据
 
 	public static Map<Integer, String> columnType = new LinkedHashMap<>();
+	public static Map<Integer, String> columnIcon = new LinkedHashMap<>();
 
 	static
 	{
@@ -38,6 +39,16 @@ public class Constant
 		columnType.put(COLUMN_TYPE_DATE, "日期");
 		columnType.put(COLUMN_TYPE_FILE, "附件");
 		columnType.put(COLUMN_TYPE_ID, "号码");
+	}
+	
+	static
+	{
+		columnIcon.put(COLUMN_TYPE_TEXT, "fa-file-text");
+		columnIcon.put(COLUMN_TYPE_NUMBER, "fa-sort-numeric-asc");
+		columnIcon.put(COLUMN_TYPE_ENUM, "fa-bars");
+		columnIcon.put(COLUMN_TYPE_DATE, "fa-file-text");
+		columnIcon.put(COLUMN_TYPE_FILE, "fa-file-text");
+		columnIcon.put(COLUMN_TYPE_ID, "fa-headphones");
 	}
 
 	// 运单公司集合

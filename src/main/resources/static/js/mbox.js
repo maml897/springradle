@@ -32,11 +32,19 @@
 			var top= options.top($this,position);
 			var left= options.left($this,position);
 			dest.css({top:top,left:left}).show();
+			
+			
 			dest.source = $this;//当前
 			if(options.source){
 				dest.source =options.source($this);//可以自定义source
 			}
 			dest.target=$this;
+			
+			console.log($this);
+			console.log(options.value($this));
+			
+			
+			dest.value=options.value($this);
 			$document.bind("mousedown",{source:$this},bindmousedown);
 		});
 		
@@ -66,6 +74,8 @@
 		},
 		onClose:function(){
 		},
-		source:null
+		source:null,//fun
+		value:function($this){
+		}
 	};
 })(jQuery,window);

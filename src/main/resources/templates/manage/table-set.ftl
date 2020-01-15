@@ -35,15 +35,19 @@ $(function(){
 	});
 	
 	var dest=$(".opt_menu").mbox({
-		data:$(".popover"),
+		data:$(".opt-column"),
 		left:function(a,b){
 			return b.left-10
 		},
 		onClose:function(){
-			//$(".opt_menu").hide();
+			$(".opt-column").find(".popover-content-menu").show();
+			$(".opt-column").find(".popover-content-changetype").hide();
 		},
 		source:function($this){
 			return $this.parent("td");
+		},
+		value:function($this){
+			return $this.parent("td").attr("data-column");
 		}
 	});
 	$(".columndata").on("mouseover",td_mouseover);
@@ -74,6 +78,13 @@ $(function(){
 				
 			}
 		});
+	});
+	
+	$(".menu_changetype").click(function(){
+		//console.log(dest.value);
+		//dest.close();
+		$(".opt-column").find(".popover-content-menu").hide();
+		$(".opt-column").find(".popover-content-changetype").show();
 	});
 	
 	//修改
@@ -220,7 +231,7 @@ $(function(){
 		<tr class="title">
 			<#list columns as item>
 			<td style="min-width: 60px;position: relative;overflow: visible;" data-column="${item.id}" data-order="${item.order}" class="columndata">
-				<div class="content">${item.title}</div> 
+				<div class="content"><i class="fa fa-file-text" aria-hidden="true"></i>&nbsp;&nbsp;${item.title}</div> 
 				<div class="modify_title nodragg"><input value="${item.title}" alt="${item.id}" style="height: 43px;border:none;width: 92%;" autocomplete="off" class="input_title nodragg"/></div><#--修改-->
 				<span class="opt_menu nodragg"><i class="nodragg"></i></span>
 			</td>
@@ -238,11 +249,38 @@ $(function(){
 	</table>
 </div>
 
-<div class="popover bottom-left in" style="display: block; height: auto; max-width: 148px; display: none;">
+<div class="opt-column popover bottom-left in" style="display: block; height: auto; max-width: 148px; display: none;">
+	
+	<div class="popover-content popover-content-menu">
+		<div class="pop_menu cl">
+			<ul class="cl">
+				<li class="menu_modify"><a href="javascript:void(0);"><span>改列名</span></a></li>
+				<li class="menu_changetype"><a href="javascript:void(0);"><span>更改属性</span></a></li>
+				<li class="menu_insertbefore"><a href="javascript:void(0);"><span>在前一列插入</span></a></li>
+				<li class="menu_insertafter"><a href="###"><span>在后一列插入</span></a></li>
+				<li class="menu_copy"><a href="###"><span>复制列</span></a></li>
+				<li class="menu_remove"><a href="javascirpt:void(0);"><span>删除列</span></a></li>
+			</ul>
+		</div>
+	</div>
+	
+	<div class="popover-content popover-content-changetype" style="display: none;min-width:100px;">
+		<div class="pop_menu cl">
+			<ul class="cl">
+				<#list Constant.columnType as k,v>
+				<li class="menu_changetype${k}"><i class="fa ${Constant.columnIcon(k)}" aria-hidden="true"></i> &nbsp;&nbsp;<a href="javascript:void(0);"><span>${v}</span></a></li>
+				</#list>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div class="opt-column-detail popover bottom-left in" style="display: block; height: auto; max-width: 148px; display: none;">
 	<div class="popover-content ">
 		<div class="pop_menu cl">
 			<ul class="cl">
 				<li class="menu_modify"><a href="javascript:void(0);"><span>改列名</span></a></li>
+				<li class="menu_changetype"><a href="javascript:void(0);"><span>更改属性</span></a></li>
 				<li class="menu_insertbefore"><a href="javascript:void(0);"><span>在前一列插入</span></a></li>
 				<li class="menu_insertafter"><a href="###"><span>在后一列插入</span></a></li>
 				<li class="menu_copy"><a href="###"><span>复制列</span></a></li>
