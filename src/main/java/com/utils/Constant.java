@@ -2,6 +2,10 @@ package com.utils;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
+import org.springframework.http.MediaType;
 
 public class Constant
 {
@@ -30,6 +34,10 @@ public class Constant
 
 	public static Map<Integer, String> columnType = new LinkedHashMap<>();
 	public static Map<Integer, String> columnIcon = new LinkedHashMap<>();
+	
+	public static void main(String[] args)
+	{
+	}
 
 	static
 	{

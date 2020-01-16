@@ -31,19 +31,14 @@
 			var position = $this.offset();
 			var top= options.top($this,position);
 			var left= options.left($this,position);
+			options.beforeOpen($this)
 			dest.css({top:top,left:left}).show();
-			
 			
 			dest.source = $this;//当前
 			if(options.source){
 				dest.source =options.source($this);//可以自定义source
 			}
 			dest.target=$this;
-			
-			console.log($this);
-			console.log(options.value($this));
-			
-			
 			dest.value=options.value($this);
 			$document.bind("mousedown",{source:$this},bindmousedown);
 		});
@@ -70,7 +65,7 @@
 		data:null, //相关ID
 		left:function(obj,objposition){return objposition.left;},
 		top:function(obj,objposition){return objposition.top+obj.outerHeight()},
-		onOpen:function(){
+		beforeOpen:function(){
 		},
 		onClose:function(){
 		},

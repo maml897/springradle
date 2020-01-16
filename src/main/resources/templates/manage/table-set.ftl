@@ -5,6 +5,16 @@
 <script type="text/javascript" src="${base}/js/jbox/jquery-overlayQS.js"></script>
 <script type="text/javascript" src="${base}/js/jbox/jquery-boxQS.js"></script>
 <script type="text/javascript" src="${base}/js/tableset.js"></script>
+<script type="text/javascript" src="https://unpkg.com/art-template@4.13.2/lib/template-web.js"></script>
+<script id="conlumnType1" type="text/html">
+	<div>
+		<div>平铺出所有备选项，从中只可选择一项</div>
+		<div>字段类型</div>
+		<input type="radio">单选项&nbsp;&nbsp;&nbsp;&nbsp; <input type="radio">多选项
+		<textarea style="width: 100%;height: 50px;"></textarea>
+	</div>
+</script>
+    
 <script type="text/javascript">
 $(function(){
 	//调整顺序
@@ -48,6 +58,10 @@ $(function(){
 		},
 		value:function($this){
 			return $this.parent("td").attr("data-column");
+		},
+		beforeOpen:function(){
+			$(".popover-content").hide();
+			$(".popover-content-menu").show();
 		}
 	});
 	$(".columndata").on("mouseover",td_mouseover);
@@ -176,6 +190,21 @@ $(function(){
 			}
 		});
 	});
+	
+	$(".menu_changetypen").click(function(){
+		$(".popover-content").hide();
+		var d1 = {
+			    title: '基本例子',
+			    isAdmin: true,
+			    list: ['文艺', '博客', '摄影', '电影', '民谣', '旅行', '吉他']
+		};
+
+		var o=template('conlumnType1', d1);
+		$(".popover-content-changetype-content").html(o).show().parent().css({
+			left:dest.source.offset().left+1,
+			top:dest.source.offset().top+dest.source.outerHeight(),
+		});
+	});
 });
 </script>
 
@@ -248,9 +277,7 @@ $(function(){
 		</tr>
 	</table>
 </div>
-
-<div class="opt-column popover bottom-left in" style="display: block; height: auto; max-width: 148px; display: none;">
-	
+<div class="opt-column popover bottom-left in" style="display: block; height: auto;display: none;">
 	<div class="popover-content popover-content-menu">
 		<div class="pop_menu cl">
 			<ul class="cl">
@@ -263,31 +290,19 @@ $(function(){
 			</ul>
 		</div>
 	</div>
-	
 	<div class="popover-content popover-content-changetype" style="display: none;min-width:100px;">
 		<div class="pop_menu cl">
 			<ul class="cl">
 				<#list Constant.columnType as k,v>
-				<li class="menu_changetype${k}"><i class="fa ${Constant.columnIcon(k)}" aria-hidden="true"></i> &nbsp;&nbsp;<a href="javascript:void(0);"><span>${v}</span></a></li>
+				<li class="menu_changetypen menu_changetype${k}"><i class="fa ${Constant.columnIcon(k)}" aria-hidden="true"></i> &nbsp;&nbsp;<a href="javascript:void(0);"><span>${v}</span></a></li>
 				</#list>
 			</ul>
 		</div>
 	</div>
-</div>
-
-<div class="opt-column-detail popover bottom-left in" style="display: block; height: auto; max-width: 148px; display: none;">
-	<div class="popover-content ">
-		<div class="pop_menu cl">
-			<ul class="cl">
-				<li class="menu_modify"><a href="javascript:void(0);"><span>改列名</span></a></li>
-				<li class="menu_changetype"><a href="javascript:void(0);"><span>更改属性</span></a></li>
-				<li class="menu_insertbefore"><a href="javascript:void(0);"><span>在前一列插入</span></a></li>
-				<li class="menu_insertafter"><a href="###"><span>在后一列插入</span></a></li>
-				<li class="menu_copy"><a href="###"><span>复制列</span></a></li>
-				<li class="menu_remove"><a href="javascirpt:void(0);"><span>删除列</span></a></li>
-			</ul>
-		</div>
+	<div class="popover-content popover-content-changetype-content" data-changetype="" style="display: none;padding: 10px;min-height: 300px;font-size: 12px;line-height: 30px;width: 200px;">
 	</div>
 </div>
+
+
 
 </@t_admin.body>
