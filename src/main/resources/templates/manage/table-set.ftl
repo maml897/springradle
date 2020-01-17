@@ -7,12 +7,27 @@
 <script type="text/javascript" src="${base}/js/tableset.js"></script>
 <script type="text/javascript" src="https://unpkg.com/art-template@4.13.2/lib/template-web.js"></script>
 <script id="conlumnType1" type="text/html">
-	<div>
-		<div>平铺出所有备选项，从中只可选择一项</div>
-		<div>字段类型</div>
-		<input type="radio">单选项&nbsp;&nbsp;&nbsp;&nbsp; <input type="radio">多选项
-		<textarea style="width: 100%;height: 50px;"></textarea>
-	</div>
+<div>
+	<div>平铺出所有备选项，从中只可选择一项</div>
+	<div>字段类型</div>
+	<input type="radio">单选项&nbsp;&nbsp;&nbsp;&nbsp; <input type="radio">多选项
+	<textarea style="width: 100%;height: 50px;"></textarea>
+</div>
+</script>
+
+<script id="conlumnType6" type="text/html">
+<div>
+	<div style="color:#9f9f9f;line-height:22px;">手机号码可以用来发送验证码，运单号可以用来查询快递信息</div>
+
+	<div style="font-weight:bold;">字段标识</div>
+	<div><input type="radio">&nbsp;手机号&nbsp;&nbsp;&nbsp;&nbsp; <input type="radio">&nbsp;运单号&nbsp;&nbsp;&nbsp;&nbsp; <input type="radio">&nbsp;身份证号</div>
+
+	<div style="font-weight:bold;">填写标识</div>
+	<div><input type="checkbox">&nbsp;必填&nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox">&nbsp;唯一</div>
+
+	<div>填写说明</div>
+	<textarea style="width: 100%;height: 50px;"></textarea>
+</div>
 </script>
     
 <script type="text/javascript">
@@ -193,13 +208,15 @@ $(function(){
 	
 	$(".menu_changetypen").click(function(){
 		$(".popover-content").hide();
+		
+		var type=dest.source.attr("data-column-type");
 		var d1 = {
 			    title: '基本例子',
 			    isAdmin: true,
 			    list: ['文艺', '博客', '摄影', '电影', '民谣', '旅行', '吉他']
 		};
 
-		var o=template('conlumnType1', d1);
+		var o=template('conlumnType'+type, d1);
 		$(".popover-content-changetype-content").html(o).show().parent().css({
 			left:dest.source.offset().left+1,
 			top:dest.source.offset().top+dest.source.outerHeight(),
@@ -259,7 +276,7 @@ $(function(){
 	<table class="tblist">
 		<tr class="title">
 			<#list columns as item>
-			<td style="min-width: 60px;position: relative;overflow: visible;" data-column="${item.id}" data-order="${item.order}" class="columndata">
+			<td style="min-width: 60px;position: relative;overflow: visible;" data-column="${item.id}" data-order="${item.order}" data-column-type="${item.type}" class="columndata">
 				<div class="content"><i class="fa fa-file-text" aria-hidden="true"></i>&nbsp;&nbsp;${item.title}</div> 
 				<div class="modify_title nodragg"><input value="${item.title}" alt="${item.id}" style="height: 43px;border:none;width: 92%;" autocomplete="off" class="input_title nodragg"/></div><#--修改-->
 				<span class="opt_menu nodragg"><i class="nodragg"></i></span>
@@ -299,7 +316,7 @@ $(function(){
 			</ul>
 		</div>
 	</div>
-	<div class="popover-content popover-content-changetype-content" data-changetype="" style="display: none;padding: 10px;min-height: 300px;font-size: 12px;line-height: 30px;width: 200px;">
+	<div class="popover-content popover-content-changetype-content" data-changetype="" style="display: none;padding: 10px;min-height: 380px;font-size: 12px;line-height: 30px;width: 200px;">
 	</div>
 </div>
 

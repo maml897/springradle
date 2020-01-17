@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="https://unpkg.com/art-template@4.13.2/lib/template-web.js"></script>
+<script type="text/javascript" src="https://www.yunchengji.net/component/jquery/jquery-1.5.2.min.js?20160413"></script>
+<script type="text/javascript">
+
+</script>
+</head>
+<body>
+<div id="c1"></div>
+<script id="t1" type="text/html">
+        {{if isAdmin}}
+            <h1>{{title}}</h1>
+            <ul>
+                {{each list value i}}
+                    <li>索引 {{i + 1}} : {{value}}</li>
+                {{/each}}
+            </ul>
+        {{/if}}
+</script>
+<script type="text/javascript">
+var d1 = {
+    title: '基本例子',
+    isAdmin: true,
+    list: ['文艺', '博客', '摄影', '电影', '民谣', '旅行', '吉他']
+};
+
+//test("t1",document.getElementById('c1'),d1,"title");
+test("t1",document.getElementById('c1'),d1,"list");
+
+
+
+function test(source,el,obj,prop){
+	var value = obj[prop];
+	Object.defineProperty(obj,prop,{
+        enumerable: true,
+        configurable: true,
+        get:function(){
+        	return value;
+        },
+        set:function(val){
+        	value=val;
+        	obj.prop=val;
+        	console.log(obj);
+        	el.innerHTML = template(source, obj)
+       }
+	});
+}
+
+
+//d1.title="aaaaaaaaa";
+
+
+
+$(function(){
+	$(document).click(function(){
+		//d1.title="sbwff";
+		d1.list.push("ok");
+		
+		//console.log(d1.list);
+		//document.getElementById('c1').innerHTML = template('t1', d1);
+	});
+})
+</script>
+</body>
+</html>

@@ -60,7 +60,7 @@ public class TableService
 
 	public List<Column> getColumns(long tableID)
 	{
-		List<Column> list = namedJdbcTemplate.query("select ID,Title,Search,SearchShow,CShow as 'show' from m_column where tableID="+tableID +" order by COrder", new HashMap<>(),new BeanPropertyRowMapper<>(Column.class));
+		List<Column> list = namedJdbcTemplate.query("select ID,Title,Search,SearchShow,CShow as 'show',CType as 'type' from m_column where tableID="+tableID +" order by COrder", new HashMap<>(),new BeanPropertyRowMapper<>(Column.class));
 		return list;
 	}
 
