@@ -20,7 +20,7 @@
 	<div style="color:#9f9f9f;line-height:22px;">手机号码可以用来发送验证码，运单号可以用来查询快递信息</div>
 
 	<div style="font-weight:bold;">字段标识</div>
-	<div><input type="radio">&nbsp;手机号&nbsp;&nbsp;&nbsp;&nbsp; <input type="radio">&nbsp;运单号&nbsp;&nbsp;&nbsp;&nbsp; <input type="radio">&nbsp;身份证号</div>
+	<div><input type="radio">&nbsp;手机号&nbsp;&nbsp;&nbsp; <input type="radio">&nbsp;运单号&nbsp;&nbsp;&nbsp; <input type="radio">&nbsp;身份证号</div>
 
 	<div style="font-weight:bold;">填写标识</div>
 	<div><input type="checkbox">&nbsp;必填&nbsp;&nbsp;&nbsp;&nbsp; <input type="checkbox">&nbsp;唯一</div>
@@ -210,13 +210,18 @@ $(function(){
 		$(".popover-content").hide();
 		
 		var type=dest.source.attr("data-column-type");
+		var selecttype=$(this).attr("rel");
+		if(selecttype!="6" && selecttype!="1"){
+			return false;
+		}
+		
 		var d1 = {
 			    title: '基本例子',
 			    isAdmin: true,
 			    list: ['文艺', '博客', '摄影', '电影', '民谣', '旅行', '吉他']
 		};
 
-		var o=template('conlumnType'+type, d1);
+		var o=template('conlumnType'+selecttype, d1);
 		$(".popover-content-changetype-content").html(o).show().parent().css({
 			left:dest.source.offset().left+1,
 			top:dest.source.offset().top+dest.source.outerHeight(),
@@ -311,7 +316,7 @@ $(function(){
 		<div class="pop_menu cl">
 			<ul class="cl">
 				<#list Constant.columnType as k,v>
-				<li class="menu_changetypen menu_changetype${k}"><i class="fa ${Constant.columnIcon(k)}" aria-hidden="true"></i> &nbsp;&nbsp;<a href="javascript:void(0);"><span>${v}</span></a></li>
+				<li class="menu_changetypen menu_changetype${k}" rel="${k}"><i class="fa ${Constant.columnIcon(k)}" aria-hidden="true"></i> &nbsp;&nbsp;<a href="javascript:void(0);"><span>${v}</span></a></li>
 				</#list>
 			</ul>
 		</div>
