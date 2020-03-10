@@ -6,6 +6,7 @@
 <script type="text/javascript" src="${base}/js/jbox/jquery-boxQS.js"></script>
 <script type="text/javascript" src="${base}/js/tableset.js"></script>
 <script type="text/javascript" src="https://unpkg.com/art-template@4.13.2/lib/template-web.js"></script>
+<script type="text/javascript" src="${base}/js/myvue.js"></script>
 <script id="conlumnType1" type="text/html">
 <div>
 	<div>平铺出所有备选项，从中只可选择一项</div>
@@ -276,12 +277,11 @@ $(function(){
 	</div>
 </div>
 
-
 <div style="margin: 0 20px 20px 20px;background: #fff;">
 	<table class="tblist">
 		<tr class="title">
 			<#list columns as item>
-			<td style="min-width: 60px;position: relative;overflow: visible;" data-column="${item.id}" data-order="${item.order}" data-column-type="${item.type}" class="columndata">
+			<td style="min-width: 60px;position: relative;overflow: visible;" data-column="${item.id}" data-order="${item.order}" data-column-type="${item.type}" class="columndata columndata_${item.id}">
 				<div class="content"><i class="fa fa-file-text" aria-hidden="true"></i>&nbsp;&nbsp;${item.title}</div> 
 				<div class="modify_title nodragg"><input value="${item.title}" alt="${item.id}" style="height: 43px;border:none;width: 92%;" autocomplete="off" class="input_title nodragg"/></div><#--修改-->
 				<span class="opt_menu nodragg"><i class="nodragg"></i></span>

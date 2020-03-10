@@ -3,36 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style type="text/css">
-.aa{color: red;}
-</style>
+
+<script type="text/javascript">
+console.log(Object.prototype.hasOwnProperty("constructor"));
+console.log(String.prototype.__proto__.hasOwnProperty("constructor"));
+
+var o= new String("aa");
+
+console.log(o.__proto__==String.prototype);
+
+console.log(o.__proto__.hasOwnProperty("constructor"));
+console.log(Object.prototype.__proto__);
+
+function f(){}
+console.log(f.__proto__==Function.prototype);
+
+var obj =new f;
+console.log(obj.__proto__==f.prototype);
+console.log(f.prototype.__proto__==Object.prototype);
+</script>
 </head>
 <body>
-
-	<div class="b">
-		<a href="" class="a">test1</a> <a href="">test2</a> <a href="" id="ban">test3</a>
-	</div>
-
-
-
-
-	<script type="text/javascript">
-	var R_SPACE = /\s+/g;
-	function toggleClass(el, name, state) {
-		if (el && name) {
-			if (el.classList) {
-				el.classList[state ? 'add' : 'remove'](name);
-			} 
-			else 
-			{
-				var className = (' ' + el.className + ' ').replace(R_SPACE, ' ').replace(' ' + name + ' ', ' ');
-				el.className = (className + (state ? ' ' + name : '')).replace(R_SPACE, ' ');
-			}
-		}
-	}
-	var d = document.querySelector("#ban");
-	toggleClass(d,"aa",true)
-	toggleClass(d,"aa",false)
-	</script>
+	
 </body>
 </html>

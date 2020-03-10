@@ -1,11 +1,4 @@
 //https://segmentfault.com/a/1190000015075679
-function Observer(data){
-    this.data = data;
-    this.walk(data);
-}
-
-var p = Observer.prototype;
-
 var arrayProto = Array.prototype
 var arrayMethods = Object.create(arrayProto)
 
@@ -21,15 +14,22 @@ var arrayMethods = Object.create(arrayProto)
     Object.defineProperty(arrayMethods,item,{
         value:function mutator(){
             //缓存原生方法，之后调用
-            console.log('array被访问');
+            console.log('array被访问'+item);
             var original = arrayProto[item]    
             var args = Array.from(arguments)
-        original.apply(this,args)
+            original.apply(this,args)
             // console.log(this);
         },
     })
 })
 
+
+
+function Observer(data){
+    this.data = data;
+    this.walk(data);
+}
+var p = Observer.prototype;
 p.walk = function(obj){
     var value;
     for(var key in obj){
@@ -65,15 +65,11 @@ p.convert = function(key, value){
         }
     })
 }; 
-
-
-
 function observeArray (items) {
     for (var i = 0, l = items.length; i < l; i++) {
         observe(items[i])
     }
 }
-
 //数据重复Observer
 function observe(value){
     if(typeof(value) != 'object' ) return;
@@ -117,4 +113,4 @@ var app = new Observer(data);
 // data.apg[2] = 111;
 data.apg.push(5);
 // data.apg[0].a = 10;
-// console.log(data.apg);
+//console.log(data.apg);
